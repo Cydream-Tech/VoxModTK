@@ -6,7 +6,7 @@ Use this repository to create Voxel Playground mods in Unity, import `.vox` asse
 
 ## Links
 
-Docs: [Welcome](https://voxelplayground.com/doc/index.html), [Official Manual](https://voxelplayground.com/doc/documents/manual.html)
+Docs: [Official Manual](https://voxelplayground.com/doc/documents/manual.html)
 
 - [Official Manual](https://voxelplayground.com/doc/documents/manual.html)
 - [Mod.io](https://mod.io/g/voxel-playground)
@@ -15,7 +15,7 @@ Docs: [Welcome](https://voxelplayground.com/doc/index.html), [Official Manual](h
 
 ## What You Can Make
 
-Docs: [Modding Overview](https://voxelplayground.com/doc/manual/modding/index.html), [Scene Tutorial](https://voxelplayground.com/doc/manual/modding/scene/tutorial-nyc.html)
+Docs: [Modding Overview](https://voxelplayground.com/doc/documents/modding.html), [Scene Tutorial](https://voxelplayground.com/doc/documents/modding-scene-tutorial-nyc.html)
 
 Voxel Playground mods usually fall into one of these content types:
 
@@ -78,7 +78,7 @@ For narrower tasks, include only the relevant references. For example, use `@Ski
 
 ## Quick Start
 
-Docs: [Quick Start](https://voxelplayground.com/doc/documents/quick-start.html), [Modding Overview](https://voxelplayground.com/doc/manual/modding/index.html), [Create Mod](https://voxelplayground.com/doc/manual/quick-start/create-mod.html), [Testing your Mod](https://voxelplayground.com/doc/manual/quick-start/test-mod.html)
+Docs: [Quick Start](https://voxelplayground.com/doc/documents/quick-start.html), [Modding Overview](https://voxelplayground.com/doc/documents/modding.html), [Create Mod](https://voxelplayground.com/doc/documents/quick-start-create-mod.html), [Testing your Mod](https://voxelplayground.com/doc/documents/quick-start-test-mod.html)
 
 
 1. Open this project in Unity.
@@ -93,8 +93,6 @@ Docs: [Quick Start](https://voxelplayground.com/doc/documents/quick-start.html),
 10. Install the exported mod and test it in Voxel Playground.
 
 ## Project Structure
-
-Docs: [Modding Overview](https://voxelplayground.com/doc/manual/modding/index.html), [Configure Mod Manifest](https://voxelplayground.com/doc/manual/quick-start/create-mod.html)
 
 A typical mod lives under `Assets/Mod/<mod-id>`. Samples live under `Assets/Samples/<mod-id>` and are the best place to copy patterns from.
 
@@ -114,7 +112,7 @@ The most important rule is that playable content must be referenced by `manifest
 
 ## Voxel Asset Authoring
 
-Docs: [MagicaVoxel](https://voxelplayground.com/doc/manual/tools/voxel-authoring/magica-voxel.html), [Material ID and Visual](https://voxelplayground.com/doc/manual/gameplay/voxel/material-id-visual.html), [Voxel Data Editor](https://voxelplayground.com/doc/manual/tools/voxel-authoring/voxel-data-editor.html)
+Docs: [MagicaVoxel](https://voxelplayground.com/doc/documents/tools-voxel-authoring-magica-voxel.html), [Material ID and Visual](https://voxelplayground.com/doc/documents/gameplay-voxel-material-id-visual.html), [Voxel Data Editor](https://voxelplayground.com/doc/documents/tools-voxel-authoring-voxel-data-editor.html)
 
 MagicaVoxel is the primary tool used by the official documentation for creating `.vox` models. Save your models as `.vox`, import them into Unity, and use the asset processor to generate voxel data and prefabs.
 
@@ -189,7 +187,7 @@ If an engine API is not exposed through the generated typings, treat that as a t
 
 ## Testing and Debugging
 
-Docs: [Testing your Mod](https://voxelplayground.com/doc/manual/quick-start/test-mod.html)
+Docs: [Testing your Mod](https://voxelplayground.com/doc/documents/quick-start-test-mod.html)
 
 Validate script mods before treating a problem as a runtime bug:
 
@@ -229,7 +227,7 @@ In VR, use `Settings > Dev > Console` to inspect runtime output. In flatscreen t
 
 ## Exporting
 
-Docs: [Create Mod](https://voxelplayground.com/doc/manual/quick-start/create-mod.html), [Testing your Mod](https://voxelplayground.com/doc/manual/quick-start/test-mod.html)
+Docs: [Create Mod](https://voxelplayground.com/doc/documents/quick-start-create-mod.html), [Testing your Mod](https://voxelplayground.com/doc/documents/quick-start-test-mod.html)
 
 Use `Vox Mod Tools/Mod Exporter` in Unity to build and install or copy the mod package.
 
@@ -243,7 +241,7 @@ Before exporting, confirm:
 
 ## Publishing
 
-Docs: [Publishing your Mod](https://voxelplayground.com/doc/manual/quick-start/publish-mod.html)
+Docs: [Publishing your Mod](https://voxelplayground.com/doc/documents/quick-start-publish-mod.html)
 
 Once the mod is tested locally, prepare the exported package for the supported publishing or sharing workflow. Include clear metadata, representative images, and a version number that changes when you update the mod.
 
@@ -251,7 +249,7 @@ Keep published mods self-contained. Other creators and players should be able to
 
 ## Learn From Samples
 
-Docs: [Modding Overview](https://voxelplayground.com/doc/manual/modding/index.html), [Scene Tutorial](https://voxelplayground.com/doc/manual/modding/scene/tutorial-nyc.html)
+Docs: [Modding Overview](https://voxelplayground.com/doc/documents/modding.html), [Scene Tutorial](https://voxelplayground.com/doc/documents/modding-scene-tutorial-nyc.html)
 
 The fastest way to build a reliable mod is to start from the closest sample under `Assets/Samples`:
 
