@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -185086359, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
+  m_Name: manifest
+  m_EditorClassIdentifier: 
+  id: com.cydream.nyc
+  description: 
+  author: Cydream
+  modName: NYC
+  modVersion:
+    major: 1
+    minor: 0
+    patch: 0
+  minimalMainGameVersion:
+    major: 0
+    minor: 3
+    patch: 0
+  dependencies: []
+  Scenes:
+  - name: NYC
+    icon: {fileID: 2029500579, guid: 0993f3ca52bf116498502cdc86e1a120, type: 3}
+    prefab: {fileID: 2772691659773636310, guid: 6c4dc574510297c4ba0928ebcca5628b,
+      type: 3}
+    renderingSettings: {fileID: 11400000, guid: 1f46a41686e07ee4b9a8947dbf43fae0,
+      type: 2}
+  Items: []

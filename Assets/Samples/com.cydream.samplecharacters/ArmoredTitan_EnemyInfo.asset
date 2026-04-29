@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 88364479, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
+  m_Name: ArmoredTitan_EnemyInfo
+  m_EditorClassIdentifier: 
+  damageToCharacter: 30
+  damageToBuilding: 30
+  damageToCharacterCooldown: 0.8
+  dieCompletenessRatio: 0.8
+  walkingSpeed: 1.2
+  rotateSpeed: 0.5
+  dropRoll: 10
+  dropWood: 0.2
+  dropStone: 0.2
+  dropMetal: 0.6
+  knockOffForce: 20
+  isKnockOutImmune: 0
+  isFireImmune: 0
+  isPoisonImmune: 0
+  projectileType: 0

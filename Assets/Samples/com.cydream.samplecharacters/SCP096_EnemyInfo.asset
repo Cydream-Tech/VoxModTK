@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 88364479, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
+  m_Name: SCP096_EnemyInfo
+  m_EditorClassIdentifier: 
+  damageToCharacter: 5
+  damageToBuilding: 5
+  damageToCharacterCooldown: 0.8
+  dieCompletenessRatio: 0.8
+  walkingSpeed: 1.6
+  rotateSpeed: 1
+  dropRoll: 1
+  dropWood: 0.5
+  dropStone: 0.2
+  dropMetal: 0.3
+  knockOffForce: 0
+  isKnockOutImmune: 0
+  isFireImmune: 0
+  isPoisonImmune: 0
+  projectileType: 2

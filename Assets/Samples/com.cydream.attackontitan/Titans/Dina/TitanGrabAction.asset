@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1928378495, guid: 9c60075d504ffd9439fffff2500be3c0, type: 3}
+  m_Name: TitanGrabAction
+  m_EditorClassIdentifier: 
+  aiController: {fileID: 0}
+  conditionType: 0
+  considerations:
+  - {fileID: 11400000, guid: 4bffacbce22376c469045ef82788051c, type: 2}
+  - {fileID: 11400000, guid: 1a14ecfcf9198be47a30701a8ef853fc, type: 2}
+  tickEveryFrame: 1
+  useLeftHand: 1

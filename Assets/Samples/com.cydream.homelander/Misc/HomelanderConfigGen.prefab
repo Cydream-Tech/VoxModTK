@@ -1,0 +1,255 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4785300088670460083
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7862138078729639635}
+  m_Layer: 0
+  m_Name: HomelanderConfigGen
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7862138078729639635
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4785300088670460083}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.21231425, y: 4.228646, z: 3.7025824}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7363173149362979630}
+  - {fileID: 5879517844838714003}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &6202168248324320632
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7862138078729639635}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: ed26146b997fca848861331353573552,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.21231425
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ed26146b997fca848861331353573552,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.228646
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ed26146b997fca848861331353573552,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.7025821
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ed26146b997fca848861331353573552,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ed26146b997fca848861331353573552,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ed26146b997fca848861331353573552,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ed26146b997fca848861331353573552,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ed26146b997fca848861331353573552,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ed26146b997fca848861331353573552,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ed26146b997fca848861331353573552,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ed26146b997fca848861331353573552,
+        type: 3}
+      propertyPath: m_Name
+      value: homelander-head
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ed26146b997fca848861331353573552,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4308768021926038799}
+  m_SourcePrefab: {fileID: 100100000, guid: ed26146b997fca848861331353573552, type: 3}
+--- !u!4 &5879517844838714003 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ed26146b997fca848861331353573552,
+    type: 3}
+  m_PrefabInstance: {fileID: 6202168248324320632}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6544837435281297449 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ed26146b997fca848861331353573552,
+    type: 3}
+  m_PrefabInstance: {fileID: 6202168248324320632}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4308768021926038799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544837435281297449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 145149996, guid: d42c24262cd148448b5c94c1471bfb55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  voxelSize: 0.0670008
+  maxAxisSubdivisions: 60
+  fillInside: 1
+  fillInsideUseCustomColor: 1
+  fillInsideCustomColor: {r: 0, g: 1, b: 0, a: 1}
+  useCustomBounds: 0
+  customBounds: {fileID: 0}
+  exportToVoxFile: 1
+  exportToVoxFilename: Homelander-Head-55
+  previewBounds: {fileID: 0}
+  previewVoxels: 0
+  previewMaxVoxels: 10000
+  previewVoxelPrefab: {fileID: 0}
+  previewOnlyVisibleVoxels: 1
+--- !u!1001 &7036179023063737541
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7862138078729639635}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 9cffae75698d91d4ba8d1d27e50f98b1,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.21231425
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9cffae75698d91d4ba8d1d27e50f98b1,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -4.228646
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9cffae75698d91d4ba8d1d27e50f98b1,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.7025824
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9cffae75698d91d4ba8d1d27e50f98b1,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9cffae75698d91d4ba8d1d27e50f98b1,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9cffae75698d91d4ba8d1d27e50f98b1,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9cffae75698d91d4ba8d1d27e50f98b1,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9cffae75698d91d4ba8d1d27e50f98b1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9cffae75698d91d4ba8d1d27e50f98b1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 9cffae75698d91d4ba8d1d27e50f98b1,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9cffae75698d91d4ba8d1d27e50f98b1,
+        type: 3}
+      propertyPath: m_Name
+      value: homelander-body
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 9cffae75698d91d4ba8d1d27e50f98b1,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 386797787950171340}
+  m_SourcePrefab: {fileID: 100100000, guid: 9cffae75698d91d4ba8d1d27e50f98b1, type: 3}
+--- !u!4 &7363173149362979630 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9cffae75698d91d4ba8d1d27e50f98b1,
+    type: 3}
+  m_PrefabInstance: {fileID: 7036179023063737541}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7882687323115739540 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 9cffae75698d91d4ba8d1d27e50f98b1,
+    type: 3}
+  m_PrefabInstance: {fileID: 7036179023063737541}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &386797787950171340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7882687323115739540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 145149996, guid: d42c24262cd148448b5c94c1471bfb55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  voxelSize: 0.1496798
+  maxAxisSubdivisions: 180
+  fillInside: 1
+  fillInsideUseCustomColor: 1
+  fillInsideCustomColor: {r: 0, g: 1, b: 0, a: 1}
+  useCustomBounds: 0
+  customBounds: {fileID: 0}
+  exportToVoxFile: 1
+  exportToVoxFilename: Homelander-BodyAndHand-180
+  previewBounds: {fileID: 0}
+  previewVoxels: 0
+  previewMaxVoxels: 10000
+  previewVoxelPrefab: {fileID: 0}
+  previewOnlyVisibleVoxels: 1

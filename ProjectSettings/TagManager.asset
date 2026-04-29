@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 3
+  tags:
+  - AnimFollow
+  - Equippable
+  - Hands
+  - FX
+  - Floor
+  - TestBullet
+  - MainPxScene
+  - SamplesInfoPanel
+  - SpectatorCamera
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Overlay UI
+  - Water
+  - UI
+  - Ragdoll
+  - Character
+  - HPTK
+  - Character_Controlled
+  - Ragdoll_VRCam_Hide
+  - RacingGameTrigger
+  - FakeRagdoll
+  - Player
+  - Projectile
+  - Item
+  - Building
+  - InteractWithUIOnly
+  - Attachable
+  - StencilLayer
+  - PingObject
+  - DeathPlane
+  - 3DUI
+  - HandCustomDepth
+  - EnergySwordCustom
+  - CharacterOverlapExclusion
+  - 
+  - 
+  - RaycastOnly
+  - LCK Tablet
+  - XR Simulation
+  - PolySpatial
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: PolySpatialUI
+    uniqueID: 3499754411
+    locked: 0
+  m_RenderingLayers:
+  - Default
+  - Item
+  - BlockyVoxel
+  - SkinnedVoxel
+  - Obstacle
+  - Light Layer 5
+  - Light Layer 6
+  - Light Layer 7
+  - HighlightOutlineMask

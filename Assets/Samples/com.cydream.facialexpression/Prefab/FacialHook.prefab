@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &752754358152762405
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9039965646327488893}
+  - component: {fileID: 1400576176869606760}
+  - component: {fileID: 6856228621919951166}
+  m_Layer: 0
+  m_Name: FacialHook
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9039965646327488893
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752754358152762405}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -56.37758, y: 33.94136, z: 38.829613}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1400576176869606760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752754358152762405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 990660820, guid: d42c24262cd148448b5c94c1471bfb55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  modId: com.cydream.facialexpression
+  className: FacialExpression
+--- !u!114 &6856228621919951166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752754358152762405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -253148736, guid: d42c24262cd148448b5c94c1471bfb55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StringPairs: []
+  NumberPairs:
+  - index: 0
+    key: animFPS
+    value: 2
+  BooleanPairs: []
+  ComponentPairs: []
+  ObjectPairs:
+  - index: 1
+    key: faceAtlas
+    value: {fileID: 2800000, guid: b35f7364e2ffcc5488f164d8ceaddb1c, type: 3}
+  GameObjectArrayPairs: []

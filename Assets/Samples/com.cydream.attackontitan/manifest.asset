@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -185086359, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
+  m_Name: manifest
+  m_EditorClassIdentifier: 
+  id: com.cydream.attackontitan
+  description: 
+  author: cydream
+  modName: AttackOnTitan
+  modVersion:
+    major: 1
+    minor: 0
+    patch: 0
+  minimalMainGameVersion:
+    major: 0
+    minor: 4
+    patch: 0
+  dependencies: []
+  Scenes:
+  - name: Attack On Titan
+    icon: {fileID: 21300000, guid: 19bac0eef2a6f4441accf64f6a75e534, type: 3}
+    prefab: {fileID: 9209963846670385761, guid: 29437fd7003f1e44a861085c34212ada,
+      type: 3}
+    renderingSettings: {fileID: 11400000, guid: 4d64af903135e894489208f206ed0a15,
+      type: 2}
+  Items:
+  - name: Eren
+    icon: {fileID: 21300000, guid: ba8eea6af9a48e743824e492577562c9, type: 3}
+    prefab: {fileID: 1403002046102417795, guid: 84aab1ba43fd17e49889c714f4142854,
+      type: 3}
+    itemType: 2
+  - name: ODM
+    icon: {fileID: 21300000, guid: 2d1bc9c596907864380f463d687d3558, type: 3}
+    prefab: {fileID: 6847502713077268133, guid: 804eb5c1e1674704f913f9c32bdf07c7,
+      type: 3}
+    itemType: 0
+  - name: Dina
+    icon: {fileID: 21300000, guid: 9a6ad1cd8e38d7c4d92e20d423970970, type: 3}
+    prefab: {fileID: 4659465614098237312, guid: 736959dd3e0cf734abf75cc6b0717ac3,
+      type: 3}
+    itemType: 1
+  - name: Eren Yeager
+    icon: {fileID: 21300000, guid: ba8eea6af9a48e743824e492577562c9, type: 3}
+    prefab: {fileID: 1403002046102417795, guid: aca55967783a60143ae9c0890886e382,
+      type: 3}
+    itemType: 1

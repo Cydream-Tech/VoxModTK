@@ -1,0 +1,1 @@
+export { OdmAvatar } from './odm_avatar';

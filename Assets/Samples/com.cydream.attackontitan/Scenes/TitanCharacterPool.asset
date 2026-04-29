@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1243345314, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
+  m_Name: TitanCharacterPool
+  m_EditorClassIdentifier: 
+  characters:
+  - character: {fileID: 0}
+    equipment: {fileID: 0}
+    equipmentLeftHand: {fileID: 0}
+    controllerOffset: 0
+    chest: {fileID: 0}
+    helmet: {fileID: 0}
+    hip: {fileID: 0}
+    armUpL: {fileID: 0}
+    armUpR: {fileID: 0}
+    armLowL: {fileID: 0}
+    armLowR: {fileID: 0}
+    legUpL: {fileID: 0}
+    legUpR: {fileID: 0}
+    legLowL: {fileID: 0}
+    legLowR: {fileID: 0}
+    footL: {fileID: 0}
+    footR: {fileID: 0}
+    handL: {fileID: 0}
+    handR: {fileID: 0}
+    characterId: js:com.cydream.attackontitan/Dina
+    leftHandItemId: 
+    rightHandItemId: 
+    helmetId: 
+    hipId: 
+    chestId: 
+    armUpLId: 
+    armUpRId: 
+    armLowLId: 
+    armLowRId: 
+    legUpLId: 
+    legUpRId: 
+    legLowLId: 
+    legLowRId: 
+    footLId: 
+    footRId: 
+    handLId: 
+    handRId: 
+    legacyLeftHandItemId: 
+    legacyRightHandItemId: 
+  concats: []

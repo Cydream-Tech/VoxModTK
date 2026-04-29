@@ -1,0 +1,4 @@
+interface:
+  display_name: "VoxModTK"
+  short_description: "Repo-specific guidance for building and scripting VoxModTK mods."
+  default_prompt: "Use $voxmodtk at /.codex/skills/voxmodtk to add or debug a VoxModTK mod in this Unity project."

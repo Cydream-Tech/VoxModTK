@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -185086359, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
+  m_Name: manifest
+  m_EditorClassIdentifier: 
+  id: com.cydream.samplecharacter
+  description: 
+  author: Cydream
+  modName: SampleCharacter
+  modVersion:
+    major: 1
+    minor: 0
+    patch: 0
+  minimalMainGameVersion:
+    major: 0
+    minor: 3
+    patch: 0
+  Scenes: []
+  Items:
+  - name: Armored Titan
+    icon: {fileID: 364723830, guid: 5876ce0141c5d5943baa368ea6e53e61, type: 3}
+    prefab: {fileID: 2543201312238165346, guid: 9c38300768dee104eb0c8d2303dd5df8,
+      type: 3}
+    itemType: 1
+  - name: Hulk
+    icon: {fileID: 1677609193, guid: a6c3c834786f682419c89f6a5d8dad32, type: 3}
+    prefab: {fileID: 873939185507584262, guid: 81e7d2f08cc7fa24288c5a9a4025849c, type: 3}
+    itemType: 1
+  - name: SCP 096
+    icon: {fileID: -1021368244, guid: 2b6e9dbb0417cfb4d9663807a8d7bff8, type: 3}
+    prefab: {fileID: 2249535884073554460, guid: 3378a27f8c546394fa7087fe923a0c8f,
+      type: 3}
+    itemType: 1

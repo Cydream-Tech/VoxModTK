@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -185086359, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
+  m_Name: manifest
+  m_EditorClassIdentifier: 
+  id: com.cydream.katana
+  description: 
+  author: Cydream
+  modName: Katana
+  modVersion:
+    major: 1
+    minor: 0
+    patch: 0
+  minimalMainGameVersion:
+    major: 0
+    minor: 3
+    patch: 0
+  Scenes: []
+  Items:
+  - name: Katana
+    icon: {fileID: -1921761406, guid: c99a7439a294ab241928edb75737f9d1, type: 3}
+    prefab: {fileID: 8828380689381220437, guid: 33d6083e37f976642b48153ae46248b1,
+      type: 3}
+    itemType: 0

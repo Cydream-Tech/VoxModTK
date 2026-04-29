@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1970398626, guid: 9c60075d504ffd9439fffff2500be3c0, type: 3}
+  m_Name: HulkActionGroup
+  m_EditorClassIdentifier: 
+  Actions:
+  - {fileID: 11400000, guid: af85b8d857e6ebe47a7f3191ebdaab35, type: 2}
+  - {fileID: 11400000, guid: 5b8750a60fb685340ab70e9209f6f40a, type: 2}

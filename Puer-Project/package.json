@@ -1,0 +1,32 @@
+{
+  "name": "tscode",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "node build-script/compile-and-move.js",
+    "build:mods": "node build-script/compile-mods.js",
+    "export:mod": "node build-script/export-mod.js",
+    "lint:mod": "node build-script/lint-mod.js",
+    "watch": "node build-script/watch-and-hotreload.js",
+    "watch:mods": "node build-script/watch-mods.js",
+    "watch:export:mod": "node build-script/watch-export-mod.js",
+    "build:all": "npm run build && npm run build:mods"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@puerts/shell-util": "^1.0.4",
+    "@types/chrome-remote-interface": "^0.31.3",
+    "@types/glob": "^7.2.0",
+    "@types/mkdirp": "^1.0.2",
+    "@types/node": "^16.7.13",
+    "chokidar": "^3.5.2",
+    "chrome-remote-interface": "^0.31.0",
+    "glob": "^7.2.0",
+    "mkdirp": "^1.0.4",
+    "mv": "^2.1.1",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.6.4"
+  }
+}

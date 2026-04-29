@@ -1,0 +1,42 @@
+{
+  "service": "voxmod-recipes",
+  "version": 1,
+  "recipes": [
+    {
+      "id": "projectile_weapon",
+      "intent": "Fire a spawned prefab from an item weapon.",
+      "requiredAssets": ["weapon prefab", "projectile prefab or inactive child"],
+      "prefabWiring": ["voxmod_bind_js_component", "voxmod_set_js_property(projectile)"],
+      "manifestMutations": ["voxmod_add_item"],
+      "validation": ["voxmod_validate_mod"],
+      "knownLimitations": ["Requires projectile prefab with compatible rigidbody/collision setup."]
+    },
+    {
+      "id": "raycast_voxel_brush_weapon",
+      "intent": "Use a weapon fire event to raycast and modify or demolish voxels.",
+      "requiredAssets": ["weapon prefab", "optional VFX or decal"],
+      "prefabWiring": ["voxmod_bind_js_component", "voxmod_set_js_property(optional assets)"],
+      "manifestMutations": ["voxmod_add_item"],
+      "validation": ["voxmod_validate_mod"],
+      "knownLimitations": ["Voxel target discovery depends on game-side collider/runtime APIs."]
+    },
+    {
+      "id": "scene_building_spawn",
+      "intent": "Package a scene or building prefab as a mod scene.",
+      "requiredAssets": [".vox source or prepared prefab"],
+      "prefabWiring": ["voxmod_convert_vox_to_prefab when available; otherwise use the existing VoxModTK conversion workflow"],
+      "manifestMutations": ["voxmod_add_scene"],
+      "validation": ["voxmod_validate_mod"],
+      "knownLimitations": ["Large scenes may require manual optimization."]
+    },
+    {
+      "id": "sound_bgm_trigger",
+      "intent": "Play sound, VFX, or BGM based on scene, item, or character triggers.",
+      "requiredAssets": ["trigger prefab", "sound event or VFX key"],
+      "prefabWiring": ["voxmod_bind_js_component", "voxmod_set_js_property(sound/VFX config)"],
+      "manifestMutations": ["voxmod_add_item or voxmod_add_scene"],
+      "validation": ["voxmod_validate_mod"],
+      "knownLimitations": ["Sound/VFX keys must exist in game/mod runtime."]
+    }
+  ]
+}
