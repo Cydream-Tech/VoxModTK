@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Text;
 using Newtonsoft.Json;
 using UnityEditor;
 using UnityEngine;
@@ -60,6 +61,17 @@ public class VoxModExporterWindowV3 : EditorWindow
     private Dictionary<string, bool> manifestSelections = new Dictionary<string, bool>();
     private Dictionary<string, bool> compileWatchSelections = new Dictionary<string, bool>();
     private Vector2 scrollPosition;
+
+    private string statusMessage;
+    private bool statusIsError;
+    private GUIStyle statusStyle;
+
+    private void SetStatus(string message, bool isError)
+    {
+        statusMessage = $"{message} - {DateTime.Now:yyyy-MM-dd HH:mm:ss}";
+        statusIsError = isError;
+        Repaint();
+    }
 
     [MenuItem("Vox Mod Tools/Mod Exporter")]
     public static void ShowWindow()
@@ -273,6 +285,20 @@ public class VoxModExporterWindowV3 : EditorWindow
 
         EditorGUILayout.Space(10);
 
+        // Status banner (shown above Export header). Only the most recent message is kept.
+        if (!string.IsNullOrEmpty(statusMessage))
+        {
+            if (statusStyle == null)
+            {
+                statusStyle = new GUIStyle(EditorStyles.boldLabel) { wordWrap = true };
+            }
+            statusStyle.normal.textColor = statusIsError
+                ? new Color(0.85f, 0.20f, 0.20f)
+                : new Color(0.10f, 0.65f, 0.20f);
+            EditorGUILayout.LabelField(statusMessage, statusStyle);
+            EditorGUILayout.Space(4);
+        }
+
         // Export buttons
         EditorGUILayout.LabelField("Export", EditorStyles.boldLabel);
 
@@ -373,7 +399,7 @@ public class VoxModExporterWindowV3 : EditorWindow
         {
             compileWatchSelections[modFolder] = false;
             SaveSelectionState();
-            EditorUtility.DisplayDialog("Compile Watch Error", errorMessage, "OK");
+            SetStatus($"Compile Watch failed: {errorMessage}", true);
         }
     }
 
@@ -409,7 +435,7 @@ public class VoxModExporterWindowV3 : EditorWindow
 
         if (selectedFolders.Count == 0)
         {
-            EditorUtility.DisplayDialog("Warning", "No mods selected for export.", "OK");
+            SetStatus("Export failed: no mods selected", true);
             return;
         }
 
@@ -434,15 +460,15 @@ public class VoxModExporterWindowV3 : EditorWindow
 
         AssetDatabase.Refresh();
 
-        string resultMessage = $"Export complete.\n\nSuccess: {successCount}\nFailed: {failCount}";
-        if (errors.Count > 0)
+        if (failCount == 0)
         {
-            resultMessage += "\n\nErrors:\n" + string.Join("\n", errors.Take(5));
-            if (errors.Count > 5)
-                resultMessage += $"\n... and {errors.Count - 5} more";
+            SetStatus($"Export succeeded ({successCount} mod{(successCount == 1 ? "" : "s")})", false);
         }
-
-        EditorUtility.DisplayDialog("Export Result", resultMessage, "OK");
+        else
+        {
+            var firstError = errors.Count > 0 ? errors[0] : string.Empty;
+            SetStatus($"Export failed ({failCount} of {successCount + failCount}): {firstError}", true);
+        }
     }
 
     private bool ExportMod(string modAssetPath, out string exportFolderPath, out string errorMessage)
@@ -523,7 +549,6 @@ public class VoxModExporterWindowV3 : EditorWindow
             {
                 // TypeScript compilation failure is not fatal - mod may not have scripts
                 UnityEngine.Debug.LogError($"[VoxModExporterV3] TypeScript compilation warning for '{modFolder}': {compileError}");
-                EditorUtility.DisplayDialog("TypeScript compilation error", compileError, "OK");
                 errorMessage = "Failed to compile typeScript: " + compileError;
                 return false;
             }
@@ -1222,6 +1247,7 @@ public class VoxModExporterWindowV3 : EditorWindow
                 Directory.CreateDirectory(exportPath);
                 AssetDatabase.Refresh();
                 UnityEngine.Debug.Log("[VoxModExporterV3] All exports cleaned.");
+                SetStatus("Clean All Exports succeeded", false);
             }
         }
     }
@@ -1229,6 +1255,14 @@ public class VoxModExporterWindowV3 : EditorWindow
     #region Install Methods
 
     private const string ModInstallPath = "CyDream/Voxel Playground";
+    private const string AndroidPackageName = "com.Cydream.VoxelPlayground";
+    private const string AndroidModsDirectory = "/sdcard/Android/data/" + AndroidPackageName + "/files/Mods";
+
+    private class AndroidInstallTarget
+    {
+        public string ModId;
+        public string SourcePath;
+    }
 
     private void InstallModsOnWindows()
     {
@@ -1236,7 +1270,7 @@ public class VoxModExporterWindowV3 : EditorWindow
 
         if (selectedFolders.Count == 0)
         {
-            EditorUtility.DisplayDialog("Warning", "No mods selected for installation.", "OK");
+            SetStatus("Windows install failed: no mods selected", true);
             return;
         }
 
@@ -1267,15 +1301,15 @@ public class VoxModExporterWindowV3 : EditorWindow
             }
         }
 
-        string resultMessage = $"Windows Installation complete.\n\nSuccess: {successCount}\nFailed: {failCount}";
-        if (errors.Count > 0)
+        if (failCount == 0)
         {
-            resultMessage += "\n\nErrors:\n" + string.Join("\n", errors.Take(5));
-            if (errors.Count > 5)
-                resultMessage += $"\n... and {errors.Count - 5} more";
+            SetStatus($"Windows install succeeded ({successCount} mod{(successCount == 1 ? "" : "s")})", false);
         }
-
-        EditorUtility.DisplayDialog("Install Result", resultMessage, "OK");
+        else
+        {
+            var firstError = errors.Count > 0 ? errors[0] : string.Empty;
+            SetStatus($"Windows install failed ({failCount} of {successCount + failCount}): {firstError}", true);
+        }
     }
 
     private void InstallModOnWindows(ModManifestV2 manifest)
@@ -1308,51 +1342,281 @@ public class VoxModExporterWindowV3 : EditorWindow
 
         if (selectedFolders.Count == 0)
         {
-            EditorUtility.DisplayDialog("Warning", "No mods selected for installation.", "OK");
+            SetStatus("Android install failed: no mods selected", true);
             return;
         }
 
-        // First export any mods that aren't already exported
+        var targets = new List<AndroidInstallTarget>();
+        var errors = new List<string>();
+        int preflightFailCount = 0;
+        var projectRoot = GetProjectRootAbsolutePath();
+
         foreach (var modAssetPath in selectedFolders)
         {
             if (!TryLoadManifest(modAssetPath, out var manifest))
             {
+                preflightFailCount++;
+                errors.Add($"{modAssetPath}: No ModManifestV2 found");
                 continue;
             }
 
-            var exportPath = Path.Combine(GetProjectRootAbsolutePath(), ExportRootFolderName, manifest.id);
+            var exportPath = Path.Combine(projectRoot, ExportRootFolderName, manifest.id);
             if (!Directory.Exists(exportPath))
             {
-                UnityEngine.Debug.Log($"[VoxModExporterV3] Exporting '{manifest.id}' before Android install...");
-                ExportMod(modAssetPath, out _, out _);
+                var exportMessage = $"Android install: exporting '{manifest.id}' before install";
+                UnityEngine.Debug.Log($"[VoxModExporterV3] {exportMessage}");
+                SetStatus(exportMessage, false);
+
+                if (!ExportMod(modAssetPath, out exportPath, out var exportError))
+                {
+                    preflightFailCount++;
+                    errors.Add($"{manifest.id}: export failed: {exportError}");
+                    UnityEngine.Debug.LogError($"[VoxModExporterV3] Android install skipped '{manifest.id}': export failed: {exportError}");
+                    continue;
+                }
+            }
+
+            if (!Directory.Exists(exportPath))
+            {
+                preflightFailCount++;
+                errors.Add($"{manifest.id}: export folder not found: {exportPath}");
+                continue;
+            }
+
+            targets.Add(new AndroidInstallTarget
+            {
+                ModId = manifest.id,
+                SourcePath = exportPath
+            });
+        }
+
+        if (targets.Count == 0)
+        {
+            var firstError = errors.Count > 0 ? errors[0] : "no installable mods";
+            SetStatus($"Android install failed ({preflightFailCount} of {selectedFolders.Count}): {firstError}", true);
+            return;
+        }
+
+        var adbPath = Path.Combine(projectRoot, "ADBTools", "adb.exe");
+        if (!File.Exists(adbPath))
+        {
+            SetStatus($"Android install failed: adb not found at {adbPath}", true);
+            return;
+        }
+
+        SetStatus($"Android install started ({targets.Count} selected mod{(targets.Count == 1 ? "" : "s")})", false);
+
+        System.Threading.ThreadPool.QueueUserWorkItem(state =>
+        {
+            int successCount = 0;
+            int failCount = preflightFailCount;
+            var installErrors = new List<string>(errors);
+
+            foreach (var target in targets)
+            {
+                SetStatusOnEditorThread($"Android install: installing {target.ModId}", false);
+
+                if (InstallModOnAndroid(adbPath, target, out var installError))
+                {
+                    successCount++;
+                    LogInfoOnEditorThread($"[VoxModExporterV3] Installed '{target.ModId}' on Android");
+                }
+                else
+                {
+                    failCount++;
+                    installErrors.Add($"{target.ModId}: {installError}");
+                    LogErrorOnEditorThread($"[VoxModExporterV3] Failed to install '{target.ModId}' on Android: {installError}");
+                }
+            }
+
+            if (failCount == 0)
+            {
+                SetStatusOnEditorThread($"Android install succeeded ({successCount} mod{(successCount == 1 ? "" : "s")})", false);
+            }
+            else
+            {
+                var firstError = installErrors.Count > 0 ? installErrors[0] : string.Empty;
+                SetStatusOnEditorThread($"Android install failed ({failCount} of {successCount + failCount}): {firstError}", true);
+            }
+        });
+    }
+
+    private bool InstallModOnAndroid(string adbPath, AndroidInstallTarget target, out string errorMessage)
+    {
+        errorMessage = string.Empty;
+
+        if (string.IsNullOrWhiteSpace(target.ModId))
+        {
+            errorMessage = "Mod id cannot be empty.";
+            return false;
+        }
+
+        if (string.IsNullOrWhiteSpace(target.SourcePath) || !Directory.Exists(target.SourcePath))
+        {
+            errorMessage = $"Export folder not found: {target.SourcePath}";
+            return false;
+        }
+
+        var remoteModPath = $"{AndroidModsDirectory}/{target.ModId}";
+
+        if (!RunAdbCommand(adbPath, target.ModId, "remove old install", $"shell rm -rf {QuoteAdbShellArgument(remoteModPath)}", out errorMessage))
+        {
+            return false;
+        }
+
+        if (!RunAdbCommand(adbPath, target.ModId, "create Mods directory", $"shell mkdir -p {QuoteAdbShellArgument(AndroidModsDirectory)}", out errorMessage))
+        {
+            return false;
+        }
+
+        if (!CreateAndroidRemoteDirectories(adbPath, target, remoteModPath, out errorMessage))
+        {
+            return false;
+        }
+
+        return RunAdbCommand(
+            adbPath,
+            target.ModId,
+            "push export",
+            $"push {QuoteProcessArgument(target.SourcePath)} {QuoteProcessArgument(AndroidModsDirectory + "/")}",
+            out errorMessage);
+    }
+
+    private bool CreateAndroidRemoteDirectories(string adbPath, AndroidInstallTarget target, string remoteModPath, out string errorMessage)
+    {
+        if (!RunAdbCommand(adbPath, target.ModId, "create mod directory", $"shell mkdir -p {QuoteAdbShellArgument(remoteModPath)}", out errorMessage))
+        {
+            return false;
+        }
+
+        foreach (var directoryPath in Directory.GetDirectories(target.SourcePath, "*", SearchOption.AllDirectories))
+        {
+            var relativePath = GetRelativePath(target.SourcePath, directoryPath).Replace("\\", "/");
+            if (string.IsNullOrWhiteSpace(relativePath) || relativePath == ".")
+            {
+                continue;
+            }
+
+            var remoteDirectoryPath = $"{remoteModPath}/{relativePath}";
+            if (!RunAdbCommand(adbPath, target.ModId, $"create {relativePath}", $"shell mkdir -p {QuoteAdbShellArgument(remoteDirectoryPath)}", out errorMessage))
+            {
+                return false;
             }
         }
 
-        // Run the ADB install script
+        return true;
+    }
+
+    private static string GetRelativePath(string rootPath, string childPath)
+    {
+        var rootFullPath = Path.GetFullPath(rootPath).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar)
+            + Path.DirectorySeparatorChar;
+        var childFullPath = Path.GetFullPath(childPath);
+
+        if (!childFullPath.StartsWith(rootFullPath, StringComparison.OrdinalIgnoreCase))
+        {
+            return childFullPath;
+        }
+
+        return childFullPath.Substring(rootFullPath.Length);
+    }
+
+    private bool RunAdbCommand(string adbPath, string modId, string label, string arguments, out string errorMessage)
+    {
+        errorMessage = string.Empty;
+        var output = new StringBuilder();
+        var startInfo = new ProcessStartInfo
+        {
+            FileName = adbPath,
+            Arguments = arguments,
+            WorkingDirectory = Path.GetDirectoryName(adbPath),
+            RedirectStandardOutput = true,
+            RedirectStandardError = true,
+            UseShellExecute = false,
+            CreateNoWindow = true
+        };
+
         try
         {
-            var options = new MS.Shell.Editor.EditorShell.Options()
+            using var process = new Process { StartInfo = startInfo, EnableRaisingEvents = true };
+            process.OutputDataReceived += (sender, args) =>
             {
-                workDirectory = "./ADBTools/",
-                environmentVars = new Dictionary<string, string>()
+                if (string.IsNullOrWhiteSpace(args.Data))
                 {
-                    {"PATH", "usr/bin"},
+                    return;
                 }
-            };
 
-            var operation = MS.Shell.Editor.EditorShell.Execute("InstallModToQuest.bat", options);
-            operation.onLog += (MS.Shell.Editor.EditorShell.LogType logType, string log) =>
+                lock (output)
+                {
+                    output.AppendLine(args.Data);
+                }
+
+                SetStatusOnEditorThread($"Android install {modId}: {args.Data}", false);
+                LogInfoOnEditorThread($"[VoxModExporterV3][ADB:{modId}] {args.Data}");
+            };
+            process.ErrorDataReceived += (sender, args) =>
             {
-                UnityEngine.Debug.Log(log);
+                if (string.IsNullOrWhiteSpace(args.Data))
+                {
+                    return;
+                }
+
+                lock (output)
+                {
+                    output.AppendLine(args.Data);
+                }
+
+                SetStatusOnEditorThread($"Android install {modId}: {args.Data}", true);
+                LogErrorOnEditorThread($"[VoxModExporterV3][ADB:{modId}] {args.Data}");
             };
 
-            EditorUtility.DisplayDialog("Android Install", "Android installation started. Check console for progress.", "OK");
+            SetStatusOnEditorThread($"Android install {modId}: {label}", false);
+            process.Start();
+            process.BeginOutputReadLine();
+            process.BeginErrorReadLine();
+            process.WaitForExit();
+
+            if (process.ExitCode == 0)
+            {
+                return true;
+            }
+
+            var details = output.ToString().Trim();
+            errorMessage = string.IsNullOrEmpty(details)
+                ? $"{label} failed with exit code {process.ExitCode}"
+                : $"{label} failed with exit code {process.ExitCode}: {details}";
+            return false;
         }
         catch (Exception e)
         {
-            EditorUtility.DisplayDialog("Android Install Error", $"Failed to start Android installation: {e.Message}", "OK");
-            UnityEngine.Debug.LogError($"[VoxModExporterV3] Android install failed: {e.Message}");
+            errorMessage = $"{label} failed: {e.Message}";
+            return false;
         }
+    }
+
+    private void SetStatusOnEditorThread(string message, bool isError)
+    {
+        EditorApplication.delayCall += () => SetStatus(message, isError);
+    }
+
+    private static string QuoteProcessArgument(string value)
+    {
+        if (string.IsNullOrEmpty(value))
+        {
+            return "\"\"";
+        }
+
+        return "\"" + value.Replace("\"", "\\\"") + "\"";
+    }
+
+    private static string QuoteAdbShellArgument(string value)
+    {
+        if (string.IsNullOrEmpty(value))
+        {
+            return "''";
+        }
+
+        return "'" + value.Replace("'", "'\\''") + "'";
     }
 
     private static string GetModInstallDirectory()

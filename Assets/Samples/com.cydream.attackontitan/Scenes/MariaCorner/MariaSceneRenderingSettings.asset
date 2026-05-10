@@ -407,7 +407,7 @@ MonoBehaviour:
   transitionDuration: 0.25
   colorAdjustments: 0
   colorAdjustmentsPlatform: 10
-  colorAdjustmentsPostExposure: -0.31
+  colorAdjustmentsPostExposure: -0.67
   colorAdjustmentsContrast: 8.3
   colorAdjustmentsColorFilter: {r: 1, g: 1, b: 1, a: 1}
   colorAdjustmentsSaturation: 0

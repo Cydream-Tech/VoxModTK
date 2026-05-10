@@ -28,8 +28,9 @@ MonoBehaviour:
   isFireImmune: 0
   isPoisonImmune: 0
   projectileType: 1
+  sceneConnectionBreakLevel: 0
   deathSound: {fileID: 0}
   reachingSoundRange: 0
   reachingSound: {fileID: 0}
   rankBgm: {fileID: 0}
-  hostileRank: 0
+  hostileRank: 6

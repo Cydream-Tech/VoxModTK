@@ -24,10 +24,10 @@ MonoBehaviour:
     major: 0
     minor: 3
     patch: 0
+  dependencies: []
   Scenes:
   - name: Track
     icon: {fileID: 1902146235, guid: 8180df61135e06542bb52ff5f42fe5ad, type: 3}
-    prefab: {fileID: 5511762635775444792, guid: 9ddb039cceb92ec4ab8520ffe6aa93bd,
-      type: 3}
+    prefab: {fileID: 85144475286155403, guid: abbe556c6f6a94c4a93b7c70a0142523, type: 3}
     renderingSettings: {fileID: 0}
   Items: []

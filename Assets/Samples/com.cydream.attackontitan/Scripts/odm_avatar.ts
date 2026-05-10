@@ -48,7 +48,7 @@ export class OdmAvatar {
 
     private readonly shotDistance = 200.0;
     private readonly shotRadius = 0.5;
-    private readonly stopPullDistance = 0.8;
+    private stopPullDistance = 0.8;
     private readonly reelSpeedMultiplier = 8.0;
     private readonly abilityPullSpeed = 18.0;
     private readonly reelPullInertiaClearThreshold = 0.04;
@@ -63,6 +63,8 @@ export class OdmAvatar {
     private reelRopeSound: CS.Sonity.SoundEvent | null = null;
     private hookShotSound: CS.Sonity.SoundEvent | null = null;
     private smokeParticles: CS.UnityEngine.ParticleSystem | null = null;
+    private moveJetSoundActive = false;
+    private reelRopeSoundActive = false;
 
     constructor(bindTo: VX.Mod.JsComponentProxy) {
         this.bindTo = bindTo;
@@ -111,7 +113,7 @@ export class OdmAvatar {
 
         if (this.smokeParticles) {
             const hip = ModAPI.GetCharacterBody(ModAPI.ControlledCharacter, "Hip");
-            if (hip) {
+            if (this.isValidRigidBody(hip)) {
                 this.smokeParticles.transform.SetParent(hip.transform);
                 this.smokeParticles.transform.localPosition = Vec3.zero;
                 this.smokeParticles.transform.localRotation = Quat.identity;
@@ -176,6 +178,8 @@ export class OdmAvatar {
 
         this.stopContinuousSound(this.moveJetSound);
         this.stopContinuousSound(this.reelRopeSound);
+        this.moveJetSoundActive = false;
+        this.reelRopeSoundActive = false;
         this.input.Dispose();
 
         if (this.smokeParticles != null && this.smokeParticles.gameObject != null) {
@@ -259,7 +263,7 @@ export class OdmAvatar {
 
             // [Experimental] Dampen high-speed contact: only clear velocity when very
             // close to the anchor AND moving fast, to avoid floating in mid-air.
-            if (hand.ropeLength <= 1.6 && hand.jointBody && hand.jointBody.velocity.magnitude > 6) {
+            if (hand.ropeLength <= 1.6 && this.isValidRigidBody(hand.jointBody) && hand.jointBody.velocity.magnitude > 6) {
                 this.clearCharacterInertia(character);
             }
         }
@@ -269,7 +273,7 @@ export class OdmAvatar {
             const rigidbodies = ModAPI.GetEntityRigidbodies(character);
             for (let i = 0; i < rigidbodies.Length; i++) {
                 const rb = rigidbodies.get_Item(i) as CS.Px5.Unity.PxRigidBody | null;
-                if (rb) {
+                if (this.isValidRigidBody(rb)) {
                     rb.AddForce(Vec3.op_UnaryNegation(PxPhysics.gravity), ForceMode.Acceleration);
                 }
             }
@@ -281,8 +285,14 @@ export class OdmAvatar {
     private onCharacterLost(): void {
         // If we lose control (character becomes null / not ControlledCharacter), we still need to
         // explicitly stop any continuous sounds that were started on this transform.
-        this.stopContinuousSound(this.moveJetSound);
-        this.stopContinuousSound(this.reelRopeSound);
+        if (this.moveJetSoundActive) {
+            this.stopContinuousSound(this.moveJetSound);
+            this.moveJetSoundActive = false;
+        }
+        if (this.reelRopeSoundActive) {
+            this.stopContinuousSound(this.reelRopeSound);
+            this.reelRopeSoundActive = false;
+        }
 
         // Also reset/cleanup any active grapple visuals/physics so they don't linger.
         for (const hand of this.hands) {
@@ -317,14 +327,16 @@ export class OdmAvatar {
         const controller = this.getControllerTransform(isLeft);
         const cam = ModAPI.GetMainCamera();
         if (controller) {
+            const controllerForward = controller.gameObject.activeInHierarchy ? controller.forward : (cam ? cam.transform.forward : this.bindTo.transform.forward);
+            const safeForward = this.safeDirection(controllerForward, this.bindTo.transform.forward);
             return {
                 position: this.getHandRbPosition(isLeft) ?? controller.position,
-                forward: controller.gameObject.activeInHierarchy ? controller.forward : cam.transform.forward, 
+                forward: safeForward,
                 rotation: controller.rotation,
             };
         }
 
-        const fallbackForward = cam ? cam.transform.forward : this.bindTo.transform.forward;
+        const fallbackForward = this.safeDirection(cam ? cam.transform.forward : this.bindTo.transform.forward, Vec3.forward);
         return {
             position: this.bindTo.transform.position,
             forward: fallbackForward,
@@ -339,7 +351,11 @@ export class OdmAvatar {
         }
         const bodyName = isLeft ? "LeftHand" : "RightHand";
         const rb = ModAPI.GetCharacterBody(character, bodyName);
-        return rb ? rb.worldCenterOfMass : null;
+        if (!this.isValidRigidBody(rb)) {
+            return null;
+        }
+
+        return rb.worldCenterOfMass;
     }
 
     private getControllerTransform(isLeft: boolean): CS.UnityEngine.Transform | null {
@@ -378,7 +394,7 @@ export class OdmAvatar {
                 continue;
             }
 
-            if (hit.rigidbody && ModAPI.IsCharacterCarryingRigidbody(character, hit.rigidbody)) {
+            if (this.isValidRigidBody(hit.rigidbody) && ModAPI.IsCharacterCarryingRigidbody(character, hit.rigidbody)) {
                 continue;
             }
 
@@ -398,12 +414,13 @@ export class OdmAvatar {
     }
 
     private containsRigidbody(rigidbodies: CS.System.Array$1<CS.Px5.Unity.PxRigidBody>, target: CS.Px5.Unity.PxRigidBody | null): boolean {
-        if (!target || !rigidbodies) {
+        if (!this.isValidRigidBody(target) || !rigidbodies) {
             return false;
         }
 
         for (let i = 0; i < rigidbodies.Length; i++) {
-            if (rigidbodies.get_Item(i) === target) {
+            const rb = rigidbodies.get_Item(i) as CS.Px5.Unity.PxRigidBody | null;
+            if (this.isValidRigidBody(rb) && rb === target) {
                 return true;
             }
         }
@@ -412,10 +429,11 @@ export class OdmAvatar {
     }
 
     private drawAimPreview(origin: CS.UnityEngine.Vector3, direction: CS.UnityEngine.Vector3, hand: HandState): void {
-        const rotation = Quat.LookRotation(direction, Vec3.up);
+        const safeDirection = this.safeDirection(direction, this.bindTo.transform.forward);
+        const rotation = Quat.LookRotation(safeDirection, Vec3.up);
         const hit = hand.rayHitInfo;
         const color = hit ? Color.white : new Color(0.7, 0.7, 0.7, 1.0);
-        const targetPos = hit ? hand.grappleHitPoint : Vec3.op_Addition(origin, Vec3.op_Multiply(direction, this.shotDistance));
+        const targetPos = hit ? hand.grappleHitPoint : Vec3.op_Addition(origin, Vec3.op_Multiply(safeDirection, this.shotDistance));
         Giz.DrawCrosshair(targetPos, rotation, 1.0, color);
         Giz.DrawDashedLine(origin, targetPos, 0.3, 0.3, color);
         if (hit && Giz.show) {
@@ -459,7 +477,7 @@ export class OdmAvatar {
         //   - movement away from anchor (rope direction): reliable when anchor is not directly forward (e.g. above)
         const hipBody = ModAPI.GetCharacterBody(character, "Hip");
         const ropeDir = dist > 0.0001 ? toAnchor.normalized : Vec3.zero;
-        const pullFromBack = hipBody ? -Vec3.Dot(handDelta, hipBody.transform.forward) : 0;
+        const pullFromBack = this.isValidRigidBody(hipBody) ? -Vec3.Dot(handDelta, hipBody.transform.forward) : 0;
         const pullFromRope = -Vec3.Dot(handDelta, ropeDir);
         const pullInput = Math.max(pullFromBack, pullFromRope);
 
@@ -513,7 +531,8 @@ export class OdmAvatar {
         Giz.DrawRay(shotPos, Vec3.op_Multiply(Vec3.op_Subtraction(anchorPos, shotPos).normalized, pullInput * this.reelSpeedMultiplier), Color.yellow);
         if (Giz.show) {
             var pA = hand.joint.transform.TransformPoint(hand.joint.anchor);
-            var pB = hand.joint.connectedBody?.transform.TransformPoint(hand.joint.connectedAnchor) ?? Vec3.zero;
+            const connectedBody = hand.joint.connectedBody;
+            var pB = this.isValidRigidBody(connectedBody) ? connectedBody.transform.TransformPoint(hand.joint.connectedAnchor) : Vec3.zero;
             Giz.DrawLine(pA, pB, Color.red);
             Giz.DrawLabel(Vec3.Lerp(pA, pB, 0.5), "RopeLen: " + hand.ropeLength.toFixed(2), Color.red);
         }
@@ -532,7 +551,7 @@ export class OdmAvatar {
         const rigidbodies = ModAPI.GetEntityRigidbodies(character);
         for (let i = 0; i < rigidbodies.Length; i++) {
             const rb = rigidbodies.get_Item(i) as CS.Px5.Unity.PxRigidBody | null;
-            if (!rb) {
+            if (!this.isValidRigidBody(rb)) {
                 continue;
             }
 
@@ -559,7 +578,8 @@ export class OdmAvatar {
             move.y = 0;
         }
         if (Giz.show) {
-            var pos = ModAPI.GetCharacterBody(character, "Hip")?.transform.position ?? Vec3.zero;   
+            const debugHip = ModAPI.GetCharacterBody(character, "Hip");
+            var pos = this.isValidRigidBody(debugHip) ? debugHip.transform.position : Vec3.zero;
             Giz.DrawRayArrow(pos, move, Color.red);
             Giz.DrawLabel(pos, "move: " + move.magnitude.toFixed(2) + "\nIsGrounded: " + ModAPI.IsCharacterGrounded(character), Color.red);
         }
@@ -583,7 +603,7 @@ export class OdmAvatar {
         const vel = Vec3.op_Multiply(move, CS.UnityEngine.Time.fixedDeltaTime * this.swingForceMultiplier);
         const hipRb = ModAPI.GetCharacterBody(character, "Hip");
 
-        if (hipRb) {
+        if (this.isValidRigidBody(hipRb)) {
             hipRb.AddForce(vel, ForceMode.VelocityChange);
         }
         ModAPI.AddCharacterMotion(character, vel, ForceMode.VelocityChange);
@@ -598,11 +618,11 @@ export class OdmAvatar {
             return hand.joint.transform.TransformPoint(hand.joint.anchor);
         }
         const torso = ModAPI.GetCharacterBody(character, "Torso");
-        if (torso) {
+        if (this.isValidRigidBody(torso)) {
             return torso.transform.position;
         }
         const mainRb = ModAPI.GetEntityMainRigidbody(character);
-        return mainRb ? mainRb.transform.position : this.bindTo.transform.position;
+        return this.isValidRigidBody(mainRb) ? mainRb.transform.position : this.bindTo.transform.position;
     }
 
     private attachJoint(
@@ -610,7 +630,9 @@ export class OdmAvatar {
         hand: HandState,
         hit: CS.Px5.UnityExtensions.RaycastHit
     ): void {
-        const joint = ModAPI.AttachJointToCharacter(character, hit.rigidbody);
+        const hitRb = this.isValidRigidBody(hit.rigidbody) ? hit.rigidbody : null;
+        this.stopPullDistance = hitRb && !hitRb.isKinematic ? 0.3 : 0.8;
+        const joint = ModAPI.AttachJointToCharacter(character, hitRb as CS.Px5.Unity.PxRigidBody);
         if (!joint) {
             return;
         }
@@ -622,9 +644,9 @@ export class OdmAvatar {
 
         joint.autoConfigureConnectedAnchor = false;
         joint.enableCollision = true;
-        joint.connectedBody = hit.rigidbody;
-        joint.connectedAnchor = hit.rigidbody
-            ? hit.rigidbody.transform.InverseTransformPoint(hand.grappleHitPoint)
+        joint.connectedBody = hitRb as CS.Px5.Unity.PxRigidBody;
+        joint.connectedAnchor = hitRb
+            ? hitRb.transform.InverseTransformPoint(hand.grappleHitPoint)
             : hand.grappleHitPoint;
         joint.anchor = Vec3.zero;
 
@@ -653,7 +675,7 @@ export class OdmAvatar {
         if (hand.joint) {
             const connectedBody = hand.joint.connectedBody;
             const connectedAnchor = hand.joint.connectedAnchor; 
-            if (connectedBody?.valid) {
+            if (this.isValidRigidBody(connectedBody)) {
                 return connectedBody.transform.TransformPoint(connectedAnchor);
             }
             return connectedAnchor;
@@ -681,7 +703,7 @@ export class OdmAvatar {
 
         for (let i = 0; i < rigidbodies.Length; i++) {
             const rb = rigidbodies.get_Item(i) as CS.Px5.Unity.PxRigidBody | null;
-            if (!rb) {
+            if (!this.isValidRigidBody(rb)) {
                 hand.savedDrags[i] = 0;
                 continue;
             }
@@ -699,7 +721,7 @@ export class OdmAvatar {
         const rigidbodies = ModAPI.GetEntityRigidbodies(character);
         for (let i = 0; i < rigidbodies.Length && i < hand.savedDrags.length; i++) {
             const rb = rigidbodies.get_Item(i) as CS.Px5.Unity.PxRigidBody | null;
-            if (!rb) {
+            if (!this.isValidRigidBody(rb)) {
                 continue;
             }
 
@@ -713,7 +735,7 @@ export class OdmAvatar {
         const rigidbodies = ModAPI.GetEntityRigidbodies(character);
         for (let i = 0; i < rigidbodies.Length; i++) {
             const rb = rigidbodies.get_Item(i) as CS.Px5.Unity.PxRigidBody | null;
-            if (!rb) {
+            if (!this.isValidRigidBody(rb)) {
                 continue;
             }
 
@@ -736,22 +758,26 @@ export class OdmAvatar {
         const moveInput = this.input.GetMoveInput();
         const swingActive = !ModAPI.IsCharacterGrounded(character) && (moveInput.x * moveInput.x + moveInput.y * moveInput.y) > 0;
 
-        this.setContinuousSoundState(this.moveJetSound, abilityActive || swingActive);
-        this.setContinuousSoundState(this.reelRopeSound, reelActive);
+        this.moveJetSoundActive = this.setContinuousSoundState(this.moveJetSound, abilityActive || swingActive, this.moveJetSoundActive);
+        this.reelRopeSoundActive = this.setContinuousSoundState(this.reelRopeSound, reelActive, this.reelRopeSoundActive);
     }
 
-    private setContinuousSoundState(soundEvent: CS.Sonity.SoundEvent | null, active: boolean): void {
+    private setContinuousSoundState(soundEvent: CS.Sonity.SoundEvent | null, active: boolean, wasActive: boolean): boolean {
         if (soundEvent == null) {
-            return;
+            return false;
         }
 
-        if (active) {
-            if (!ModAPI.IsSoundPlaying(soundEvent, this.bindTo.transform)) {
-                ModAPI.PlaySoundOnTransform(soundEvent, this.bindTo.transform);
-            }
-        } else {
-            ModAPI.StopSoundOnTransform(soundEvent, this.bindTo.transform);
+        if (active && !wasActive) {
+            ModAPI.PlaySoundOnTransform(soundEvent, this.bindTo.transform);
+            return true;
         }
+
+        if (!active && wasActive) {
+            ModAPI.StopSoundOnTransform(soundEvent, this.bindTo.transform);
+            return false;
+        }
+
+        return wasActive;
     }
 
     private stopContinuousSound(soundEvent: CS.Sonity.SoundEvent | null): void {
@@ -873,10 +899,8 @@ export class OdmAvatar {
         hand.lineRenderer.positionCount = 2;
         this.hideRopeRenderer(hand);
         hand.isGrappling = false;
-        if (character) {
-            ModAPI.SetCharacterHanging(character, hand.isGrappling);
-        }
         hand.joint = null;
+        hand.jointBody = null;
         hand.rayHitInfo = null;
         hand.prevControllerLocalPos = null;
         hand.ropeLength = 0;
@@ -893,8 +917,27 @@ export class OdmAvatar {
             }
         }
         if (!stillGrappling) {
+            if (character) {
+                ModAPI.SetCharacterHanging(character, false);
+            }
             this.stopContinuousSound(this.moveJetSound);
             this.stopContinuousSound(this.reelRopeSound);
+            this.moveJetSoundActive = false;
+            this.reelRopeSoundActive = false;
         }
+    }
+
+    private isValidRigidBody(rb: CS.Px5.Unity.PxRigidBody | null): rb is CS.Px5.Unity.PxRigidBody {
+        return !!rb && rb.valid;
+    }
+
+    private safeDirection(direction: CS.UnityEngine.Vector3, fallback: CS.UnityEngine.Vector3): CS.UnityEngine.Vector3 {
+        if (direction.sqrMagnitude > 0.0001) {
+            return direction.normalized;
+        }
+        if (fallback.sqrMagnitude > 0.0001) {
+            return fallback.normalized;
+        }
+        return Vec3.forward;
     }
 }
