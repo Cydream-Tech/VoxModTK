@@ -93,3 +93,4 @@ node_modules/
 .codex/
 .cursor/
 .trae/
+*.slnx
