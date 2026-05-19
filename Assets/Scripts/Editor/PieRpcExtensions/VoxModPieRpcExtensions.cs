@@ -1,4 +1,4 @@
-#if UNITY_EDITOR
+#if UNITY_EDITOR && USE_PIE_AGENT
 using System;
 using System.Collections.Generic;
 using System.IO;

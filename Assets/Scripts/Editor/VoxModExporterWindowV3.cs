@@ -18,12 +18,15 @@ using VoxelPlayground.Mod.Serialization;
 /// </summary>
 public class VoxModExporterWindowV3 : EditorWindow
 {
-    [Serializable]
     private class CompileWatchProcessInfo
     {
         public string ModFolder;
         public string ModId;
-        public Process Process;
+        public FileSystemWatcher Watcher;
+        public string ScriptsRoot;
+        public string OutputDir;
+        public string DebounceTimerId;
+        public EditorApplication.CallbackFunction DebounceAction;
     }
 
     private static readonly List<string> ModRootPaths = new List<string>
@@ -834,20 +837,13 @@ public class VoxModExporterWindowV3 : EditorWindow
         errorMessage = string.Empty;
         var modFolderAbsolutePath = AssetPathToAbsolutePath(modFolderAssetPath);
         var modScriptsFolderPath = Path.Combine(modFolderAbsolutePath, "Scripts");
-        var tsConfigPath = Path.Combine(modFolderAbsolutePath, "tsconfig.json");
 
         if (!HasScriptFiles(modScriptsFolderPath))
         {
             return true;
         }
 
-        if (!File.Exists(tsConfigPath))
-        {
-            errorMessage = "No tsconfig.json found - skipping TypeScript compilation.";
-            return false;
-        }
-
-        if (!RunTypeScriptExport(tsConfigPath, exportScriptFolderPath, out var compilerError))
+        if (!RunTypeScriptExport(modScriptsFolderPath, exportScriptFolderPath, out var compilerError))
         {
             errorMessage = compilerError;
             return false;
@@ -879,55 +875,9 @@ public class VoxModExporterWindowV3 : EditorWindow
             });
     }
 
-    private bool RunTypeScriptExport(string tsConfigPath, string outputFolderPath, out string errorMessage)
+    private bool RunTypeScriptExport(string scriptsRoot, string outputFolderPath, out string errorMessage)
     {
-        errorMessage = string.Empty;
-        var workingDirectory = GetTypeScriptWorkingDirectoryAbsolutePath();
-        var npmCmdPath = GetNpmCommandPath(workingDirectory);
-
-        if (string.IsNullOrEmpty(npmCmdPath))
-        {
-            errorMessage = $"npm not found. Ensure Node.js/npm is installed and available to the Unity editor.";
-            return false;
-        }
-
-        var startInfo = new ProcessStartInfo
-        {
-            FileName = npmCmdPath,
-            Arguments = $"run export:mod -- \"{tsConfigPath}\" \"{outputFolderPath}\"",
-            WorkingDirectory = workingDirectory,
-            RedirectStandardOutput = true,
-            RedirectStandardError = true,
-            UseShellExecute = false,
-            CreateNoWindow = true
-        };
-
-        try
-        {
-            using var process = Process.Start(startInfo);
-            if (process == null)
-            {
-                errorMessage = "Failed to start npm export process.";
-                return false;
-            }
-
-            var stdOut = process.StandardOutput.ReadToEnd();
-            var stdErr = process.StandardError.ReadToEnd();
-            process.WaitForExit();
-
-            if (process.ExitCode != 0)
-            {
-                errorMessage = $"TypeScript export failed (exit {process.ExitCode}).\n{stdOut}\n{stdErr}".Trim();
-                return false;
-            }
-
-            return true;
-        }
-        catch (Exception e)
-        {
-            errorMessage = $"TypeScript export failed: {e.Message}";
-            return false;
-        }
+        return TypeScriptCompiler.Compile(scriptsRoot, outputFolderPath, out errorMessage);
     }
 
     private bool TryStartCompileWatch(string modFolderAssetPath, ModManifestV2 manifest, out string errorMessage)
@@ -947,16 +897,9 @@ public class VoxModExporterWindowV3 : EditorWindow
 
         var modFolderAbsolutePath = AssetPathToAbsolutePath(modFolderAssetPath);
         var modScriptsFolderPath = Path.Combine(modFolderAbsolutePath, "Scripts");
-        var tsConfigPath = Path.Combine(modFolderAbsolutePath, "tsconfig.json");
         if (!HasScriptFiles(modScriptsFolderPath))
         {
             errorMessage = "No TypeScript files found under the mod's Scripts folder.";
-            return false;
-        }
-
-        if (!File.Exists(tsConfigPath))
-        {
-            errorMessage = "No tsconfig.json found in the mod folder.";
             return false;
         }
 
@@ -968,66 +911,32 @@ public class VoxModExporterWindowV3 : EditorWindow
         var targetScriptFolder = GetInstalledModScriptDirectory(manifest.id);
         Directory.CreateDirectory(targetScriptFolder);
 
-        var workingDirectory = GetTypeScriptWorkingDirectoryAbsolutePath();
-        var npmCmdPath = GetNpmCommandPath(workingDirectory);
-        if (string.IsNullOrEmpty(npmCmdPath))
-        {
-            errorMessage = "npm not found. Ensure Node.js/npm is installed and available to the Unity editor.";
-            return false;
-        }
-
-        var startInfo = new ProcessStartInfo
-        {
-            FileName = npmCmdPath,
-            Arguments = $"run watch:export:mod -- \"{tsConfigPath}\" \"{targetScriptFolder}\"",
-            WorkingDirectory = workingDirectory,
-            RedirectStandardOutput = true,
-            RedirectStandardError = true,
-            UseShellExecute = false,
-            CreateNoWindow = true
-        };
-
         try
         {
-            var process = Process.Start(startInfo);
-            if (process == null)
+            var watcher = new FileSystemWatcher(modScriptsFolderPath, "*.ts")
             {
-                errorMessage = "Failed to start compile watch process.";
-                return false;
-            }
+                IncludeSubdirectories = true,
+                EnableRaisingEvents = true
+            };
 
-            process.EnableRaisingEvents = true;
-            process.OutputDataReceived += (_, args) =>
-            {
-                if (!string.IsNullOrWhiteSpace(args.Data))
-                {
-                    LogInfoOnEditorThread($"[VoxModExporterV3][Watch:{manifest.id}] {args.Data}");
-                }
-            };
-            process.ErrorDataReceived += (_, args) =>
-            {
-                if (!string.IsNullOrWhiteSpace(args.Data))
-                {
-                    LogErrorOnEditorThread($"[VoxModExporterV3][Watch:{manifest.id}] {args.Data}");
-                }
-            };
-            process.Exited += (_, _) =>
-            {
-                ActiveCompileWatchProcesses.Remove(manifest.id);
-                if (IsCompileWatchEnabled(modFolderAssetPath))
-                {
-                    LogWarningOnEditorThread($"[VoxModExporterV3] Compile watch exited for '{manifest.id}'.");
-                }
-            };
-            process.BeginOutputReadLine();
-            process.BeginErrorReadLine();
-
-            ActiveCompileWatchProcesses[manifest.id] = new CompileWatchProcessInfo
+            var watchInfo = new CompileWatchProcessInfo
             {
                 ModFolder = modFolderAssetPath,
                 ModId = manifest.id,
-                Process = process
+                Watcher = watcher,
+                ScriptsRoot = modScriptsFolderPath,
+                OutputDir = targetScriptFolder
             };
+
+            watcher.Changed += (_, _) => ScheduleRecompile(watchInfo);
+            watcher.Created += (_, _) => ScheduleRecompile(watchInfo);
+            watcher.Deleted += (_, _) => ScheduleRecompile(watchInfo);
+            watcher.Renamed += (_, _) => ScheduleRecompile(watchInfo);
+
+            ActiveCompileWatchProcesses[manifest.id] = watchInfo;
+
+            // Do an initial compile
+            RecompileWatchTarget(watchInfo);
 
             UnityEngine.Debug.Log($"[VoxModExporterV3] Compile watch started for '{manifest.id}'.");
             return true;
@@ -1036,6 +945,46 @@ public class VoxModExporterWindowV3 : EditorWindow
         {
             errorMessage = $"Failed to start compile watch: {e.Message}";
             return false;
+        }
+    }
+
+    private void ScheduleRecompile(CompileWatchProcessInfo watchInfo)
+    {
+        // Cancel any pending debounce
+        if (!string.IsNullOrEmpty(watchInfo.DebounceTimerId))
+        {
+            EditorApplication.delayCall -= watchInfo.DebounceAction;
+            watchInfo.DebounceTimerId = null;
+        }
+
+        // Debounce: wait ~250ms for filesystem to settle
+        var timerId = Guid.NewGuid().ToString();
+        watchInfo.DebounceTimerId = timerId;
+
+        void callback()
+        {
+            if (watchInfo.DebounceTimerId == timerId)
+            {
+                watchInfo.DebounceTimerId = null;
+                RecompileWatchTarget(watchInfo);
+            }
+        }
+
+        watchInfo.DebounceAction = callback;
+        EditorApplication.delayCall += callback;
+    }
+
+    private void RecompileWatchTarget(CompileWatchProcessInfo watchInfo)
+    {
+        TypeScriptCompiler.CleanDirectory(watchInfo.OutputDir);
+
+        if (TypeScriptCompiler.Compile(watchInfo.ScriptsRoot, watchInfo.OutputDir, out var error))
+        {
+            LogInfoOnEditorThread($"[VoxModExporterV3][Watch:{watchInfo.ModId}] Recompiled successfully.");
+        }
+        else
+        {
+            LogErrorOnEditorThread($"[VoxModExporterV3][Watch:{watchInfo.ModId}] {error}");
         }
     }
 
@@ -1062,18 +1011,9 @@ public class VoxModExporterWindowV3 : EditorWindow
 
     private static bool IsCompileWatchRunning(string modId)
     {
-        if (!ActiveCompileWatchProcesses.TryGetValue(modId, out var info) || info?.Process == null)
-        {
-            return false;
-        }
-
-        if (info.Process.HasExited)
-        {
-            ActiveCompileWatchProcesses.Remove(modId);
-            return false;
-        }
-
-        return true;
+        return ActiveCompileWatchProcesses.TryGetValue(modId, out var info)
+            && info?.Watcher != null
+            && info.Watcher.EnableRaisingEvents;
     }
 
     private static void StopCompileWatchByModId(string modId)
@@ -1083,18 +1023,15 @@ public class VoxModExporterWindowV3 : EditorWindow
             return;
         }
 
-        if (!ActiveCompileWatchProcesses.TryGetValue(modId, out var info) || info?.Process == null)
+        if (!ActiveCompileWatchProcesses.TryGetValue(modId, out var info) || info?.Watcher == null)
         {
             return;
         }
 
         try
         {
-            if (!info.Process.HasExited)
-            {
-                info.Process.Kill();
-                info.Process.WaitForExit(2000);
-            }
+            info.Watcher.EnableRaisingEvents = false;
+            info.Watcher.Dispose();
         }
         catch (Exception e)
         {
@@ -1102,7 +1039,6 @@ public class VoxModExporterWindowV3 : EditorWindow
         }
         finally
         {
-            info.Process.Dispose();
             ActiveCompileWatchProcesses.Remove(modId);
         }
     }
@@ -1146,27 +1082,6 @@ public class VoxModExporterWindowV3 : EditorWindow
     private static string GetProjectRootAbsolutePath()
     {
         return Path.GetFullPath(Path.Combine(Application.dataPath, ".."));
-    }
-
-    private static string GetTypeScriptWorkingDirectoryAbsolutePath()
-    {
-        var projectRoot = GetProjectRootAbsolutePath();
-        var puerProjectPath = Path.Combine(projectRoot, "Puer-Project");
-        return Directory.Exists(puerProjectPath) ? puerProjectPath : projectRoot;
-    }
-
-    private static string GetNpmCommandPath(string workingDirectory)
-    {
-        if (string.IsNullOrWhiteSpace(workingDirectory)) return null;
-
-        if (Application.platform == RuntimePlatform.WindowsEditor)
-        {
-            var windowsNpmCmd = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "nodejs", "npm.cmd");
-            if (File.Exists(windowsNpmCmd)) return windowsNpmCmd;
-            return "npm.cmd";
-        }
-
-        return "npm";
     }
 
     private static string AssetPathToAbsolutePath(string assetPath)

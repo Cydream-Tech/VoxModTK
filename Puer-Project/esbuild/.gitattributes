@@ -1,0 +1,2 @@
+# macOS esbuild binaries must use LF line endings
+esbuild-darwin-* text eol=lf

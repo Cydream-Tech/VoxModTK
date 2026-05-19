@@ -1,21 +1,5 @@
 {
   "dependencies": {
-    "com.madsbangh.easybuttons": {
-      "version": "https://github.com/madsbangh/EasyButtons.git#upm",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "73d2383899210da808a1b27329cdaa8000de557b"
-    },
-    "com.pie.agent": {
-      "version": "https://github.com/Cydream-Tech/PieUnity.git#0.1.19",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {
-        "com.tencent.puerts.core": "2.2.2"
-      },
-      "hash": "baf5ef7705c10556d8879679f11467328d6356b5"
-    },
     "com.tencent.puerts.core": {
       "version": "2.2.2",
       "depth": 0,
