@@ -51,8 +51,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 40.21982, y: 91.14359, z: 7.675299}
-  m_Center: {x: 6.9444532, y: 69.15077, z: 0.94030374}
+  m_Size: {x: 5.906785, y: 74.41777, z: 2.2244852}
+  m_Center: {x: 2.7665458, y: 60.78784, z: 1.1751856}
 --- !u!1 &2883342602541135426
 GameObject:
   m_ObjectHideFlags: 0
@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 0.002
+  mass: 3.6
   useGravity: 1
   isKinematic: 0
 --- !u!114 &5287789182311779895
@@ -262,10 +262,17 @@ MonoBehaviour:
   enableStab: 0
   shadowGo: {fileID: 921720975871388003}
   hitDetectionBox: {fileID: 0}
-  damageVoxel: 1
+  damageVoxel: 0
+  attachOnLegacyCollision: 0
+  attachOnPenetration: 1
   enableSliceOut: 1
   disableColliderOnHit: 0
   sharpness: 6
+  initializeSharpVoxels: 1
+  sharpVoxelBand: 5
+  showSharpVoxelGizmos: 1
+  sharpVoxelGizmoColor: {r: 1, g: 0, b: 0, a: 1}
+  maxSharpVoxelGizmos: 2048
   materialID: 12
   cutHardnessCap: 9
   extraJointData: {fileID: 0}
@@ -307,12 +314,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 0
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 60
   durabilityDamageRelVelThreshold: 9

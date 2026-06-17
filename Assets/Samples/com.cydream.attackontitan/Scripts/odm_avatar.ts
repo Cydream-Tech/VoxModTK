@@ -377,12 +377,86 @@ export class OdmAvatar {
         }
 
         let chosen: CS.Px5.UnityExtensions.RaycastHit | null = null;
+        let chosenPoint: CS.UnityEngine.Vector3 | null = null;
         let bestDist = Number.POSITIVE_INFINITY;
         const ownRigidbodies = ModAPI.GetEntityRigidbodies(character);
 
         for (let i = 0; i < hits.Length; i++) {
             const hit = hits.get_Item(i) as CS.Px5.UnityExtensions.RaycastHit;
             if (!hit || !hit.collider) {
+                continue;
+            }
+
+            if (!this.isFiniteVector(hit.point)) {
+                continue;
+            }
+
+            if (!this.isFiniteScalar(hit.distance)) {
+                continue;
+            }
+
+            if (hit.point.x === 0 && hit.point.y === 0 && hit.point.z === 0) {
+                continue;
+            }
+
+            if (this.containsRigidbody(ownRigidbodies, hit.rigidbody)) {
+                continue;
+            }
+
+            if (this.isValidRigidBody(hit.rigidbody) && ModAPI.IsCharacterCarryingRigidbody(character, hit.rigidbody)) {
+                continue;
+            }
+
+            const closestPoint = hit.collider.ClosestPoint(hit.point);
+            if (!this.isFiniteVector(closestPoint)) {
+                continue;
+            }
+
+            if (hit.distance < bestDist) {
+                bestDist = hit.distance;
+                chosen = hit;
+                chosenPoint = closestPoint;
+            }
+        }
+
+        if (!chosen || !chosenPoint) {
+            hand.rayHitInfo = null;
+            return null;
+        }
+
+        const preciseHit = this.findPreciseRaycastTarget(character, origin, direction, layerMask, ownRigidbodies);
+        if (preciseHit && this.shouldPreferPreciseRaycast(preciseHit.hit.distance, chosen.distance)) {
+            hand.grappleHitPoint = preciseHit.point;
+            return preciseHit.hit;
+        }
+
+        hand.grappleHitPoint = chosenPoint;
+        return chosen;
+    }
+
+    private findPreciseRaycastTarget(
+        character: VX.Entity.EntityCharacter,
+        origin: CS.UnityEngine.Vector3,
+        direction: CS.UnityEngine.Vector3,
+        layerMask: number,
+        ownRigidbodies: CS.System.Array$1<CS.Px5.Unity.PxRigidBody>
+    ): { hit: CS.Px5.UnityExtensions.RaycastHit; point: CS.UnityEngine.Vector3 } | null {
+        const hits = PxPhysics.RaycastAll(origin, direction, this.shotDistance, layerMask, QueryTriggerInteraction.Ignore);
+        if (!hits || hits.Length <= 0) {
+            return null;
+        }
+
+        let chosen: CS.Px5.UnityExtensions.RaycastHit | null = null;
+        let chosenPoint: CS.UnityEngine.Vector3 | null = null;
+        let bestDist = Number.POSITIVE_INFINITY;
+
+        for (let i = 0; i < hits.Length; i++) {
+            const hit = hits.get_Item(i) as CS.Px5.UnityExtensions.RaycastHit;
+            if (!hit || !hit.collider) {
+                continue;
+            }
+
+            if (!this.isFiniteVector(hit.point) || !this.isFiniteScalar(hit.distance)) {
                 continue;
             }
 
@@ -401,16 +475,16 @@ export class OdmAvatar {
             if (hit.distance < bestDist) {
                 bestDist = hit.distance;
                 chosen = hit;
+                chosenPoint = hit.point;
             }
         }
 
-        if (!chosen) {
-            hand.rayHitInfo = null;
-            return null;
-        }
+        return chosen && chosenPoint ? { hit: chosen, point: chosenPoint } : null;
+    }
 
-        hand.grappleHitPoint = chosen.collider.ClosestPoint(chosen.point);
-        return chosen;
+    private shouldPreferPreciseRaycast(rayDistance: number, sphereDistance: number): boolean {
+        const maxDistanceDelta = Math.max(this.shotRadius * 1.5, 0.25);
+        return Math.abs(rayDistance - sphereDistance) <= maxDistanceDelta;
     }
 
     private containsRigidbody(rigidbodies: CS.System.Array$1<CS.Px5.Unity.PxRigidBody>, target: CS.Px5.Unity.PxRigidBody | null): boolean {
@@ -929,6 +1003,14 @@ export class OdmAvatar {
 
     private isValidRigidBody(rb: CS.Px5.Unity.PxRigidBody | null): rb is CS.Px5.Unity.PxRigidBody {
         return !!rb && rb.valid;
+    }
+
+    private isFiniteScalar(value: number): boolean {
+        return value === value && value !== Number.POSITIVE_INFINITY && value !== Number.NEGATIVE_INFINITY;
+    }
+
+    private isFiniteVector(value: CS.UnityEngine.Vector3 | null): value is CS.UnityEngine.Vector3 {
+        return !!value && this.isFiniteScalar(value.x) && this.isFiniteScalar(value.y) && this.isFiniteScalar(value.z);
     }
 
     private safeDirection(direction: CS.UnityEngine.Vector3, fallback: CS.UnityEngine.Vector3): CS.UnityEngine.Vector3 {

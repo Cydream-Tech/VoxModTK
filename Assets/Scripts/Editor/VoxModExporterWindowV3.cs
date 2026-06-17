@@ -381,6 +381,11 @@ public class VoxModExporterWindowV3 : EditorWindow
             return "Compile Watch: On";
         }
 
+        if (!VoxModIdUtility.TryValidate(manifest.id, out _))
+        {
+            return "Compile Watch: invalid mod ID";
+        }
+
         return IsCompileWatchRunning(manifest.id)
             ? "Compile Watch: On (running)"
             : "Compile Watch: On (stopped)";
@@ -498,6 +503,11 @@ public class VoxModExporterWindowV3 : EditorWindow
             return false;
         }
 
+        if (!TryValidateManifestModId(manifest, out errorMessage))
+        {
+            return false;
+        }
+
         exportFolderPath = Path.Combine(GetProjectRootAbsolutePath(), ExportRootFolderName, manifest.id);
         var prefabsFolderPath = Path.Combine(exportFolderPath, "prefabs");
         var scriptsFolderPath = Path.Combine(exportFolderPath, "script");
@@ -565,6 +575,33 @@ public class VoxModExporterWindowV3 : EditorWindow
         {
             errorMessage = $"Export failed: {e.Message}";
             return false;
+        }
+    }
+
+    private static bool TryValidateManifestModId(ModManifestV2 manifest, out string errorMessage)
+    {
+        errorMessage = string.Empty;
+
+        if (manifest == null)
+        {
+            errorMessage = "Manifest is null.";
+            return false;
+        }
+
+        if (!VoxModIdUtility.TryValidate(manifest.id, out var modIdError))
+        {
+            errorMessage = $"Invalid manifest id '{manifest.id}': {modIdError} {VoxModIdUtility.ValidationHint}";
+            return false;
+        }
+
+        return true;
+    }
+
+    private static void ValidateManifestModIdOrThrow(ModManifestV2 manifest)
+    {
+        if (!TryValidateManifestModId(manifest, out var errorMessage))
+        {
+            throw new Exception(errorMessage);
         }
     }
 
@@ -887,6 +924,11 @@ public class VoxModExporterWindowV3 : EditorWindow
         if (manifest == null)
         {
             errorMessage = "Manifest is required to start compile watch.";
+            return false;
+        }
+
+        if (!TryValidateManifestModId(manifest, out errorMessage))
+        {
             return false;
         }
 
@@ -1229,6 +1271,8 @@ public class VoxModExporterWindowV3 : EditorWindow
 
     private void InstallModOnWindows(ModManifestV2 manifest)
     {
+        ValidateManifestModIdOrThrow(manifest);
+
         var modInstallDirectory = GetModInstallDirectory();
         var targetModPath = Path.Combine(modInstallDirectory, manifest.id);
 
@@ -1272,6 +1316,13 @@ public class VoxModExporterWindowV3 : EditorWindow
             {
                 preflightFailCount++;
                 errors.Add($"{modAssetPath}: No ModManifestV2 found");
+                continue;
+            }
+
+            if (!TryValidateManifestModId(manifest, out var modIdError))
+            {
+                preflightFailCount++;
+                errors.Add($"{modAssetPath}: {modIdError}");
                 continue;
             }
 
@@ -1360,9 +1411,9 @@ public class VoxModExporterWindowV3 : EditorWindow
     {
         errorMessage = string.Empty;
 
-        if (string.IsNullOrWhiteSpace(target.ModId))
+        if (!VoxModIdUtility.TryValidate(target.ModId, out var modIdError))
         {
-            errorMessage = "Mod id cannot be empty.";
+            errorMessage = $"Invalid mod id '{target.ModId}': {modIdError}";
             return false;
         }
 
@@ -1632,5 +1683,181 @@ public class VoxModExporterWindowV3 : EditorWindow
     }
 
     #endregion
+}
+
+internal static class VoxModIdUtility
+{
+    public const string ValidationHint = "Use a lower-case reverse-DNS id such as com.cydream.sample. Use modName for display names with spaces.";
+
+    public static string BuildModId(string author, string modName)
+    {
+        return SanitizeModId("com." + SanitizeIdPart(author) + "." + SanitizeIdPart(modName));
+    }
+
+    public static string SanitizeModId(string value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            return string.Empty;
+        }
+
+        var parts = value
+            .ToLowerInvariant()
+            .Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries)
+            .Select(SanitizeIdPart)
+            .Where(part => part.Length > 0)
+            .ToArray();
+        return string.Join(".", parts);
+    }
+
+    public static string SanitizeIdPart(string value)
+    {
+        var builder = new StringBuilder();
+        var lastWasSeparator = false;
+
+        foreach (var c in (value ?? string.Empty).ToLowerInvariant())
+        {
+            if ((c >= 'a' && c <= 'z') || (c >= '0' && c <= '9'))
+            {
+                builder.Append(c);
+                lastWasSeparator = false;
+            }
+            else if (c == '-' || c == '_' || char.IsWhiteSpace(c))
+            {
+                if (builder.Length > 0 && !lastWasSeparator)
+                {
+                    builder.Append('-');
+                    lastWasSeparator = true;
+                }
+            }
+        }
+
+        return builder.ToString().Trim('-');
+    }
+
+    public static string ToClassName(string value)
+    {
+        var builder = new StringBuilder();
+        var uppercaseNext = true;
+
+        foreach (var c in value ?? string.Empty)
+        {
+            if (char.IsLetterOrDigit(c))
+            {
+                builder.Append(uppercaseNext ? char.ToUpperInvariant(c) : c);
+                uppercaseNext = false;
+            }
+            else
+            {
+                uppercaseNext = true;
+            }
+        }
+
+        var result = builder.Length == 0 ? "GeneratedMod" : builder.ToString();
+        return char.IsDigit(result[0]) ? "Mod" + result : result;
+    }
+
+    public static string ToScriptFileBaseName(string value)
+    {
+        var sanitized = SanitizeIdPart(value);
+        return string.IsNullOrWhiteSpace(sanitized) ? "generated-mod" : sanitized;
+    }
+
+    public static bool TryValidate(string modId, out string errorMessage)
+    {
+        errorMessage = string.Empty;
+
+        if (string.IsNullOrWhiteSpace(modId))
+        {
+            errorMessage = "Mod id cannot be empty.";
+            return false;
+        }
+
+        if (modId != modId.Trim())
+        {
+            errorMessage = "Mod id cannot contain leading or trailing whitespace.";
+            return false;
+        }
+
+        if (!string.Equals(modId, modId.ToLowerInvariant(), StringComparison.Ordinal))
+        {
+            errorMessage = "Mod id must be lower-case.";
+            return false;
+        }
+
+        if (modId.Contains("@@"))
+        {
+            errorMessage = "Mod id cannot contain '@@'.";
+            return false;
+        }
+
+        foreach (var invalidChar in Path.GetInvalidFileNameChars())
+        {
+            if (modId.IndexOf(invalidChar) >= 0)
+            {
+                errorMessage = $"Mod id contains invalid filename character '{invalidChar}'.";
+                return false;
+            }
+        }
+
+        foreach (var c in modId)
+        {
+            if (char.IsWhiteSpace(c))
+            {
+                errorMessage = "Mod id cannot contain whitespace.";
+                return false;
+            }
+        }
+
+        var parts = modId.Split('.');
+        if (parts.Length < 3)
+        {
+            errorMessage = "Mod id must contain at least three dot-separated parts, for example com.cydream.sample.";
+            return false;
+        }
+
+        foreach (var part in parts)
+        {
+            if (!IsValidPart(part, out errorMessage))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private static bool IsValidPart(string part, out string errorMessage)
+    {
+        errorMessage = string.Empty;
+
+        if (string.IsNullOrEmpty(part))
+        {
+            errorMessage = "Mod id cannot contain empty dot-separated parts.";
+            return false;
+        }
+
+        if (!IsAsciiLetterOrDigit(part[0]) || !IsAsciiLetterOrDigit(part[part.Length - 1]))
+        {
+            errorMessage = $"Mod id part '{part}' must start and end with a letter or digit.";
+            return false;
+        }
+
+        foreach (var c in part)
+        {
+            if (!IsAsciiLetterOrDigit(c) && c != '-' && c != '_')
+            {
+                errorMessage = $"Mod id part '{part}' contains invalid character '{c}'.";
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private static bool IsAsciiLetterOrDigit(char c)
+    {
+        return (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9');
+    }
 }
 #endif

@@ -13,6 +13,7 @@ const ModAPI = VX.Mod.ModAPI;
 
 const EntityCharacterType = puerts.$typeof(VX.Entity.EntityCharacter);
 const LineRendererType = puerts.$typeof(CS.UnityEngine.LineRenderer);
+const PxD6JointType = puerts.$typeof(CS.Px5.Unity.PxD6Joint);
 
 type HandKey = "left" | "right";
 
@@ -20,6 +21,7 @@ interface HandState {
     key: HandKey;
     isLeft: boolean;
     firePressedLastFrame: boolean;
+    abilityPressedLastFrame: boolean;
     isGrappling: boolean;
     grappleHitPoint: CS.UnityEngine.Vector3;
     rayHitInfo: CS.Px5.UnityExtensions.RaycastHit | null;
@@ -33,11 +35,34 @@ interface HandState {
     hadStrongReelPullLastFrame: boolean;
     wasAbilityBoostActive: boolean;
     reelSoundActive: boolean;
+    hoveredLink: ObjectLink | null;
     // The rope-shooting animation status (< 0 indicates it is not playing).
     fireAnimElapsed: number;
     fireAnimStartPos: CS.UnityEngine.Vector3;
     fireAnimEndPos: CS.UnityEngine.Vector3;
     fireAnimPerp: CS.UnityEngine.Vector3;
+    fireAnimFollowAnchor: LinkAnchor | null;
+    linkCompleteAnimElapsed: number;
+    linkCompleteAnimStartPos: CS.UnityEngine.Vector3;
+    linkCompleteAnimAnchorA: LinkAnchor | null;
+    linkCompleteAnimAnchorB: LinkAnchor | null;
+}
+
+interface LinkAnchor {
+    rigidbody: CS.Px5.Unity.PxRigidBody;
+    localAnchor: CS.UnityEngine.Vector3;
+}
+
+interface ObjectLink {
+    joint: CS.Px5.Unity.PxD6Joint;
+    rigidbodyA: CS.Px5.Unity.PxRigidBody;
+    localAnchorA: CS.UnityEngine.Vector3;
+    rigidbodyB: CS.Px5.Unity.PxRigidBody;
+    localAnchorB: CS.UnityEngine.Vector3;
+    lineRenderer: CS.UnityEngine.LineRenderer;
+    targetLength: number;
+    visualDelay: number;
+    age: number;
 }
 
 export class Spiderman {
@@ -50,6 +75,15 @@ export class Spiderman {
     private readonly stopPullDistance = 0.8;
     private readonly reelSpeedMultiplier = 8.0;
     private readonly abilityPullSpeed = 18.0;
+    private readonly linkJointSpring = 90000;
+    private readonly linkJointDamper = 0;
+    private readonly linkAutoReelSpeed = 0.7;
+    private readonly linkAutoReelMinLength = 0.25;
+    private readonly linkAutoReelMaxOverpull = 1.5;
+    private readonly linkHitRadius = 0.25;
+    private readonly linkCompleteAnimDuration = 0.22;
+    private readonly linkDissolveDuration = 60.0;
+    private readonly linkDissolveEndAlpha = 0.5;
     private readonly reelPullInertiaClearThreshold = 0.04;
     private readonly allowClearInertia = true;
     private readonly dashAntiGravity = true;
@@ -57,6 +91,11 @@ export class Spiderman {
     private readonly ropeWidth = 0.035;
 
     private readonly hands: HandState[];
+    private readonly objectLinks: ObjectLink[] = [];
+    private pendingLinkAnchor: LinkAnchor | null = null;
+    private pendingLinkHandKey: HandKey | null = null;
+    private readonly linkPreviewLineRenderer: CS.UnityEngine.LineRenderer;
+    private readonly objectLinkColor = new Color(1.0, 1.0, 1.0, 1.0);
 
     private moveJetSound: CS.Sonity.SoundEvent | null = null;
     private reelRopeSound: CS.Sonity.SoundEvent | null = null;
@@ -67,6 +106,7 @@ export class Spiderman {
         this.character = bindTo.GetComponent(EntityCharacterType) as VX.Entity.EntityCharacter | null;
         this.input = new VX.Mod.ModAPI.Input();
         this.readProperties();
+        this.linkPreviewLineRenderer = this.createLineRenderer("spiderman-link-preview", false, new Color(0.85, 1.0, 0.85, 0.65));
         this.hands = [
             this.createHandState("left", true),
             this.createHandState("right", false),
@@ -82,6 +122,7 @@ export class Spiderman {
             key,
             isLeft,
             firePressedLastFrame: false,
+            abilityPressedLastFrame: false,
             isGrappling: false,
             grappleHitPoint: Vec3.zero,
             rayHitInfo: null,
@@ -95,10 +136,16 @@ export class Spiderman {
             hadStrongReelPullLastFrame: false,
             wasAbilityBoostActive: false,
             reelSoundActive: false,
+            hoveredLink: null,
             fireAnimElapsed: -1,
             fireAnimStartPos: Vec3.zero,
             fireAnimEndPos: Vec3.zero,
             fireAnimPerp: Vec3.up,
+            fireAnimFollowAnchor: null,
+            linkCompleteAnimElapsed: -1,
+            linkCompleteAnimStartPos: Vec3.zero,
+            linkCompleteAnimAnchorA: null,
+            linkCompleteAnimAnchorB: null,
         };
     }
 
@@ -127,7 +174,7 @@ export class Spiderman {
         }
     }
 
-    private createLineRenderer(name: string, isLeft: boolean): CS.UnityEngine.LineRenderer {
+    private createLineRenderer(name: string, isLeft: boolean, colorOverride: CS.UnityEngine.Color | null = null): CS.UnityEngine.LineRenderer {
         const go = new CS.UnityEngine.GameObject(name);
         go.transform.SetParent(this.bindTo.transform);
         go.transform.localPosition = Vec3.zero;
@@ -148,7 +195,7 @@ export class Spiderman {
             renderer.material = new CS.UnityEngine.Material(shader);
         }
 
-        const color = isLeft ? new Color(0.88, 0.95, 1.0, 0.95) : new Color(1.0, 0.95, 0.88, 0.95);
+        const color = colorOverride ?? new Color(1.0, 0.95, 0.88, 0.95);
         renderer.startColor = color;
         renderer.endColor = color;
         return renderer;
@@ -162,6 +209,12 @@ export class Spiderman {
             }
         }
 
+        this.clearPendingLinkAnchor();
+        this.destroyAllObjectLinks();
+        if (this.linkPreviewLineRenderer) {
+            CS.UnityEngine.Object.Destroy(this.linkPreviewLineRenderer.gameObject);
+        }
+
         this.stopContinuousSound(this.moveJetSound);
         this.stopContinuousSound(this.reelRopeSound);
         this.input.Dispose();
@@ -173,8 +226,10 @@ export class Spiderman {
             return;
         }
 
+        let linkAbilityHandled = false;
         for (const hand of this.hands) {
             const shotPose = this.getShotPose(hand.isLeft);
+            hand.hoveredLink = null;
 
             if (hand.isGrappling) {
                 this.updateActiveGrapple(character, hand, shotPose.position);
@@ -188,7 +243,16 @@ export class Spiderman {
                 hand.prevControllerLocalPos = null;
                 hand.reelSoundActive = false;
                 hand.rayHitInfo = this.findGrappleTarget(character, shotPose.position, shotPose.forward, hand);
-                this.hideRopeRenderer(hand);
+
+                if (this.tickLinkCompleteAnimation(hand, _deltaTime)) {
+                    // The link-complete animation owns this line renderer for this frame.
+                } else if (!this.tickFireAnimation(hand, _deltaTime, shotPose.position)) {
+                    if (this.pendingLinkHandKey === hand.key && this.pendingLinkAnchor) {
+                        this.updatePendingLinkRenderer(hand, shotPose.position);
+                    } else {
+                        this.hideRopeRenderer(hand);
+                    }
+                }
                 this.drawAimPreview(shotPose.position, shotPose.forward, hand);
             }
 
@@ -199,8 +263,17 @@ export class Spiderman {
                 this.releaseHand(hand);
             }
             hand.firePressedLastFrame = firePressed > 0.5;
+
+            const abilityPressed = this.getAbilityInput(hand.isLeft);
+            if (!linkAbilityHandled && !hand.isGrappling && abilityPressed > 0.5 && !hand.abilityPressedLastFrame) {
+                this.tryHandleLinkAbility(character, hand);
+                linkAbilityHandled = true;
+            }
+            hand.abilityPressedLastFrame = abilityPressed > 0.5;
         }
 
+        this.updateObjectLinks();
+        this.updateLinkPreview();
         this.updateContinuousSounds(character);
     }
 
@@ -256,6 +329,7 @@ export class Spiderman {
             }
         }
 
+        // Air thrust is disabled; grapple and reel physics remain active.
         this.applySwingAssist(character);
     }
 
@@ -325,12 +399,21 @@ export class Spiderman {
         }
 
         let chosen: CS.Px5.UnityExtensions.RaycastHit | null = null;
+        let chosenPoint: CS.UnityEngine.Vector3 | null = null;
         let bestDist = Number.POSITIVE_INFINITY;
         const ownRigidbodies = ModAPI.GetEntityRigidbodies(character);
 
         for (let i = 0; i < hits.Length; i++) {
             const hit = hits.get_Item(i) as CS.Px5.UnityExtensions.RaycastHit;
             if (!hit || !hit.collider) {
+                continue;
+            }
+
+            if (!this.isFiniteVector(hit.point)) {
+                continue;
+            }
+
+            if (!this.isFiniteScalar(hit.distance)) {
                 continue;
             }
 
@@ -346,28 +429,98 @@ export class Spiderman {
                 continue;
             }
 
+            const closestPoint = hit.collider.ClosestPoint(hit.point);
+            if (!this.isValidAimPoint(origin, closestPoint)) {
+                continue;
+            }
+
             if (hit.distance < bestDist) {
                 bestDist = hit.distance;
                 chosen = hit;
+                chosenPoint = closestPoint;
             }
         }
 
-        if (!chosen) {
+        if (!chosen || !chosenPoint) {
             hand.rayHitInfo = null;
             return null;
         }
 
-        hand.grappleHitPoint = chosen.collider.ClosestPoint(chosen.point);
+        const preciseHit = this.findPreciseRaycastTarget(character, origin, direction, layerMask, ownRigidbodies);
+        if (preciseHit && this.shouldPreferPreciseRaycast(preciseHit.hit.distance, chosen.distance)) {
+            hand.grappleHitPoint = preciseHit.point;
+            return preciseHit.hit;
+        }
+
+        hand.grappleHitPoint = chosenPoint;
         return chosen;
     }
 
+    private findPreciseRaycastTarget(
+        character: VX.Entity.EntityCharacter,
+        origin: CS.UnityEngine.Vector3,
+        direction: CS.UnityEngine.Vector3,
+        layerMask: number,
+        ownRigidbodies: CS.System.Array$1<CS.Px5.Unity.PxRigidBody>
+    ): { hit: CS.Px5.UnityExtensions.RaycastHit; point: CS.UnityEngine.Vector3 } | null {
+        const hits = PxPhysics.RaycastAll(origin, direction, this.shotDistance, layerMask, QueryTriggerInteraction.Ignore);
+        if (!hits || hits.Length <= 0) {
+            return null;
+        }
+
+        let chosen: CS.Px5.UnityExtensions.RaycastHit | null = null;
+        let chosenPoint: CS.UnityEngine.Vector3 | null = null;
+        let bestDist = Number.POSITIVE_INFINITY;
+
+        for (let i = 0; i < hits.Length; i++) {
+            const hit = hits.get_Item(i) as CS.Px5.UnityExtensions.RaycastHit;
+            if (!hit || !hit.collider) {
+                continue;
+            }
+
+            if (!this.isFiniteVector(hit.point) || !this.isFiniteScalar(hit.distance)) {
+                continue;
+            }
+
+            if (hit.point.x === 0 && hit.point.y === 0 && hit.point.z === 0) {
+                continue;
+            }
+
+            if (this.containsRigidbody(ownRigidbodies, hit.rigidbody)) {
+                continue;
+            }
+
+            if (hit.rigidbody && ModAPI.IsCharacterCarryingRigidbody(character, hit.rigidbody)) {
+                continue;
+            }
+
+            if (!this.isValidAimPoint(origin, hit.point)) {
+                continue;
+            }
+
+            if (hit.distance < bestDist) {
+                bestDist = hit.distance;
+                chosen = hit;
+                chosenPoint = hit.point;
+            }
+        }
+
+        return chosen && chosenPoint ? { hit: chosen, point: chosenPoint } : null;
+    }
+
+    private shouldPreferPreciseRaycast(rayDistance: number, sphereDistance: number): boolean {
+        const maxDistanceDelta = Math.max(this.shotRadius * 1.5, 0.25);
+        return Math.abs(rayDistance - sphereDistance) <= maxDistanceDelta;
+    }
+
     private containsRigidbody(rigidbodies: CS.System.Array$1<CS.Px5.Unity.PxRigidBody>, target: CS.Px5.Unity.PxRigidBody | null): boolean {
-        if (!target || !rigidbodies) {
+        if (!this.isValidRigidBody(target) || !rigidbodies) {
             return false;
         }
 
         for (let i = 0; i < rigidbodies.Length; i++) {
-            if (rigidbodies.get_Item(i) === target) {
+            const rb = rigidbodies.get_Item(i) as CS.Px5.Unity.PxRigidBody | null;
+            if (this.isValidRigidBody(rb) && rb === target) {
                 return true;
             }
         }
@@ -376,13 +529,20 @@ export class Spiderman {
     }
 
     private drawAimPreview(origin: CS.UnityEngine.Vector3, direction: CS.UnityEngine.Vector3, hand: HandState): void {
-        const rotation = Quat.LookRotation(direction, Vec3.up);
+        const safeDirection = this.safeDirection(direction, this.bindTo.transform.forward);
+        const rotation = Quat.LookRotation(safeDirection, Vec3.up);
         const hit = hand.rayHitInfo;
         const color = hit ? Color.white : new Color(0.7, 0.7, 0.7, 1.0);
-        const targetPos = hit ? hand.grappleHitPoint : Vec3.op_Addition(origin, Vec3.op_Multiply(direction, this.shotDistance));
+        const targetPos = hit && this.isValidAimPoint(origin, hand.grappleHitPoint)
+            ? hand.grappleHitPoint
+            : Vec3.op_Addition(origin, Vec3.op_Multiply(safeDirection, this.shotDistance));
+        if (!this.isValidAimPoint(origin, targetPos)) {
+            return;
+        }
+
         Giz.DrawCrosshair(targetPos, rotation, 1.0, color);
         Giz.DrawDashedLine(origin, targetPos, 0.3, 0.3, color);
-        if (hit && Giz.show) {
+        if (hit && Giz.show && this.isValidAimPoint(origin, hit.point)) {
             Giz.DrawLine(hit.point, hand.grappleHitPoint, Color.yellow);
         }
     }
@@ -403,6 +563,450 @@ export class Spiderman {
         this.attachJoint(character, hand, hand.rayHitInfo);
         this.startFireAnimation(hand, shotPose.position, hand.grappleHitPoint);
         this.playHookShot(hand.rayHitInfo, hand.grappleHitPoint);
+    }
+
+    private tryHandleLinkAbility(character: VX.Entity.EntityCharacter, hand: HandState): void {
+        if (!hand.rayHitInfo) {
+            this.clearPendingLinkAnchor();
+            return;
+        }
+
+        const anchor = this.getLinkAnchorFromHit(hand.rayHitInfo, hand.grappleHitPoint);
+        if (!anchor || this.containsRigidbody(ModAPI.GetEntityRigidbodies(character), anchor.rigidbody)) {
+            this.clearPendingLinkAnchor();
+            return;
+        }
+
+        if (!this.pendingLinkAnchor) {
+            this.pendingLinkAnchor = anchor;
+            this.pendingLinkHandKey = hand.key;
+            const shotPose = this.getShotPose(hand.isLeft);
+            this.startFireAnimation(hand, shotPose.position, this.getAnchorWorldPosition(anchor), anchor);
+            this.playHookShot(hand.rayHitInfo, this.getAnchorWorldPosition(anchor));
+            return;
+        }
+
+        if (this.pendingLinkAnchor.rigidbody === anchor.rigidbody) {
+            this.clearPendingLinkAnchor();
+            this.playHookShot(hand.rayHitInfo, this.getAnchorWorldPosition(anchor));
+            return;
+        }
+
+        const shotPose = this.getShotPose(hand.isLeft);
+        this.startLinkCompleteAnimation(hand, this.pendingLinkAnchor, shotPose.position, anchor);
+        this.createObjectLink(this.pendingLinkAnchor, anchor, this.linkCompleteAnimDuration);
+        this.playHookShot(hand.rayHitInfo, this.getAnchorWorldPosition(anchor));
+        this.clearPendingLinkAnchor();
+    }
+
+    private getLinkAnchorFromHit(hit: CS.Px5.UnityExtensions.RaycastHit, worldPoint: CS.UnityEngine.Vector3): LinkAnchor | null {
+        const rb = hit.rigidbody;
+        if (!this.isValidRigidBody(rb)) {
+            return null;
+        }
+
+        return {
+            rigidbody: rb,
+            localAnchor: rb.transform.InverseTransformPoint(worldPoint),
+        };
+    }
+
+    private createObjectLink(anchorA: LinkAnchor, anchorB: LinkAnchor, visualDelay: number = 0): void {
+        const joint = anchorB.rigidbody.gameObject.AddComponent(PxD6JointType) as CS.Px5.Unity.PxD6Joint;
+        if (!joint) {
+            return;
+        }
+
+        const worldA = this.getAnchorWorldPosition(anchorA);
+        const worldB = this.getAnchorWorldPosition(anchorB);
+        const distance = Vec3.Distance(worldA, worldB);
+
+        joint.autoConfigureConnectedAnchor = false;
+        joint.enableCollision = true;
+        joint.connectedBody = anchorA.rigidbody;
+        joint.anchor = anchorB.localAnchor;
+        joint.connectedAnchor = anchorA.localAnchor;
+
+        joint.xMotion = ConfigurableJointMotion.Limited;
+        joint.yMotion = ConfigurableJointMotion.Limited;
+        joint.zMotion = ConfigurableJointMotion.Limited;
+        joint.angularXMotion = ConfigurableJointMotion.Free;
+        joint.angularYMotion = ConfigurableJointMotion.Free;
+        joint.angularZMotion = ConfigurableJointMotion.Free;
+
+        const linearLimit = joint.linearLimit;
+        linearLimit.limit = Mathf.Max(distance, 0.01);
+        linearLimit.bounciness = 0;
+        linearLimit.contactDistance = 0;
+        joint.linearLimit = linearLimit;
+
+        const spring = joint.linearLimitSpring;
+        spring.spring = this.linkJointSpring;
+        spring.damper = this.linkJointDamper;
+        joint.linearLimitSpring = spring;
+
+        const lineRenderer = this.createLineRenderer(`spiderman-object-link-${this.objectLinks.length}`, false, this.objectLinkColor);
+        lineRenderer.startWidth = this.ropeWidth * 1.15;
+        lineRenderer.endWidth = this.ropeWidth;
+
+        const link: ObjectLink = {
+            joint,
+            rigidbodyA: anchorA.rigidbody,
+            localAnchorA: anchorA.localAnchor,
+            rigidbodyB: anchorB.rigidbody,
+            localAnchorB: anchorB.localAnchor,
+            lineRenderer,
+            targetLength: linearLimit.limit,
+            visualDelay,
+            age: 0,
+        };
+
+        this.objectLinks.push(link);
+        this.updateObjectLinkRenderer(link);
+    }
+
+    private updateObjectLinks(): void {
+        for (let i = this.objectLinks.length - 1; i >= 0; i--) {
+            const link = this.objectLinks[i];
+            if (!link.joint || !link.joint.valid || !this.isValidRigidBody(link.rigidbodyA) || !this.isValidRigidBody(link.rigidbodyB)) {
+                this.destroyObjectLinkAt(i);
+                continue;
+            }
+
+            link.age += CS.UnityEngine.Time.deltaTime;
+            if (link.age >= this.linkDissolveDuration) {
+                this.destroyObjectLinkAt(i);
+                continue;
+            }
+
+            this.updateObjectLinkReel(link);
+            if (link.visualDelay > 0) {
+                link.visualDelay -= CS.UnityEngine.Time.deltaTime;
+                if (link.lineRenderer) {
+                    link.lineRenderer.enabled = false;
+                }
+                continue;
+            }
+            this.updateObjectLinkRenderer(link);
+        }
+    }
+
+    private updateObjectLinkReel(link: ObjectLink): void {
+        const pointA = link.rigidbodyA.transform.TransformPoint(link.localAnchorA);
+        const pointB = link.rigidbodyB.transform.TransformPoint(link.localAnchorB);
+        const currentLength = Vec3.Distance(pointA, pointB);
+        const overpull = currentLength - link.targetLength;
+        if (overpull > this.linkAutoReelMaxOverpull || link.targetLength <= this.linkAutoReelMinLength) {
+            return;
+        }
+
+        const nextTargetLength = Mathf.Max(
+            this.linkAutoReelMinLength,
+            link.targetLength - this.linkAutoReelSpeed * CS.UnityEngine.Time.deltaTime
+        );
+        if (nextTargetLength >= link.targetLength) {
+            return;
+        }
+
+        link.targetLength = nextTargetLength;
+        const limit = link.joint.linearLimit;
+        limit.limit = link.targetLength;
+        link.joint.linearLimit = limit;
+    }
+
+    private updateObjectLinkRenderer(link: ObjectLink): void {
+        const renderer = link.lineRenderer;
+        if (!renderer) {
+            return;
+        }
+
+        const color = this.getObjectLinkDissolveColor(link);
+        renderer.startColor = color;
+        renderer.endColor = color;
+        renderer.enabled = true;
+        renderer.positionCount = 2;
+        renderer.SetPosition(0, link.rigidbodyA.transform.TransformPoint(link.localAnchorA));
+        renderer.SetPosition(1, link.rigidbodyB.transform.TransformPoint(link.localAnchorB));
+    }
+
+    private updatePendingLinkRenderer(hand: HandState, shotPosition: CS.UnityEngine.Vector3): void {
+        if (!this.pendingLinkAnchor || !this.isValidRigidBody(this.pendingLinkAnchor.rigidbody)) {
+            this.clearPendingLinkAnchor();
+            this.hideRopeRenderer(hand);
+            return;
+        }
+
+        const renderer = hand.lineRenderer;
+        renderer.enabled = true;
+        renderer.positionCount = 2;
+        renderer.SetPosition(0, shotPosition);
+        renderer.SetPosition(1, this.getAnchorWorldPosition(this.pendingLinkAnchor));
+    }
+
+    private startLinkCompleteAnimation(
+        hand: HandState,
+        anchorA: LinkAnchor,
+        startPos: CS.UnityEngine.Vector3,
+        anchorB: LinkAnchor
+    ): void {
+        hand.fireAnimElapsed = -1;
+        hand.fireAnimFollowAnchor = null;
+        hand.linkCompleteAnimElapsed = 0;
+        hand.linkCompleteAnimStartPos = startPos;
+        hand.linkCompleteAnimAnchorA = anchorA;
+        hand.linkCompleteAnimAnchorB = anchorB;
+        hand.lineRenderer.enabled = true;
+        hand.lineRenderer.positionCount = 2;
+    }
+
+    private tickLinkCompleteAnimation(hand: HandState, dt: number): boolean {
+        if (hand.linkCompleteAnimElapsed < 0) {
+            return false;
+        }
+
+        const anchorA = hand.linkCompleteAnimAnchorA;
+        const anchorB = hand.linkCompleteAnimAnchorB;
+        if (!anchorA || !anchorB || !this.isValidRigidBody(anchorA.rigidbody) || !this.isValidRigidBody(anchorB.rigidbody)) {
+            this.finishLinkCompleteAnimation(hand);
+            return false;
+        }
+
+        hand.linkCompleteAnimElapsed += dt;
+        const t = Mathf.Clamp01(hand.linkCompleteAnimElapsed / this.linkCompleteAnimDuration);
+        const ease = 1 - (1 - t) * (1 - t);
+        const pointA = this.getAnchorWorldPosition(anchorA);
+        const pointB = this.getAnchorWorldPosition(anchorB);
+        const flyingEnd = Vec3.Lerp(hand.linkCompleteAnimStartPos, pointB, ease);
+
+        const renderer = hand.lineRenderer;
+        renderer.enabled = true;
+        renderer.positionCount = 2;
+        renderer.SetPosition(0, pointA);
+        renderer.SetPosition(1, flyingEnd);
+
+        if (t >= 1) {
+            this.finishLinkCompleteAnimation(hand);
+        }
+
+        return true;
+    }
+
+    private finishLinkCompleteAnimation(hand: HandState): void {
+        hand.linkCompleteAnimElapsed = -1;
+        hand.linkCompleteAnimAnchorA = null;
+        hand.linkCompleteAnimAnchorB = null;
+        this.hideRopeRenderer(hand);
+    }
+
+    private getObjectLinkDissolveColor(link: ObjectLink): CS.UnityEngine.Color {
+        const t = Mathf.Clamp01(link.age / this.linkDissolveDuration);
+        const alpha = Mathf.Lerp(this.objectLinkColor.a, this.linkDissolveEndAlpha, t);
+        return new Color(this.objectLinkColor.r * alpha, this.objectLinkColor.g * alpha, this.objectLinkColor.b * alpha, alpha);
+    }
+
+    private isObjectLinkHovered(link: ObjectLink): boolean {
+        for (const hand of this.hands) {
+            if (hand.hoveredLink === link) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private findHoveredObjectLink(origin: CS.UnityEngine.Vector3, direction: CS.UnityEngine.Vector3, maxRayDistance: number): ObjectLink | null {
+        if (this.objectLinks.length <= 0 || direction.sqrMagnitude <= 0.0001) {
+            return null;
+        }
+
+        const dir = direction.normalized;
+        const maxDistanceSqr = this.linkHitRadius * this.linkHitRadius;
+        let bestLink: ObjectLink | null = null;
+        let bestRayDistance = Number.POSITIVE_INFINITY;
+
+        for (const link of this.objectLinks) {
+            if (!link.joint || !link.joint.valid || !this.isValidRigidBody(link.rigidbodyA) || !this.isValidRigidBody(link.rigidbodyB)) {
+                continue;
+            }
+
+            const pointA = link.rigidbodyA.transform.TransformPoint(link.localAnchorA);
+            const pointB = link.rigidbodyB.transform.TransformPoint(link.localAnchorB);
+            const hit = this.getRaySegmentDistance(origin, dir, pointA, pointB);
+            if (hit.rayDistance <= maxRayDistance && hit.distanceSqr <= maxDistanceSqr && hit.rayDistance < bestRayDistance) {
+                bestRayDistance = hit.rayDistance;
+                bestLink = link;
+            }
+        }
+
+        return bestLink;
+    }
+
+    private getRaySegmentDistance(
+        origin: CS.UnityEngine.Vector3,
+        direction: CS.UnityEngine.Vector3,
+        pointA: CS.UnityEngine.Vector3,
+        pointB: CS.UnityEngine.Vector3
+    ): { distanceSqr: number; rayDistance: number } {
+        const linkDelta = Vec3.op_Subtraction(pointB, pointA);
+        const linkLengthSqr = linkDelta.sqrMagnitude;
+        if (linkLengthSqr <= 0.000001) {
+            return this.getRayPointDistance(origin, direction, pointA);
+        }
+
+        const rayEnd = Vec3.op_Addition(origin, Vec3.op_Multiply(direction, this.shotDistance));
+        const fromOrigin = Vec3.op_Subtraction(pointA, origin);
+        const linkParallel = Vec3.op_Multiply(direction, Vec3.Dot(linkDelta, direction));
+        const linkPerp = Vec3.op_Subtraction(linkDelta, linkParallel);
+        const pointParallel = Vec3.op_Multiply(direction, Vec3.Dot(fromOrigin, direction));
+        const pointPerp = Vec3.op_Subtraction(fromOrigin, pointParallel);
+
+        const candidates = [0, 1];
+        const perpLenSqr = linkPerp.sqrMagnitude;
+        if (perpLenSqr > 0.000001) {
+            candidates.push(Mathf.Clamp01(-Vec3.Dot(pointPerp, linkPerp) / perpLenSqr));
+        }
+        candidates.push(Mathf.Clamp01(-Vec3.Dot(Vec3.op_Subtraction(pointA, origin), linkDelta) / linkLengthSqr));
+        candidates.push(Mathf.Clamp01(-Vec3.Dot(Vec3.op_Subtraction(pointA, rayEnd), linkDelta) / linkLengthSqr));
+
+        let bestDistanceSqr = Number.POSITIVE_INFINITY;
+        let bestRayDistance = Number.POSITIVE_INFINITY;
+        for (const t of candidates) {
+            const point = Vec3.op_Addition(pointA, Vec3.op_Multiply(linkDelta, t));
+            const hit = this.getRayPointDistance(origin, direction, point);
+            if (hit.distanceSqr < bestDistanceSqr) {
+                bestDistanceSqr = hit.distanceSqr;
+                bestRayDistance = hit.rayDistance;
+            }
+        }
+
+        return { distanceSqr: bestDistanceSqr, rayDistance: bestRayDistance };
+    }
+
+    private getRayPointDistance(
+        origin: CS.UnityEngine.Vector3,
+        direction: CS.UnityEngine.Vector3,
+        point: CS.UnityEngine.Vector3
+    ): { distanceSqr: number; rayDistance: number } {
+        const toPoint = Vec3.op_Subtraction(point, origin);
+        const rayDistance = Mathf.Clamp(Vec3.Dot(toPoint, direction), 0, this.shotDistance);
+        const closestPoint = Vec3.op_Addition(origin, Vec3.op_Multiply(direction, rayDistance));
+        return {
+            distanceSqr: Vec3.op_Subtraction(point, closestPoint).sqrMagnitude,
+            rayDistance,
+        };
+    }
+
+    private updateLinkPreview(): void {
+        if (!this.pendingLinkAnchor || !this.isValidRigidBody(this.pendingLinkAnchor.rigidbody)) {
+            this.clearPendingLinkAnchor();
+            return;
+        }
+
+        const start = this.getAnchorWorldPosition(this.pendingLinkAnchor);
+        let end: CS.UnityEngine.Vector3 | null = null;
+        for (const hand of this.hands) {
+            if (hand.key !== this.pendingLinkHandKey || hand.isGrappling || !hand.rayHitInfo) {
+                continue;
+            }
+
+            const hoverAnchor = this.getLinkAnchorFromHit(hand.rayHitInfo, hand.grappleHitPoint);
+            if (hoverAnchor && hoverAnchor.rigidbody !== this.pendingLinkAnchor.rigidbody) {
+                end = this.getAnchorWorldPosition(hoverAnchor);
+                break;
+            }
+        }
+
+        Giz.DrawCrosshair(start, Quat.identity, 0.7, new Color(0.45, 1.0, 0.85, 1.0));
+        if (!end) {
+            this.hideLinkPreview();
+            return;
+        }
+
+        this.linkPreviewLineRenderer.enabled = true;
+        this.linkPreviewLineRenderer.positionCount = 2;
+        this.linkPreviewLineRenderer.SetPosition(0, start);
+        this.linkPreviewLineRenderer.SetPosition(1, end);
+    }
+
+    private hideLinkPreview(): void {
+        if (this.linkPreviewLineRenderer.enabled) {
+            this.linkPreviewLineRenderer.enabled = false;
+        }
+    }
+
+    private clearPendingLinkAnchor(): void {
+        this.pendingLinkAnchor = null;
+        this.pendingLinkHandKey = null;
+        this.hideLinkPreview();
+    }
+
+    private getAnchorWorldPosition(anchor: LinkAnchor): CS.UnityEngine.Vector3 {
+        return anchor.rigidbody.transform.TransformPoint(anchor.localAnchor);
+    }
+
+    private destroyObjectLinkAt(index: number): void {
+        const link = this.objectLinks[index];
+        if (!link) {
+            return;
+        }
+
+        for (const hand of this.hands) {
+            if (hand.hoveredLink === link) {
+                hand.hoveredLink = null;
+            }
+        }
+
+        if (link.joint) {
+            CS.UnityEngine.Object.Destroy(link.joint);
+        }
+        if (link.lineRenderer) {
+            CS.UnityEngine.Object.Destroy(link.lineRenderer.gameObject);
+        }
+
+        this.objectLinks.splice(index, 1);
+    }
+
+    private destroyObjectLink(link: ObjectLink): void {
+        const index = this.objectLinks.indexOf(link);
+        if (index >= 0) {
+            this.destroyObjectLinkAt(index);
+        }
+    }
+
+    private destroyAllObjectLinks(): void {
+        for (let i = this.objectLinks.length - 1; i >= 0; i--) {
+            this.destroyObjectLinkAt(i);
+        }
+    }
+
+    private isValidRigidBody(rb: CS.Px5.Unity.PxRigidBody | null): rb is CS.Px5.Unity.PxRigidBody {
+        return !!rb && rb.valid;
+    }
+
+    private isFiniteScalar(value: number): boolean {
+        return value === value && value !== Number.POSITIVE_INFINITY && value !== Number.NEGATIVE_INFINITY;
+    }
+
+    private isFiniteVector(value: CS.UnityEngine.Vector3 | null): value is CS.UnityEngine.Vector3 {
+        return !!value && this.isFiniteScalar(value.x) && this.isFiniteScalar(value.y) && this.isFiniteScalar(value.z);
+    }
+
+    private isValidAimPoint(origin: CS.UnityEngine.Vector3, point: CS.UnityEngine.Vector3 | null): point is CS.UnityEngine.Vector3 {
+        if (!this.isFiniteVector(origin) || !this.isFiniteVector(point)) {
+            return false;
+        }
+
+        const maxPreviewDistance = this.shotDistance + this.shotRadius * 4.0;
+        return Vec3.Distance(origin, point) <= maxPreviewDistance;
+    }
+
+    private safeDirection(direction: CS.UnityEngine.Vector3, fallback: CS.UnityEngine.Vector3): CS.UnityEngine.Vector3 {
+        if (this.isFiniteVector(direction) && direction.sqrMagnitude > 0.0001) {
+            return direction.normalized;
+        }
+        if (this.isFiniteVector(fallback) && fallback.sqrMagnitude > 0.0001) {
+            return fallback.normalized;
+        }
+        return Vec3.forward;
     }
 
     private updateActiveGrapple(
@@ -676,19 +1280,14 @@ export class Spiderman {
         ModAPI.SetCharacterVelocity(character, Vec3.zero);
     }
 
-    private updateContinuousSounds(character: VX.Entity.EntityCharacter): void {
+    private updateContinuousSounds(_character: VX.Entity.EntityCharacter): void {
         let reelActive = false;
-        let abilityActive = false;
 
         for (const hand of this.hands) {
             reelActive = reelActive || hand.reelSoundActive;
-            abilityActive = abilityActive || (hand.isGrappling && this.getAbilityInput(hand.isLeft) > 0.5);
         }
 
-        const moveInput = this.input.GetMoveInput();
-        const swingActive = !ModAPI.IsCharacterGrounded(character) && (moveInput.x * moveInput.x + moveInput.y * moveInput.y) > 0;
-
-        this.setContinuousSoundState(this.moveJetSound, abilityActive || swingActive);
+        this.setContinuousSoundState(this.moveJetSound, false);
         this.setContinuousSoundState(this.reelRopeSound, reelActive);
     }
 
@@ -730,7 +1329,12 @@ export class Spiderman {
         return voxel && voxel.IsSolid() ? voxel.ID : 0;
     }
 
-    private startFireAnimation(hand: HandState, startPos: CS.UnityEngine.Vector3, endPos: CS.UnityEngine.Vector3): void {
+    private startFireAnimation(
+        hand: HandState,
+        startPos: CS.UnityEngine.Vector3,
+        endPos: CS.UnityEngine.Vector3,
+        followAnchor: LinkAnchor | null = null
+    ): void {
         const dir = Vec3.op_Subtraction(endPos, startPos).normalized;
 
         // Vertical offset axis: Take the component of up perpendicular to the rope direction.
@@ -745,6 +1349,7 @@ export class Spiderman {
         hand.fireAnimStartPos = startPos;
         hand.fireAnimEndPos   = endPos;
         hand.fireAnimPerp     = perp.normalized;
+        hand.fireAnimFollowAnchor = followAnchor;
 
         hand.lineRenderer.enabled       = true;
         hand.lineRenderer.positionCount = 14;
@@ -768,7 +1373,7 @@ export class Spiderman {
 
         const startPos = shotPosition;
         // Read the anchor point world coordinates dynamically every frame, following the target object.
-        const liveEnd  = this.getAnchorWorldPos(hand);
+        const liveEnd  = this.getFireAnimationEndPos(hand);
         const perp     = hand.fireAnimPerp;
         const totalLen = Vec3.Distance(hand.fireAnimStartPos, hand.fireAnimEndPos);
         const lr       = hand.lineRenderer;
@@ -804,11 +1409,21 @@ export class Spiderman {
         } else {
             // The animation ends, and the rope returns to normal at 2 points.
             hand.fireAnimElapsed    = -1;
+            hand.fireAnimFollowAnchor = null;
             lr.positionCount        = 2;
             return false;
         }
 
         return true;
+    }
+
+    private getFireAnimationEndPos(hand: HandState): CS.UnityEngine.Vector3 {
+        const followAnchor = hand.fireAnimFollowAnchor;
+        if (followAnchor && this.isValidRigidBody(followAnchor.rigidbody)) {
+            return this.getAnchorWorldPosition(followAnchor);
+        }
+
+        return hand.isGrappling ? this.getAnchorWorldPos(hand) : hand.fireAnimEndPos;
     }
 
     private releaseHand(hand: HandState): void {
@@ -822,6 +1437,10 @@ export class Spiderman {
         }
 
         hand.fireAnimElapsed = -1;
+        hand.fireAnimFollowAnchor = null;
+        hand.linkCompleteAnimElapsed = -1;
+        hand.linkCompleteAnimAnchorA = null;
+        hand.linkCompleteAnimAnchorB = null;
         hand.lineRenderer.positionCount = 2;
         this.hideRopeRenderer(hand);
         hand.isGrappling = false;

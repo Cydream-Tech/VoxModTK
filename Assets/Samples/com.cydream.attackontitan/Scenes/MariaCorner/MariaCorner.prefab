@@ -95,12 +95,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -213,12 +217,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -330,12 +338,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -579,12 +591,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -787,12 +803,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -905,12 +925,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -1022,12 +1046,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -1139,12 +1167,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -1438,12 +1470,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -1687,12 +1723,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -1896,12 +1936,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -2014,12 +2058,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -2222,12 +2270,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -2339,12 +2391,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -2547,12 +2603,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -2664,12 +2724,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -2825,12 +2889,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -2943,12 +3011,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -3060,12 +3132,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -3243,12 +3319,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -3457,12 +3537,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -3574,12 +3658,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -3691,12 +3779,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -3899,12 +3991,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -4107,12 +4203,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -4225,12 +4325,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -4408,12 +4512,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -4525,12 +4633,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -4642,12 +4754,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -4880,12 +4996,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -4998,12 +5118,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -5115,12 +5239,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -5313,12 +5441,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -5430,12 +5562,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -5548,12 +5684,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -5822,12 +5962,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -6005,12 +6149,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -6122,12 +6270,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -6239,12 +6391,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -6422,12 +6578,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -6626,12 +6786,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -6743,12 +6907,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -7023,12 +7191,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -7140,12 +7312,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -7323,12 +7499,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -7440,12 +7620,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -7557,12 +7741,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -7674,12 +7862,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -7791,12 +7983,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -7876,7 +8072,7 @@ Transform:
   m_GameObject: {fileID: 5496764954598973902}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -175, y: 1, z: -301.5}
+  m_LocalPosition: {x: -174, y: 1, z: -301.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8034,12 +8230,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -8468,12 +8668,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -8586,12 +8790,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -8703,12 +8911,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -8924,12 +9136,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -9041,12 +9257,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -9224,12 +9444,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -9341,12 +9565,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -9524,12 +9752,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -9722,12 +9954,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -9930,12 +10166,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -10048,12 +10288,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -10232,12 +10476,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -10349,12 +10597,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -10466,12 +10718,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -10583,12 +10839,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -10701,12 +10961,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -10818,12 +11082,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -11102,12 +11370,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -11251,12 +11523,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -11368,12 +11644,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -11485,12 +11765,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -11688,12 +11972,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -11897,12 +12185,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -12015,12 +12307,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -12314,12 +12610,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -12431,12 +12731,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -12548,12 +12852,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -12731,12 +13039,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -12848,12 +13160,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -13002,12 +13318,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -13210,12 +13530,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -13393,12 +13717,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -13510,12 +13838,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -13627,12 +13959,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -13744,12 +14080,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -13862,12 +14202,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -13979,12 +14323,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -14228,12 +14576,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -14345,12 +14697,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -14462,12 +14818,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -14580,12 +14940,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -14697,12 +15061,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -14880,12 +15248,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -15058,12 +15430,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -15176,12 +15552,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -15294,12 +15674,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -15477,12 +15861,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -15594,12 +15982,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -15672,16 +16064,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainVoxelData: {fileID: 0}
+  mainVoxelDataGroupTransform: {fileID: 0}
   associatedVoxelDataTrans: {fileID: 0}
-  spawnPoint: {fileID: 5028849898104074624}
   voxelizeCenterTransform: {fileID: 0}
+  voxelizeCenterHorizontalPadding: {x: 0, y: 0}
   defaultViewType: 0
   defaultAvatarId: js:com.cydream.attackontitan/Eren
   spawner: {fileID: 0}
+  spawnPoint: {fileID: 5028849898104074624}
   StartTime: 12
   enablePortals: 0
   sceneConfigsContainer: {fileID: 0}
-  autoSwitchActiveStateOfAssociatedObject: 1
 --- !u!114 &891090547316848518
 MonoBehaviour:
   m_ObjectHideFlags: 0

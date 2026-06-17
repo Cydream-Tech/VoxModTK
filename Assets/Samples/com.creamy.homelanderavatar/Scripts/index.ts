@@ -1,0 +1,1 @@
+export { HomelanderAvatar } from './homelanderavatar';

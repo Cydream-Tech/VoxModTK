@@ -22,7 +22,7 @@ MonoBehaviour:
     patch: 0
   minimalMainGameVersion:
     major: 0
-    minor: 3
+    minor: 5
     patch: 0
   dependencies: []
   Scenes: []

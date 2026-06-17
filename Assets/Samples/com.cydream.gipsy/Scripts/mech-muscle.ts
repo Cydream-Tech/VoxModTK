@@ -70,7 +70,7 @@ export class MechMuscle {
                     }
                 }
             };
-            VX.Mod.ModAPI.AddVoxelFragmentedListener(vc, this.fragmentedHandler);
+            // VX.Mod.ModAPI.AddVoxelFragmentedListener(vc, this.fragmentedHandler);
         } else {
             CS.UnityEngine.Debug.LogError(
                 'MechMuscle Init VC VD not initialized ' + vc + ' ' + this.voxelVolume

@@ -1,0 +1,24 @@
+﻿{
+    "shaderNames": [
+        "Shader Graphs/CenterGlow",
+        "Shader Graphs/Flowing_Add",
+        "Shader Graphs/Flowing_Alpha",
+        "Shader Graphs/Flowing_Override",
+        "Shader Graphs/ParticleNoiseTurbulence",
+        "Shader Graphs/RimLight",
+        "Shader Graphs/Texture_Add",
+        "Shader Graphs/Texture_Add_NoZTest",
+        "Shader Graphs/Texture_Add_Override",
+        "Shader Graphs/Texture_Alpha",
+        "Shader Graphs/Texture_Color",
+        "Shader Graphs/Texture_Override",
+        "Sprites/Default",
+        "Standard",
+        "UI/Default",
+        "Universal Render Pipeline/2D/Sprite-Unlit-Default",
+        "Universal Render Pipeline/Lit",
+        "Universal Render Pipeline/Particles/Lit",
+        "Universal Render Pipeline/Particles/Unlit",
+        "Universal Render Pipeline/Unlit"
+    ]
+}

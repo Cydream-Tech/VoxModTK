@@ -332,7 +332,7 @@ public static class VoxModPieRpcExtensions
         manifest.id = modId;
         manifest.description = payload.description ?? "";
         manifest.modVersion = new SemanticVersion { major = 1, minor = 0, patch = 0 };
-        manifest.minimalMainGameVersion = new SemanticVersion { major = 0, minor = 3, patch = 0 };
+        manifest.minimalMainGameVersion = new SemanticVersion { major = 0, minor = 5, patch = 0 };
         AssetDatabase.CreateAsset(manifest, modRoot + "/manifest.asset");
         AssetDatabase.ImportAsset(modRoot);
         AssetDatabase.SaveAssets();

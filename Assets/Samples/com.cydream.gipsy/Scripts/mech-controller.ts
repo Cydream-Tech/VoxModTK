@@ -5,6 +5,7 @@
 const Vec3 = CS.UnityEngine.Vector3;
 const Color = CS.UnityEngine.Color;
 const Giz = VX.Utility.Giz;
+const JsPropertiesType = puerts.$typeof(VX.Mod.JsProperties);
 
 export class MechController {
     private bindTo: VX.Mod.JsComponentProxy;
@@ -95,6 +96,9 @@ export class MechController {
         // Initialize and find all components
         this.initializeComponents();
 
+        this.readProperties();
+        this.bindSeatVehicle();
+
         // Bind callbacks
         this.bindTo.onUpdate = (dt) => this.onUpdate(dt);
         this.bindTo.onEnable = () => this.onEnable();
@@ -104,6 +108,45 @@ export class MechController {
         this.input = new VX.Mod.ModAPI.Input();
 
         CS.UnityEngine.Debug.Log("Gipsy initialized, " + this.bodyT + " " + this.jointLegUpR);
+    }
+
+    private readProperties(): void {
+        const props = this.bindTo.GetComponent(JsPropertiesType) as VX.Mod.JsProperties | null;
+        if (props == null) {
+            return;
+        }
+    }
+
+    private bindSeatVehicle(): void {
+        const props = this.bindTo.GetComponent(JsPropertiesType) as VX.Mod.JsProperties | null;
+        let vehicle = props?.Get("vehicle") as VX.Entity.IVehicle | null;
+        let seat = props?.Get("seat") as any | null;
+
+        if (vehicle == null) {
+            vehicle = this.findVehicleProxy();
+        }
+        if (seat == null && vehicle != null) {
+            seat = (vehicle as any).driverSeat;
+        }
+        if (seat != null && vehicle != null) {
+            seat.vehicle = vehicle;
+        } else {
+            CS.UnityEngine.Debug.LogWarning("Gipsy Seat.vehicle binding skipped, vehicle=" + vehicle + " seat=" + seat);
+        }
+    }
+
+    private findVehicleProxy(): VX.Entity.IVehicle | null {
+        const gameObject = this.bindTo.gameObject;
+        const componentCount = gameObject.GetComponentCount();
+
+        for (let i = 0; i < componentCount; i++) {
+            const component = gameObject.GetComponentAtIndex(i) as VX.Entity.IVehicle | null;
+            if (component != null && VX.Mod.ModAPI.IsVehicleProxy(component)) {
+                return component;
+            }
+        }
+
+        return null;
     }
 
     private initializeComponents(): void {
@@ -208,7 +251,7 @@ export class MechController {
         // Use fixed delta time for physics
         const fixedDt = CS.UnityEngine.Time.fixedDeltaTime;
 
-        if (!this.bodyRb) return;
+        if (!this.isValidRigidBody(this.bodyRb)) return;
 
         // === Raycast Hover ===
         const worldCenter = this.bodyRb.worldCenterOfMass;
@@ -442,5 +485,9 @@ export class MechController {
     private lerpAngle(a: number, b: number, t: number): number {
         let delta = CS.UnityEngine.Mathf.DeltaAngle(a, b);
         return a + delta * t;
+    }
+
+    private isValidRigidBody(rb: CS.Px5.Unity.PxRigidBody | null): rb is CS.Px5.Unity.PxRigidBody {
+        return !!rb && rb.valid;
     }
 }

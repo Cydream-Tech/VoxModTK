@@ -415,11 +415,6 @@
         (arg1: T1, arg2: T2) : TResult; 
         Invoke?: (arg1: T1, arg2: T2) => TResult;
         }
-        interface Action$3<T1, T2, T3>
-        { 
-        (arg1: T1, arg2: T2, arg3: T3) : void; 
-        Invoke?: (arg1: T1, arg2: T2, arg3: T3) => void;
-        }
         class Attribute extends System.Object implements System.Runtime.InteropServices._Attribute
         {
             protected [__keep_incompatibility]: never;
@@ -8974,9 +8969,12 @@
             public static ID_GLASS : number
             public static NORMAL_HARDNESS : number
             public static MAX_HARDNESS : number
+            public static NORMAL_TOUGHNESS : number
+            public static MAX_TOUGHNESS : number
             public static NORMAL_TEMPERATURE : number
             public static PROPERTY_MAX_VALUE : number
             public static PROPERTY_Min_VALUE : number
+            public static CollisionMaterialSharpFlag : number
             public static HardnessCap_Sword : number
             public static HardnessCap_Bullet : number
             public static HardnessCap_LaserGun : number
@@ -8997,6 +8995,10 @@
             public SetColor ($color: Unity.Mathematics.float3) : void
             public GetColor () : UnityEngine.Color
             public CopyColor ($otherData: VoxelPlayground.Engine.PointDataV2) : void
+            public IsSharp () : boolean
+            public SetSharp ($yes: boolean) : void
+            public static PackCollisionMaterialId ($id: number, $sharp: boolean) : number
+            public GetCollisionMaterialId () : number
             public SetNumber ($property: VoxelPlayground.Engine.PointDataV2.Property, $value: number) : void
             public GetNumber ($property: VoxelPlayground.Engine.PointDataV2.Property) : number
             public GetPropertyValueNormalized ($property: VoxelPlayground.Engine.PointDataV2.Property) : number
@@ -9010,11 +9012,16 @@
             public InitDefaultValue () : void
             public CloneFrom ($other: VoxelPlayground.Engine.PointDataV2) : void
             public static SetHardnessTable ($hardness: System.Array$1<number>) : void
+            public static SetToughnessTable ($toughness: System.Array$1<number>) : void
             public GetHardnessById ($id: number) : number
+            public GetToughnessById ($id: number) : number
             public GetHardness () : number
+            public GetToughness () : number
             public GetHardnessNormalize () : number
+            public GetToughnessNormalize () : number
             public static CalcHardness2IntensityMlp ($hardnessCap: number, $selfHardness: number) : number
             public static GetHardnessAffectSize ($hardness: number) : number
+            public static CalcToughnessRadiusMultiplier ($toughness: number) : number
             public constructor ($other: VoxelPlayground.Engine.PointDataV2)
             public constructor ($other: VoxelPlayground.Engine.PointData)
         }
@@ -9056,6 +9063,7 @@
             public static gameplayTagMask_Obstacle : number
             public static bulletHitLayerMask : UnityEngine.LayerMask
             public static visualObjectsLayerMask : UnityEngine.LayerMask
+            public static hzbNearCameraOcclusionBypassMask : UnityEngine.LayerMask
             public static grabMask : UnityEngine.LayerMask
             public static attachableLayer : UnityEngine.LayerMask
             public static uiMask : UnityEngine.LayerMask
@@ -9080,7 +9088,7 @@
         {
             protected [__keep_incompatibility]: never;
         }
-        class EntityCharacter extends VoxelPlayground.Entity.Entity implements VoxelPlayground.Gaming.IPinchable, System.IEquatable$1<VoxelPlayground.Entity.Entity>, VoxelPlayground.Entity.ICombustible
+        class EntityCharacter extends VoxelPlayground.Entity.Entity implements VoxelPlayground.Gaming.IPinchable, VoxelPlayground.Entity.ICombustible, System.IEquatable$1<VoxelPlayground.Entity.Entity>
         {
             protected [__keep_incompatibility]: never;
         }
@@ -9332,6 +9340,8 @@
             public static showUI : boolean
             public static showSkeleton : boolean
             public static showAttach : boolean
+            public static showInput : boolean
+            public static showRayHit : boolean
             public static verbose : boolean
             public static PushDuration ($duration: number) : void
             public static PopDuration () : void
@@ -11176,6 +11186,9 @@
             protected [__keep_incompatibility]: never;
             public static get ControlledVehicle(): VoxelPlayground.Entity.IVehicle;
             public static get ControlledCharacter(): VoxelPlayground.Entity.EntityCharacter;
+            public static get PlayerHealth(): number;
+            public static set PlayerHealth(value: number);
+            public static get PlayerMaxHealth(): number;
             public static get ShowHUD(): boolean;
             public static get OnSceneLoaded(): UnityEngine.Events.UnityEvent;
             public static set OnSceneLoaded(value: UnityEngine.Events.UnityEvent);
@@ -11188,6 +11201,7 @@
             public static AttachJointToCharacter ($ch: VoxelPlayground.Entity.EntityCharacter, $connectedBody: Px5.Unity.PxRigidBody, $bodyName?: string) : Px5.Unity.PxD6Joint
             public static CharacterContainsRigidbody ($ch: VoxelPlayground.Entity.EntityCharacter, $rb: Px5.Unity.PxRigidBody) : boolean
             public static IsCharacterCarryingRigidbody ($ch: VoxelPlayground.Entity.EntityCharacter, $rb: Px5.Unity.PxRigidBody) : boolean
+            public static GetCharacterCarriedRigidbody ($ch: VoxelPlayground.Entity.EntityCharacter, $isLeftHand: boolean) : Px5.Unity.PxRigidBody
             public static IsCharacterGrounded ($ch: VoxelPlayground.Entity.EntityCharacter) : boolean
             public static SetCharacterHanging ($ch: VoxelPlayground.Entity.EntityCharacter, $hanging: boolean) : void
             public static GetCharacterVelocity ($ch: VoxelPlayground.Entity.EntityCharacter) : UnityEngine.Vector3
@@ -11196,11 +11210,13 @@
             public static AddCharacterMotion ($ch: VoxelPlayground.Entity.EntityCharacter, $v: UnityEngine.Vector3, $mode?: UnityEngine.ForceMode) : void
             public static TeleportCharacter ($ch: VoxelPlayground.Entity.EntityCharacter, $pos: UnityEngine.Vector3, $rot: UnityEngine.Quaternion) : void
             public static GetCharacterCurrentState ($ch: VoxelPlayground.Entity.EntityCharacter) : VoxelPlayground.Utility.State
+            public static SetCharacterCurrentState ($ch: VoxelPlayground.Entity.EntityCharacter, $stateName: string) : void
             public static AddCharacterStateChangedListener ($ch: VoxelPlayground.Entity.EntityCharacter, $cb: UnityEngine.Events.UnityAction$1<VoxelPlayground.Utility.State>) : void
             public static RemoveCharacterStateChangedListener ($ch: VoxelPlayground.Entity.EntityCharacter, $cb: UnityEngine.Events.UnityAction$1<VoxelPlayground.Utility.State>) : void
             public static AddCharacterAIActionChangedListener ($ch: VoxelPlayground.Entity.EntityCharacter, $cb: UnityEngine.Events.UnityAction$1<VoxelPlayground.AI.AIAction>) : void
             public static RemoveCharacterAIActionChangedListener ($ch: VoxelPlayground.Entity.EntityCharacter, $cb: UnityEngine.Events.UnityAction$1<VoxelPlayground.AI.AIAction>) : void
             public static GetXRControllerTransform ($isLeft: boolean) : UnityEngine.Transform
+            public static VibrateXRController ($isLeft: boolean, $amplitude?: number, $duration?: number, $frequency?: number) : void
             public static GetMainCamera () : UnityEngine.Camera
             public static AddCharacterSpawnedListener ($cb: UnityEngine.Events.UnityAction$1<VoxelPlayground.Entity.EntityCharacter>) : void
             public static RemoveCharacterSpawnedListener ($cb: UnityEngine.Events.UnityAction$1<VoxelPlayground.Entity.EntityCharacter>) : void
@@ -11214,6 +11230,7 @@
             public static PushBgm ($soundEvent: Sonity.SoundEvent, $priority?: VoxelPlayground.Sound.BgmPriority) : void
             public static PopBgm ($soundEvent: Sonity.SoundEvent, $priority?: VoxelPlayground.Sound.BgmPriority) : void
             public static PlayVFX ($effectKey: string, $pos: UnityEngine.Vector3, $scale?: number) : UnityEngine.GameObject
+            public static GetCurrentVersion () : VoxelPlayground.Mod.SemanticVersion
             public static Log ($message: string) : void
             public static GetEntityMainRigidbody ($e: VoxelPlayground.Entity.Entity) : Px5.Unity.PxRigidBody
             public static GetEntityRigidbodies ($e: VoxelPlayground.Entity.Entity) : System.Array$1<Px5.Unity.PxRigidBody>
@@ -11223,6 +11240,7 @@
             public static SetEntityActivated ($e: VoxelPlayground.Entity.Entity, $active: boolean) : void
             public static IsEntityActivated ($e: VoxelPlayground.Entity.Entity) : boolean
             public static SetEntityVisible ($e: VoxelPlayground.Entity.Entity, $visible: boolean) : void
+            public static SetEntityHighlight ($e: VoxelPlayground.Entity.Entity, $highlighted: boolean) : void
             public static TeleportEntity ($e: VoxelPlayground.Entity.Entity, $pos: UnityEngine.Vector3, $rot: UnityEngine.Quaternion) : void
             public static AddWeaponTriggerPressedListener ($w: VoxelPlayground.Entity.EntityFirableWeapon, $cb: System.Action) : void
             public static RemoveWeaponTriggerPressedListener ($w: VoxelPlayground.Entity.EntityFirableWeapon, $cb: System.Action) : void
@@ -11264,8 +11282,8 @@
             public static GetVoxelSolidRatio ($voxel: VoxelPlayground.Engine.VoxelVolume) : number
             public static AddVoxelModifiedListener ($voxel: VoxelPlayground.Engine.VoxelVolume, $cb: System.Action$1<VoxelPlayground.Engine.VoxelVolume>) : void
             public static RemoveVoxelModifiedListener ($voxel: VoxelPlayground.Engine.VoxelVolume, $cb: System.Action$1<VoxelPlayground.Engine.VoxelVolume>) : void
-            public static AddVoxelFragmentedListener ($voxel: VoxelPlayground.Destruction.VoxelDestructor, $cb: System.Action$3<VoxelPlayground.Destruction.VoxelDestructor, VoxelPlayground.Destruction.VoxelDestructor, Unity.Collections.NativeSlice$1<number>>) : void
-            public static RemoveVoxelFragmentedListener ($voxel: VoxelPlayground.Destruction.VoxelDestructor, $cb: System.Action$3<VoxelPlayground.Destruction.VoxelDestructor, VoxelPlayground.Destruction.VoxelDestructor, Unity.Collections.NativeSlice$1<number>>) : void
+            public static AddVoxelFragmentedListener ($voxel: VoxelPlayground.Destruction.VoxelDestructor, $cb: System.Action) : void
+            public static RemoveVoxelFragmentedListener ($voxel: VoxelPlayground.Destruction.VoxelDestructor, $cb: System.Action) : void
             public static IsVoxelDestructible ($voxel: VoxelPlayground.Destruction.VoxelDestructor) : boolean
             public static SetVoxelDestructible ($voxel: VoxelPlayground.Destruction.VoxelDestructor, $destructible: boolean) : void
             public static IsVoxelUnyielding ($voxel: VoxelPlayground.Destruction.VoxelDestructor) : boolean
@@ -11280,6 +11298,24 @@
             public static GetCharacterFaceRenderTarget ($ch: VoxelPlayground.Entity.EntityCharacter) : VoxelPlayground.Engine.VoxelVolume
             public static SetVoxelFaceProperties ($target: VoxelPlayground.Engine.VoxelVolume, $material: UnityEngine.Material, $animationEnable: boolean, $direction: number, $depth: number) : void
             public static IsVoxelCollider ($collider: Px5.Unity.PxCollider) : boolean
+        }
+        class SemanticVersion extends System.ValueType implements System.IComparable$1<VoxelPlayground.Mod.SemanticVersion>, System.IEquatable$1<VoxelPlayground.Mod.SemanticVersion>
+        {
+            protected [__keep_incompatibility]: never;
+            public major : number
+            public minor : number
+            public patch : number
+            public static Parse ($version: string) : VoxelPlayground.Mod.SemanticVersion
+            public static TryParse ($version: string, $parsed: $Ref<VoxelPlayground.Mod.SemanticVersion>) : boolean
+            public CompareTo ($other: VoxelPlayground.Mod.SemanticVersion) : number
+            public Equals ($other: VoxelPlayground.Mod.SemanticVersion) : boolean
+            public Equals ($obj: any) : boolean
+            public static op_Equality ($left: VoxelPlayground.Mod.SemanticVersion, $right: VoxelPlayground.Mod.SemanticVersion) : boolean
+            public static op_Inequality ($left: VoxelPlayground.Mod.SemanticVersion, $right: VoxelPlayground.Mod.SemanticVersion) : boolean
+            public static op_LessThan ($left: VoxelPlayground.Mod.SemanticVersion, $right: VoxelPlayground.Mod.SemanticVersion) : boolean
+            public static op_LessThanOrEqual ($left: VoxelPlayground.Mod.SemanticVersion, $right: VoxelPlayground.Mod.SemanticVersion) : boolean
+            public static op_GreaterThan ($left: VoxelPlayground.Mod.SemanticVersion, $right: VoxelPlayground.Mod.SemanticVersion) : boolean
+            public static op_GreaterThanOrEqual ($left: VoxelPlayground.Mod.SemanticVersion, $right: VoxelPlayground.Mod.SemanticVersion) : boolean
         }
         class JsComponentProxy extends UnityEngine.MonoBehaviour
         {
@@ -11389,15 +11425,16 @@
             public set collisionDetectionMode(value: UnityEngine.CollisionDetectionMode);
             public get detectCollisions(): boolean;
             public set detectCollisions(value: boolean);
-            public get easyKinematicPenetration(): boolean;
-            public set easyKinematicPenetration(value: boolean);
             public get indestructible(): boolean;
             public set indestructible(value: boolean);
+            public get materialSupportGraph(): boolean;
+            public set materialSupportGraph(value: boolean);
             public AddForce ($force: UnityEngine.Vector3, $mode?: UnityEngine.ForceMode) : void
             public AddForceAtPosition ($force: UnityEngine.Vector3, $position: UnityEngine.Vector3, $mode?: UnityEngine.ForceMode) : void
             public AddTorque ($torque: UnityEngine.Vector3, $mode?: UnityEngine.ForceMode) : void
             public MovePosition ($position: UnityEngine.Vector3) : void
             public MoveRotation ($rotation: UnityEngine.Quaternion) : void
+            public MovePose ($position: UnityEngine.Vector3, $rotation: UnityEngine.Quaternion) : void
             public IsSleeping () : boolean
             public WakeUp () : void
             public WorldBound () : UnityEngine.Bounds
@@ -11422,6 +11459,7 @@
             public set actor0(value: Px5.Unity.PxActor);
             public get actor1(): Px5.Unity.PxActor;
             public set actor1(value: Px5.Unity.PxActor);
+            public get valid(): boolean;
             public get breakForce(): number;
             public set breakForce(value: number);
             public get breakTorque(): number;
@@ -11748,12 +11786,17 @@
         class ContactPoint extends System.ValueType
         {
             protected [__keep_incompatibility]: never;
+            public static NoMaterialId : number
             public thisCollider : Px5.Unity.PxCollider
             public otherCollider : Px5.Unity.PxCollider
             public point : UnityEngine.Vector3
             public normal : UnityEngine.Vector3
             public impulse : UnityEngine.Vector3
             public seperation : number
+            public thisMaterialId : number
+            public otherMaterialId : number
+            public TryGetThisMaterialId ($materialId: $Ref<number>) : boolean
+            public TryGetOtherMaterialId ($materialId: $Ref<number>) : boolean
         }
         enum CollisionType
         { SurfaceHit = 0, PenetrateSelf = 1, PenetrateOthers = 2 }

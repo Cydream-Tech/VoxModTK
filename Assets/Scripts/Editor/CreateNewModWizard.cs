@@ -30,10 +30,22 @@ public class CreateNewModWizard : EditorWindow
         EditorGUILayout.LabelField("Mod Name:");
         modName = EditorGUILayout.TextField(modName);
         
-        EditorGUILayout.Space(20);
+        EditorGUILayout.Space(10);
+
+        var generatedModId = GetModId(author, modName);
+        if (!string.IsNullOrEmpty(generatedModId))
+        {
+            EditorGUILayout.LabelField("Generated Mod ID:");
+            EditorGUILayout.SelectableLabel(generatedModId, EditorStyles.textField, GUILayout.Height(EditorGUIUtility.singleLineHeight));
+        }
+
+        EditorGUILayout.Space(10);
 
         // Validation and Create Button
-        bool canCreate = !string.IsNullOrEmpty(author) && !string.IsNullOrEmpty(modName);
+        bool hasRequiredFields = !string.IsNullOrWhiteSpace(author) && !string.IsNullOrWhiteSpace(modName);
+        string modIdError = string.Empty;
+        bool hasValidModId = hasRequiredFields && VoxModIdUtility.TryValidate(generatedModId, out modIdError);
+        bool canCreate = hasRequiredFields && hasValidModId;
         
         GUI.enabled = canCreate;
         if (GUILayout.Button("Create Mod", GUILayout.Height(30)))
@@ -42,20 +54,30 @@ public class CreateNewModWizard : EditorWindow
         }
         GUI.enabled = true;
         
-        if (!canCreate)
+        if (!hasRequiredFields)
         {
             EditorGUILayout.HelpBox("Please enter both Creator Name and Mod Name to continue.", MessageType.Info);
+        }
+        else if (!hasValidModId)
+        {
+            EditorGUILayout.HelpBox($"Generated mod ID is invalid: {modIdError}\n{VoxModIdUtility.ValidationHint}", MessageType.Error);
         }
     }
 
     private string GetModId(string author, string modName)
     {
-        return $"com.{author}.{modName}".ToLower();
+        return VoxModIdUtility.BuildModId(author, modName);
     }
 
     private void CreateNewMod()
     {
         string modIdentifier = GetModId(author, modName);
+        if (!VoxModIdUtility.TryValidate(modIdentifier, out var modIdError))
+        {
+            EditorUtility.DisplayDialog("Invalid Mod ID", $"Generated mod ID '{modIdentifier}' is invalid:\n\n{modIdError}\n\n{VoxModIdUtility.ValidationHint}", "OK");
+            return;
+        }
+
         string modRootPath = $"Assets/Mod/{modIdentifier}";
 
         try
@@ -90,7 +112,7 @@ public class CreateNewModWizard : EditorWindow
             CreateSampleTypeScriptFiles(scriptsPath, modName);
 
             // Create ModManifest ScriptableObject
-            CreateModManifest(modRootPath, author, modName);
+            CreateModManifest(modRootPath, author, modName, modIdentifier);
 
             // Refresh AssetDatabase
             AssetDatabase.Refresh();
@@ -107,7 +129,7 @@ public class CreateNewModWizard : EditorWindow
         }
     }
 
-    private void CreateModManifest(string modRootPath, string author, string modName)
+    private void CreateModManifest(string modRootPath, string author, string modName, string modId)
     {
         string manifestPath = Path.Combine(modRootPath, $"manifest.asset");
         
@@ -117,9 +139,9 @@ public class CreateNewModWizard : EditorWindow
         // Set basic properties
         manifest.author = author;
         manifest.modName = modName;
-        manifest.id = GetModId(author, modName);
+        manifest.id = modId;
         manifest.modVersion = new SemanticVersion{major = 1, minor = 0, patch = 0};
-        manifest.minimalMainGameVersion = new SemanticVersion{major = 0, minor = 4, patch = 0};
+        manifest.minimalMainGameVersion = new SemanticVersion{major = 0, minor = 5, patch = 0};
 
         // Create the asset file
         AssetDatabase.CreateAsset(manifest, manifestPath);
@@ -154,11 +176,11 @@ public class CreateNewModWizard : EditorWindow
 
     private void CreateSampleTypeScriptFiles(string scriptsPath, string modName)
     {
-        // Capitalize first letter for class name
-        string className = char.ToUpper(modName[0]) + modName.Substring(1);
+        string className = VoxModIdUtility.ToClassName(modName);
+        string componentModuleName = VoxModIdUtility.ToScriptFileBaseName(modName);
 
         // Create sample component TypeScript file
-        string componentFileName = $"{modName.ToLower()}.ts";
+        string componentFileName = $"{componentModuleName}.ts";
         string componentFilePath = Path.Combine(scriptsPath, componentFileName);
         string componentContent = $@"/**
  * {className} component implementation using JsComponentProxy.
@@ -186,7 +208,7 @@ export class {className} {{
 
         // Create index.ts that exports the component
         string indexPath = Path.Combine(scriptsPath, "index.ts");
-        string indexContent = $@"export {{ {className} }} from './{modName.ToLower()}';
+        string indexContent = $@"export {{ {className} }} from './{componentModuleName}';
 ";
         File.WriteAllText(indexPath, indexContent);
         Debug.Log($"Created index.ts: {indexPath}");

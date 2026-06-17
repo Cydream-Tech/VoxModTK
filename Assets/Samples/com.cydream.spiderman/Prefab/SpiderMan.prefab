@@ -176,7 +176,7 @@ MonoBehaviour:
     value: {fileID: 11400000, guid: dbf297933fbd9e34599d8f8274a0f596, type: 2}
   - index: 2
     key: hookShotSound
-    value: {fileID: 11400000, guid: c7838b8f1825cc9499b9271993673185, type: 2}
+    value: {fileID: 11400000, guid: 31949490243c7d74891e8d1ebdcc2442, type: 2}
   GameObjectArrayPairs: []
 --- !u!1 &2134442376541589662
 GameObject:

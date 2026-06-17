@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -185086359, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
+  m_Name: manifest
+  m_EditorClassIdentifier: 
+  id: com.creamy.omniman
+  description: 
+  author: Creamy
+  modName: OmniMan
+  modVersion:
+    major: 1
+    minor: 0
+    patch: 0
+  minimalMainGameVersion:
+    major: 0
+    minor: 3
+    patch: 0
+  dependencies: []
+  Scenes: []
+  Items:
+  - name: OmniMan
+    icon: {fileID: 21300000, guid: 550971028300f044b88173e4ec2849de, type: 3}
+    prefab: {fileID: 8960779978959247558, guid: b2ad08b614f2d1a48a454d7b4677e8d3,
+      type: 3}
+    itemType: 2
+  - name: Invincible
+    icon: {fileID: 21300000, guid: 30052ec4323ac36449ce19c9b900cfe0, type: 3}
+    prefab: {fileID: 5654866102270977857, guid: 5e766ce4bc75a074783885d9b3fa065f,
+      type: 3}
+    itemType: 2
+  - name: Invincible_NPC
+    icon: {fileID: 21300000, guid: 30052ec4323ac36449ce19c9b900cfe0, type: 3}
+    prefab: {fileID: 5539775919349498188, guid: 8987157c85adfbb4b8172cb2fe765e91,
+      type: 3}
+    itemType: 1
+  - name: OmniMan_NPC
+    icon: {fileID: 21300000, guid: 550971028300f044b88173e4ec2849de, type: 3}
+    prefab: {fileID: 758986707194461296, guid: 308af510cdf13a14c9ce32a7a43ea836, type: 3}
+    itemType: 1
