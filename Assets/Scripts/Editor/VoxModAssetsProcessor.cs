@@ -14,7 +14,7 @@ public class VoxModAssetsProcessor : EditorWindow
     private Vector2 scrollPosition;
     private ConvertType selectedConvertType = ConvertType.Scene;
 
-    [MenuItem("Vox Mod Tools/Assets Processor")]
+    [MenuItem("Vox Mod Tools/Assets Processor", priority = 11)]
     public static void ShowWindow()
     {
         GetWindow<VoxModAssetsProcessor>("Vox Assets Processor");

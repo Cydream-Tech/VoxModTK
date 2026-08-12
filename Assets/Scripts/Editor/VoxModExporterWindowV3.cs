@@ -29,6 +29,17 @@ public class VoxModExporterWindowV3 : EditorWindow
         public EditorApplication.CallbackFunction DebounceAction;
     }
 
+    private class ManifestSummary
+    {
+        public string ModFolder;
+        public string ManifestAssetPath;
+        public string Id;
+        public string ModName;
+        public string Author;
+        public int SceneCount;
+        public int ItemCount;
+    }
+
     private static readonly List<string> ModRootPaths = new List<string>
     {
         "Assets/Mod",
@@ -63,6 +74,11 @@ public class VoxModExporterWindowV3 : EditorWindow
     private List<string> modDirectories = new List<string>();
     private Dictionary<string, bool> manifestSelections = new Dictionary<string, bool>();
     private Dictionary<string, bool> compileWatchSelections = new Dictionary<string, bool>();
+    private readonly Dictionary<string, ManifestSummary> manifestSummaries = new Dictionary<string, ManifestSummary>(StringComparer.OrdinalIgnoreCase);
+    private readonly Dictionary<string, ModManifestV2> manifestCache = new Dictionary<string, ModManifestV2>(StringComparer.OrdinalIgnoreCase);
+    private readonly HashSet<string> manifestLoadDiagnosticPaths = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+    private bool modListHasBeenRefreshed;
+    private string modSearchQuery = string.Empty;
     private Vector2 scrollPosition;
 
     private string statusMessage;
@@ -76,11 +92,12 @@ public class VoxModExporterWindowV3 : EditorWindow
         Repaint();
     }
 
-    [MenuItem("Vox Mod Tools/Mod Exporter")]
+    [MenuItem("Vox Mod Tools/Mod Exporter", priority = 12)]
     public static void ShowWindow()
     {
         var window = GetWindow<VoxModExporterWindowV3>("Vox Mod Exporter V3");
         window.minSize = new Vector2(450, 500);
+        window.RefreshModList();
         window.Show();
     }
 
@@ -88,8 +105,6 @@ public class VoxModExporterWindowV3 : EditorWindow
     {
         RegisterLifecycleHooks();
         LoadSelectionState();
-        RefreshModList();
-        RestoreCompileWatchProcesses();
     }
 
     private void OnDisable()
@@ -118,6 +133,10 @@ public class VoxModExporterWindowV3 : EditorWindow
     private void RefreshModList()
     {
         modDirectories.Clear();
+        manifestSummaries.Clear();
+        manifestCache.Clear();
+        manifestLoadDiagnosticPaths.Clear();
+        modListHasBeenRefreshed = true;
 
         foreach (var root in ModRootPaths)
         {
@@ -127,8 +146,9 @@ public class VoxModExporterWindowV3 : EditorWindow
             var modFolders = AssetDatabase.GetSubFolders(root);
             foreach (var folder in modFolders)
             {
-                if (TryLoadManifest(folder, out _))
+                if (TryLoadManifestSummary(folder, out var summary))
                 {
+                    manifestSummaries[folder] = summary;
                     modDirectories.Add(folder);
                     if (!manifestSelections.ContainsKey(folder))
                     {
@@ -201,27 +221,57 @@ public class VoxModExporterWindowV3 : EditorWindow
         // Manifest list header
         EditorGUILayout.LabelField("Available Mods:", EditorStyles.boldLabel);
 
+        GUILayout.BeginHorizontal();
+        EditorGUILayout.LabelField("Search", GUILayout.Width(50));
+        var nextSearchQuery = EditorGUILayout.TextField(modSearchQuery ?? string.Empty);
+        if (!string.Equals(nextSearchQuery, modSearchQuery, StringComparison.Ordinal))
+        {
+            modSearchQuery = nextSearchQuery;
+            scrollPosition = Vector2.zero;
+        }
+
+        GUI.enabled = !string.IsNullOrWhiteSpace(modSearchQuery);
+        if (GUILayout.Button("Clear", GUILayout.Width(60)))
+        {
+            modSearchQuery = string.Empty;
+            GUI.FocusControl(string.Empty);
+            scrollPosition = Vector2.zero;
+        }
+        GUI.enabled = true;
+        GUILayout.EndHorizontal();
+
+        var visibleModDirectories = GetVisibleModFolders();
+        var isSearchActive = !string.IsNullOrWhiteSpace(modSearchQuery);
+        if (modListHasBeenRefreshed)
+        {
+            EditorGUILayout.LabelField(
+                isSearchActive
+                    ? $"Showing {visibleModDirectories.Count} of {modDirectories.Count} mods"
+                    : $"Showing {modDirectories.Count} mods",
+                EditorStyles.miniLabel);
+        }
+
         // Selection buttons
         GUILayout.BeginHorizontal();
-        if (GUILayout.Button("Select All", GUILayout.Width(100)))
+        if (GUILayout.Button(isSearchActive ? "Select Visible" : "Select All", GUILayout.Width(100)))
         {
-            foreach (var folder in modDirectories)
+            foreach (var folder in visibleModDirectories)
             {
                 manifestSelections[folder] = true;
             }
             SaveSelectionState();
         }
-        if (GUILayout.Button("Deselect All", GUILayout.Width(100)))
+        if (GUILayout.Button(isSearchActive ? "Deselect Visible" : "Deselect All", GUILayout.Width(120)))
         {
-            foreach (var folder in modDirectories)
+            foreach (var folder in visibleModDirectories)
             {
                 manifestSelections[folder] = false;
             }
             SaveSelectionState();
         }
-        if (GUILayout.Button("Invert", GUILayout.Width(80)))
+        if (GUILayout.Button(isSearchActive ? "Invert Visible" : "Invert", GUILayout.Width(100)))
         {
-            foreach (var folder in modDirectories)
+            foreach (var folder in visibleModDirectories)
             {
                 manifestSelections[folder] = !manifestSelections[folder];
             }
@@ -238,17 +288,29 @@ public class VoxModExporterWindowV3 : EditorWindow
             GUILayout.ExpandHeight(true),
             GUILayout.MaxHeight(500));
 
-        if (modDirectories.Count == 0)
+        if (!modListHasBeenRefreshed)
+        {
+            EditorGUILayout.HelpBox(
+                "Click Refresh Mod List to scan mod manifests.",
+                MessageType.Info);
+        }
+        else if (modDirectories.Count == 0)
         {
             EditorGUILayout.HelpBox(
                 $"No mods with ModManifestV2 found under: {string.Join(", ", ModRootPaths)}",
                 MessageType.Warning);
         }
+        else if (visibleModDirectories.Count == 0)
+        {
+            EditorGUILayout.HelpBox(
+                $"No mods match '{modSearchQuery}'.",
+                MessageType.Info);
+        }
         else
         {
-            foreach (var modFolder in modDirectories)
+            foreach (var modFolder in visibleModDirectories)
             {
-                if (!TryLoadManifest(modFolder, out var manifest))
+                if (!manifestSummaries.TryGetValue(modFolder, out var summary) || summary == null)
                     continue;
 
                 EditorGUILayout.BeginHorizontal();
@@ -264,19 +326,19 @@ public class VoxModExporterWindowV3 : EditorWindow
 
                 // Manifest info
                 EditorGUILayout.BeginVertical();
-                EditorGUILayout.LabelField($"{manifest.modName} by {manifest.author}", EditorStyles.boldLabel);
-                EditorGUILayout.LabelField($"ID: {manifest.id}", EditorStyles.miniLabel);
+                EditorGUILayout.LabelField($"{summary.ModName} by {summary.Author}", EditorStyles.boldLabel);
+                EditorGUILayout.LabelField($"ID: {summary.Id}", EditorStyles.miniLabel);
                 EditorGUILayout.LabelField($"Path: {modFolder}", EditorStyles.miniLabel);
-                EditorGUILayout.LabelField($"Scenes: {manifest.Scenes?.Count ?? 0} | Items: {manifest.Items?.Count ?? 0}",
+                EditorGUILayout.LabelField($"Scenes: {summary.SceneCount} | Items: {summary.ItemCount}",
                     EditorStyles.miniLabel);
-                EditorGUILayout.LabelField(GetCompileWatchStatusLabel(modFolder, manifest), EditorStyles.miniLabel);
+                EditorGUILayout.LabelField(GetCompileWatchStatusLabel(modFolder, summary.Id), EditorStyles.miniLabel);
                 EditorGUILayout.EndVertical();
 
                 var watchEnabled = IsCompileWatchEnabled(modFolder);
                 var watchLabel = watchEnabled ? "Stop Watch" : "Start Watch";
                 if (GUILayout.Button(watchLabel, GUILayout.Width(95), GUILayout.Height(38)))
                 {
-                    ToggleCompileWatch(modFolder, manifest);
+                    ToggleCompileWatch(modFolder);
                 }
 
                 EditorGUILayout.EndHorizontal();
@@ -334,7 +396,6 @@ public class VoxModExporterWindowV3 : EditorWindow
         if (GUILayout.Button("Refresh Mod List"))
         {
             RefreshModList();
-            RestoreCompileWatchProcesses();
         }
         if (GUILayout.Button("Open Export Directory"))
         {
@@ -364,44 +425,93 @@ public class VoxModExporterWindowV3 : EditorWindow
         return selected;
     }
 
+    private List<string> GetVisibleModFolders()
+    {
+        if (string.IsNullOrWhiteSpace(modSearchQuery))
+        {
+            return modDirectories.ToList();
+        }
+
+        var query = modSearchQuery.Trim();
+        return modDirectories
+            .Where(folder => manifestSummaries.TryGetValue(folder, out var summary)
+                && DoesSummaryMatchSearch(summary, query))
+            .ToList();
+    }
+
+    private static bool DoesSummaryMatchSearch(ManifestSummary summary, string query)
+    {
+        if (summary == null || string.IsNullOrWhiteSpace(query))
+        {
+            return true;
+        }
+
+        return ContainsSearchTerm(summary.ModName, query)
+            || ContainsSearchTerm(summary.Id, query)
+            || ContainsSearchTerm(summary.Author, query)
+            || ContainsSearchTerm(summary.ModFolder, query)
+            || ContainsSearchTerm(summary.ManifestAssetPath, query);
+    }
+
+    private static bool ContainsSearchTerm(string value, string query)
+    {
+        return !string.IsNullOrEmpty(value)
+            && value.IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0;
+    }
+
     private bool IsCompileWatchEnabled(string modFolder)
     {
         return compileWatchSelections.TryGetValue(modFolder, out var enabled) && enabled;
     }
 
-    private string GetCompileWatchStatusLabel(string modFolder, ModManifestV2 manifest)
+    private string GetCompileWatchStatusLabel(string modFolder, string modId)
     {
         if (!IsCompileWatchEnabled(modFolder))
         {
             return "Compile Watch: Off";
         }
 
-        if (manifest == null)
+        if (string.IsNullOrWhiteSpace(modId))
         {
             return "Compile Watch: On";
         }
 
-        if (!VoxModIdUtility.TryValidate(manifest.id, out _))
+        if (!VoxModIdUtility.TryValidate(modId, out _))
         {
             return "Compile Watch: invalid mod ID";
         }
 
-        return IsCompileWatchRunning(manifest.id)
+        return IsCompileWatchRunning(modId)
             ? "Compile Watch: On (running)"
             : "Compile Watch: On (stopped)";
     }
 
-    private void ToggleCompileWatch(string modFolder, ModManifestV2 manifest)
+    private void ToggleCompileWatch(string modFolder)
     {
         var enable = !IsCompileWatchEnabled(modFolder);
-        compileWatchSelections[modFolder] = enable;
-        SaveSelectionState();
 
         if (!enable)
         {
-            StopCompileWatchByModId(manifest.id);
+            compileWatchSelections[modFolder] = false;
+            SaveSelectionState();
+
+            if (manifestSummaries.TryGetValue(modFolder, out var summary)
+                && !string.IsNullOrWhiteSpace(summary.Id))
+            {
+                StopCompileWatchByModId(summary.Id);
+            }
+
             return;
         }
+
+        if (!TryGetManifest(modFolder, out var manifest))
+        {
+            SetStatus($"Compile Watch failed: no ModManifestV2 found in {modFolder}", true);
+            return;
+        }
+
+        compileWatchSelections[modFolder] = true;
+        SaveSelectionState();
 
         if (!TryStartCompileWatch(modFolder, manifest, out var errorMessage))
         {
@@ -420,7 +530,7 @@ public class VoxModExporterWindowV3 : EditorWindow
                 continue;
             }
 
-            if (!TryLoadManifest(modFolder, out var manifest))
+            if (!TryGetManifest(modFolder, out var manifest))
             {
                 continue;
             }
@@ -491,7 +601,7 @@ public class VoxModExporterWindowV3 : EditorWindow
         }
 
         var modFolder = modAssetPath.Replace("\\", "/");
-        if (!TryLoadManifest(modFolder, out var manifest))
+        if (!TryGetManifest(modFolder, out var manifest))
         {
             errorMessage = $"No ModManifestV2 found in {modFolder}.";
             return false;
@@ -539,9 +649,11 @@ public class VoxModExporterWindowV3 : EditorWindow
                 var prefabRelativePath = $"prefabs/{prefabFileName}";
                 var prefabExportPath = Path.Combine(prefabsFolderPath, prefabFileName);
 
-                if (!SerializePrefabToJson(prefab, prefabExportPath, exportFolderPath))
+                if (!SerializePrefabToJson(prefab, prefabExportPath, exportFolderPath, out var prefabExportError))
                 {
-                    errorMessage = $"Failed to export prefab '{prefab.name}'.";
+                    errorMessage = string.IsNullOrWhiteSpace(prefabExportError)
+                        ? $"Failed to export prefab '{prefab.name}'."
+                        : $"Failed to export prefab '{prefab.name}': {prefabExportError}";
                     return false;
                 }
 
@@ -605,9 +717,167 @@ public class VoxModExporterWindowV3 : EditorWindow
         }
     }
 
+    private bool TryLoadManifestSummary(string modFolderPath, out ManifestSummary summary)
+    {
+        summary = null;
+        modFolderPath = modFolderPath?.Replace("\\", "/");
+        if (string.IsNullOrWhiteSpace(modFolderPath) || !AssetDatabase.IsValidFolder(modFolderPath))
+        {
+            return false;
+        }
+
+        var defaultManifestPath = $"{modFolderPath}/manifest.asset";
+        if (TryParseManifestSummaryAsset(modFolderPath, defaultManifestPath, out summary))
+        {
+            return true;
+        }
+
+        var manifestGuids = AssetDatabase.FindAssets("manifest", new[] { modFolderPath });
+        foreach (var guid in manifestGuids)
+        {
+            var manifestAssetPath = AssetDatabase.GUIDToAssetPath(guid);
+            if (string.Equals(manifestAssetPath, defaultManifestPath, StringComparison.OrdinalIgnoreCase))
+            {
+                continue;
+            }
+
+            if (TryParseManifestSummaryAsset(modFolderPath, manifestAssetPath, out summary))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static bool TryParseManifestSummaryAsset(string modFolderPath, string manifestAssetPath, out ManifestSummary summary)
+    {
+        summary = null;
+        if (string.IsNullOrWhiteSpace(manifestAssetPath)
+            || !manifestAssetPath.EndsWith(".asset", StringComparison.OrdinalIgnoreCase))
+        {
+            return false;
+        }
+
+        var absolutePath = AssetPathToAbsolutePath(manifestAssetPath);
+        if (!File.Exists(absolutePath))
+        {
+            return false;
+        }
+
+        try
+        {
+            string id = null;
+            string modName = null;
+            string author = null;
+            string listSection = null;
+            var sceneCount = 0;
+            var itemCount = 0;
+
+            foreach (var rawLine in File.ReadLines(absolutePath))
+            {
+                var trimmed = rawLine.Trim();
+                if (trimmed.Length == 0)
+                {
+                    continue;
+                }
+
+                var indent = rawLine.Length - rawLine.TrimStart().Length;
+                if (indent == 2 && !trimmed.StartsWith("-") && trimmed.Contains(":"))
+                {
+                    if (trimmed.StartsWith("id:", StringComparison.Ordinal))
+                    {
+                        id = ReadYamlScalarAfterColon(trimmed);
+                    }
+                    else if (trimmed.StartsWith("modName:", StringComparison.Ordinal))
+                    {
+                        modName = ReadYamlScalarAfterColon(trimmed);
+                    }
+                    else if (trimmed.StartsWith("author:", StringComparison.Ordinal))
+                    {
+                        author = ReadYamlScalarAfterColon(trimmed);
+                    }
+
+                    if (trimmed.StartsWith("Scenes:", StringComparison.Ordinal))
+                    {
+                        listSection = "Scenes";
+                    }
+                    else if (trimmed.StartsWith("Items:", StringComparison.Ordinal))
+                    {
+                        listSection = "Items";
+                    }
+                    else
+                    {
+                        listSection = null;
+                    }
+                }
+                else if (indent == 2 && trimmed.StartsWith("- name:", StringComparison.Ordinal))
+                {
+                    if (listSection == "Scenes")
+                    {
+                        sceneCount++;
+                    }
+                    else if (listSection == "Items")
+                    {
+                        itemCount++;
+                    }
+                }
+            }
+
+            if (string.IsNullOrWhiteSpace(id) && string.IsNullOrWhiteSpace(modName))
+            {
+                return false;
+            }
+
+            var normalizedFolder = modFolderPath.Replace("\\", "/");
+            var folderName = normalizedFolder.Split('/').LastOrDefault() ?? normalizedFolder;
+            summary = new ManifestSummary
+            {
+                ModFolder = normalizedFolder,
+                ManifestAssetPath = manifestAssetPath.Replace("\\", "/"),
+                Id = id ?? string.Empty,
+                ModName = string.IsNullOrWhiteSpace(modName) ? folderName : modName,
+                Author = author ?? string.Empty,
+                SceneCount = sceneCount,
+                ItemCount = itemCount
+            };
+            return true;
+        }
+        catch (Exception e)
+        {
+            UnityEngine.Debug.LogWarning($"[VoxModExporterV3] Failed to read manifest summary '{manifestAssetPath}': {e.Message}");
+            return false;
+        }
+    }
+
+    private static string ReadYamlScalarAfterColon(string line)
+    {
+        var separator = line.IndexOf(':');
+        if (separator < 0 || separator + 1 >= line.Length)
+        {
+            return string.Empty;
+        }
+
+        var value = line.Substring(separator + 1).Trim();
+        if (value.Length >= 2
+            && ((value[0] == '"' && value[value.Length - 1] == '"')
+                || (value[0] == '\'' && value[value.Length - 1] == '\'')))
+        {
+            value = value.Substring(1, value.Length - 2);
+        }
+
+        return value;
+    }
+
     private bool TryLoadManifest(string modFolderPath, out ModManifestV2 manifest)
     {
         manifest = null;
+        modFolderPath = modFolderPath?.Replace("\\", "/");
+        if (string.IsNullOrWhiteSpace(modFolderPath))
+        {
+            return false;
+        }
+
         if (!AssetDatabase.IsValidFolder(modFolderPath))
         {
             return false;
@@ -617,7 +887,38 @@ public class VoxModExporterWindowV3 : EditorWindow
         foreach (var guid in manifestGuids)
         {
             var manifestAssetPath = AssetDatabase.GUIDToAssetPath(guid);
-            var loaded = AssetDatabase.LoadAssetAtPath<ModManifestV2>(manifestAssetPath);
+            var sawUnityEventDeserializeException = false;
+            Application.LogCallback logCallback = (condition, stackTrace, type) =>
+            {
+                if (type == LogType.Exception && IsUnityEventDeserializeException(condition, stackTrace))
+                {
+                    sawUnityEventDeserializeException = true;
+                }
+            };
+
+            ModManifestV2 loaded = null;
+            Application.logMessageReceived += logCallback;
+            try
+            {
+                loaded = AssetDatabase.LoadAssetAtPath<ModManifestV2>(manifestAssetPath);
+            }
+            catch (Exception e)
+            {
+                if (manifestLoadDiagnosticPaths.Add(manifestAssetPath))
+                {
+                    UnityEngine.Debug.LogError($"[VoxModExporterV3] Failed to load manifest '{manifestAssetPath}': {e.Message}");
+                }
+            }
+            finally
+            {
+                Application.logMessageReceived -= logCallback;
+            }
+
+            if (sawUnityEventDeserializeException && manifestLoadDiagnosticPaths.Add(manifestAssetPath))
+            {
+                UnityEngine.Debug.LogError($"[VoxModExporterV3] UnityEvent deserialization failed while loading manifest '{manifestAssetPath}'. Check that manifest's prefab/icon references for broken or version-mismatched UnityEvent data.");
+            }
+
             if (loaded != null)
             {
                 manifest = loaded;
@@ -626,6 +927,37 @@ public class VoxModExporterWindowV3 : EditorWindow
         }
 
         return false;
+    }
+
+    private bool TryGetManifest(string modFolderPath, out ModManifestV2 manifest)
+    {
+        manifest = null;
+        modFolderPath = modFolderPath?.Replace("\\", "/");
+        if (string.IsNullOrWhiteSpace(modFolderPath))
+        {
+            return false;
+        }
+
+        if (manifestCache.TryGetValue(modFolderPath, out manifest) && manifest != null)
+        {
+            return true;
+        }
+
+        if (!TryLoadManifest(modFolderPath, out manifest))
+        {
+            return false;
+        }
+
+        manifestCache[modFolderPath] = manifest;
+        return true;
+    }
+
+    private static bool IsUnityEventDeserializeException(string condition, string stackTrace)
+    {
+        return !string.IsNullOrEmpty(condition)
+            && condition.Contains("NullReferenceException")
+            && !string.IsNullOrEmpty(stackTrace)
+            && stackTrace.Contains("UnityEventBase.DirtyPersistentCalls");
     }
 
     private List<GameObject> CollectPrefabReferences(ModManifestV2 manifest)
@@ -662,9 +994,23 @@ public class VoxModExporterWindowV3 : EditorWindow
         return prefabs;
     }
 
-    private bool SerializePrefabToJson(GameObject prefab, string outputPath, string modPath)
+    private bool SerializePrefabToJson(GameObject prefab, string outputPath, string modPath, out string errorMessage)
     {
-        if (prefab == null || string.IsNullOrEmpty(outputPath))
+        errorMessage = string.Empty;
+
+        if (prefab == null)
+        {
+            errorMessage = "Prefab cannot be null.";
+            return false;
+        }
+
+        if (string.IsNullOrEmpty(outputPath))
+        {
+            errorMessage = "Prefab output path cannot be empty.";
+            return false;
+        }
+
+        if (!TryValidateReadableMeshes(prefab, out errorMessage))
         {
             return false;
         }
@@ -673,13 +1019,111 @@ public class VoxModExporterWindowV3 : EditorWindow
         {
             // Use JsonPrefabSerializer from VoxelPlayground.Mod.Serialization for full prefab serialization
             var serializationContext = new SerializationContext(modPath);
-            return JsonPrefabSerializer.Serialize(prefab, outputPath, serializationContext);
+            if (!JsonPrefabSerializer.Serialize(prefab, outputPath, serializationContext))
+            {
+                errorMessage = "JsonPrefabSerializer returned false.";
+                return false;
+            }
+
+            return true;
         }
         catch (Exception e)
         {
             UnityEngine.Debug.LogError($"[VoxModExporterV3] Failed to serialize prefab '{prefab.name}': {e.Message}");
+            errorMessage = e.Message;
             return false;
         }
+    }
+
+    private static bool TryValidateReadableMeshes(GameObject prefab, out string errorMessage)
+    {
+        errorMessage = string.Empty;
+        if (prefab == null)
+        {
+            return true;
+        }
+
+        var errors = new List<string>();
+
+        foreach (var meshFilter in prefab.GetComponentsInChildren<MeshFilter>(true))
+        {
+            AddUnreadableMeshError(prefab, meshFilter, meshFilter.sharedMesh, nameof(MeshFilter), errors);
+        }
+
+        foreach (var skinnedMeshRenderer in prefab.GetComponentsInChildren<SkinnedMeshRenderer>(true))
+        {
+            AddUnreadableMeshError(prefab, skinnedMeshRenderer, skinnedMeshRenderer.sharedMesh, nameof(SkinnedMeshRenderer), errors);
+        }
+
+        foreach (var particleRenderer in prefab.GetComponentsInChildren<ParticleSystemRenderer>(true))
+        {
+            AddUnreadableMeshError(prefab, particleRenderer, particleRenderer.mesh, nameof(ParticleSystemRenderer), errors);
+        }
+
+        if (errors.Count == 0)
+        {
+            return true;
+        }
+
+        const int maxShownErrors = 5;
+        var shownErrors = errors.Take(maxShownErrors).ToList();
+        var remainingCount = errors.Count - shownErrors.Count;
+        errorMessage = "Unreadable mesh assets must have Read/Write enabled before export: " + string.Join("; ", shownErrors);
+        if (remainingCount > 0)
+        {
+            errorMessage += $"; plus {remainingCount} more.";
+        }
+
+        return false;
+    }
+
+    private static void AddUnreadableMeshError(
+        GameObject prefab,
+        Component component,
+        Mesh mesh,
+        string componentTypeName,
+        List<string> errors)
+    {
+        if (mesh == null || mesh.isReadable)
+        {
+            return;
+        }
+
+        var componentPath = GetTransformPath(prefab.transform, component.transform);
+        var assetPath = AssetDatabase.GetAssetPath(mesh);
+        var assetHint = string.IsNullOrEmpty(assetPath)
+            ? "the mesh asset"
+            : $"'{assetPath}'";
+
+        errors.Add($"Mesh '{mesh.name}' used by {componentTypeName} at '{componentPath}' is not readable. Enable Read/Write on {assetHint}");
+    }
+
+    private static string GetTransformPath(Transform root, Transform target)
+    {
+        if (target == null)
+        {
+            return string.Empty;
+        }
+
+        if (root == null)
+        {
+            return target.name;
+        }
+
+        var parts = new Stack<string>();
+        var current = target;
+        while (current != null)
+        {
+            parts.Push(current.name);
+            if (current == root)
+            {
+                break;
+            }
+
+            current = current.parent;
+        }
+
+        return string.Join("/", parts.ToArray());
     }
 
     private void ExportIcons(ModManifestV2 manifest, string exportFolderPath)
@@ -1237,7 +1681,7 @@ public class VoxModExporterWindowV3 : EditorWindow
 
         foreach (var modAssetPath in selectedFolders)
         {
-            if (!TryLoadManifest(modAssetPath, out var manifest))
+            if (!TryGetManifest(modAssetPath, out var manifest))
             {
                 failCount++;
                 errors.Add($"{modAssetPath}: No ModManifestV2 found");
@@ -1312,7 +1756,7 @@ public class VoxModExporterWindowV3 : EditorWindow
 
         foreach (var modAssetPath in selectedFolders)
         {
-            if (!TryLoadManifest(modAssetPath, out var manifest))
+            if (!TryGetManifest(modAssetPath, out var manifest))
             {
                 preflightFailCount++;
                 errors.Add($"{modAssetPath}: No ModManifestV2 found");

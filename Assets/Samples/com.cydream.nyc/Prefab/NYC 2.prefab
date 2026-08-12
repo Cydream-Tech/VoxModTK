@@ -260,7 +260,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &1436387539995918730
@@ -294,12 +294,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -510,7 +514,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &3216681841208163172
@@ -544,12 +548,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -628,7 +636,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &703815677867669605
@@ -662,12 +670,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -746,7 +758,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &4798219041115440523
@@ -780,12 +792,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -864,7 +880,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &7519047880242499584
@@ -898,12 +914,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -1048,7 +1068,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &3517211962913905091
@@ -1082,12 +1102,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -1166,7 +1190,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &1088941692764320969
@@ -1200,12 +1224,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -1284,7 +1312,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &305093170701317274
@@ -1318,12 +1346,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -1534,7 +1566,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &5926977322318646155
@@ -1568,12 +1600,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -1686,12 +1722,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -1902,7 +1942,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &6285847155909079200
@@ -1936,12 +1976,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -2020,7 +2064,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &5275280446785296674
@@ -2054,12 +2098,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -2138,7 +2186,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &7490637923779551739
@@ -2172,12 +2220,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -2419,7 +2471,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &7277864388164767380
@@ -2453,12 +2505,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -2669,7 +2725,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &3927575939211146008
@@ -2703,12 +2759,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -2853,7 +2913,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &9186100678368288535
@@ -2887,12 +2947,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -3169,7 +3233,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &5341340803239214437
@@ -3203,12 +3267,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -3287,7 +3355,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &9111358149177464570
@@ -3321,12 +3389,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -3657,7 +3729,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &3155984514653244513
@@ -3691,12 +3763,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -3775,7 +3851,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &8453577927212677662
@@ -3809,12 +3885,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -3959,7 +4039,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &1310323779780245410
@@ -3993,12 +4073,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -4504,7 +4588,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &7500045384036187890
@@ -4538,12 +4622,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -4622,7 +4710,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &526198396612038038
@@ -4656,12 +4744,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -4938,7 +5030,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &5520086309973908801
@@ -4972,12 +5064,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -5056,7 +5152,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &4455432388075099168
@@ -5090,12 +5186,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -5174,7 +5274,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &3094542353230394293
@@ -5208,12 +5308,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -5292,7 +5396,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &6031507248954394318
@@ -5326,12 +5430,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -5476,7 +5584,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &745373017569075242
@@ -5510,12 +5618,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -5625,7 +5737,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &6946367326277360536
@@ -5659,12 +5771,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -5732,16 +5848,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainVoxelData: {fileID: 0}
+  mainVoxelDataGroupTransform: {fileID: 0}
   associatedVoxelDataTrans: {fileID: 0}
-  spawnPoint: {fileID: 3041623222817401631}
   voxelizeCenterTransform: {fileID: 0}
+  voxelizeCenterHorizontalPadding: {x: 0, y: 0}
   defaultViewType: 0
   defaultAvatarId: 
   spawner: {fileID: 0}
+  spawnPoint: {fileID: 3041623222817401631}
   StartTime: 12
   enablePortals: 0
   sceneConfigsContainer: {fileID: 0}
-  autoSwitchActiveStateOfAssociatedObject: 1
 --- !u!114 &8261792863954011003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5850,7 +5967,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &467778762555676805
@@ -5884,12 +6001,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -5968,7 +6089,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &944359468970776030
@@ -6002,12 +6123,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -6086,7 +6211,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &2038057433563183344
@@ -6120,12 +6245,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -6204,7 +6333,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &8534252530768141596
@@ -6238,12 +6367,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -6322,7 +6455,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &6711806416600267567
@@ -6356,12 +6489,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -6537,7 +6674,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &6051171959103469700
@@ -6571,12 +6708,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -6655,7 +6796,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &9112384785363075182
@@ -6689,12 +6830,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -6839,7 +6984,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &7576035690707851704
@@ -6873,12 +7018,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -6988,7 +7137,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &9162129217640373096
@@ -7022,12 +7171,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -7140,12 +7293,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -7224,7 +7381,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &3034353990096824037
@@ -7258,12 +7415,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -7342,7 +7503,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &2214030529416314751
@@ -7376,12 +7537,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -7689,7 +7854,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &4755040721221921144
@@ -7723,12 +7888,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -7807,7 +7976,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &1979216198662195864
@@ -7841,12 +8010,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -8154,7 +8327,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &4054416981718159248
@@ -8188,12 +8361,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -8501,7 +8678,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &2376792926907728307
@@ -8535,12 +8712,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -8653,12 +8834,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -8737,7 +8922,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &5674424343685231640
@@ -8771,12 +8956,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -9087,12 +9276,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -9171,7 +9364,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &6453335829118253813
@@ -9205,12 +9398,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -9355,7 +9552,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &3446817527789277502
@@ -9389,12 +9586,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -9636,7 +9837,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &1183410907336043004
@@ -9670,12 +9871,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -9872,12 +10077,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -10021,12 +10230,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -10105,7 +10318,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &7088483801937666773
@@ -10139,12 +10352,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -10223,7 +10440,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &861167141160774227
@@ -10257,12 +10474,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -10407,7 +10628,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &6219732470980363795
@@ -10441,12 +10662,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -10657,7 +10882,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &9125659568554202471
@@ -10691,12 +10916,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -10841,7 +11070,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &9058722573837374844
@@ -10875,12 +11104,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -10959,7 +11192,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &1727733417160178348
@@ -10993,12 +11226,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -11275,7 +11512,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &4244201321921136689
@@ -11309,12 +11546,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -11591,7 +11832,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &7055576284407752967
@@ -11625,12 +11866,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -11806,7 +12051,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &2845780153677313141
@@ -11840,12 +12085,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -11924,7 +12173,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &8146938512973071040
@@ -11958,12 +12207,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -12042,7 +12295,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &6343499730090109703
@@ -12076,12 +12329,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -12781,7 +13038,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &3314574240110941510
@@ -12815,12 +13072,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -13315,7 +13576,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &7400896215038882022
@@ -13349,12 +13610,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -13433,7 +13698,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &5392411450575351217
@@ -13467,12 +13732,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -13551,7 +13820,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &3875127139478827504
@@ -13585,12 +13854,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -13700,7 +13973,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &6211743845051542359
@@ -13734,12 +14007,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -13950,7 +14227,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &8503537603393091451
@@ -13984,12 +14261,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -14068,7 +14349,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &4137658182843593863
@@ -14102,12 +14383,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -14186,7 +14471,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &8247461025675810640
@@ -14220,12 +14505,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -14304,7 +14593,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &334737609113103491
@@ -14338,12 +14627,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -14422,7 +14715,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &2167737413411047694
@@ -14456,12 +14749,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -14804,7 +15101,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &7148865407570766111
@@ -14838,12 +15135,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -14922,7 +15223,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &7854489320785671562
@@ -14956,12 +15257,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -15172,7 +15477,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &8764514679341104127
@@ -15206,12 +15511,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -15487,12 +15796,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -15769,7 +16082,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &2091423088478637227
@@ -15803,12 +16116,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -15887,7 +16204,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &220710792504191848
@@ -15921,12 +16238,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -16036,7 +16357,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &8541081162946337123
@@ -16070,12 +16391,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -16154,7 +16479,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &5312706550286101312
@@ -16188,12 +16513,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -16272,7 +16601,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &8102980449153822616
@@ -16306,12 +16635,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -16456,7 +16789,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &5926994221348170400
@@ -16490,12 +16823,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -16640,7 +16977,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &9142320924105902111
@@ -16674,12 +17011,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -16758,7 +17099,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &7988564129607317464
@@ -16792,12 +17133,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -17077,7 +17422,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &1049059564493856486
@@ -17111,12 +17456,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -17195,7 +17544,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &1823916537722846339
@@ -17229,12 +17578,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -17379,7 +17732,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &7765612335195844568
@@ -17413,12 +17766,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -17563,7 +17920,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &9009390520464136676
@@ -17597,12 +17954,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -17747,7 +18108,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &5322611399277546031
@@ -17781,12 +18142,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -17899,12 +18264,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -18017,12 +18386,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -18167,7 +18540,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &7370428303867679404
@@ -18201,12 +18574,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9
@@ -18448,7 +18825,7 @@ MonoBehaviour:
   m_Script: {fileID: -10093975, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mass: 1000
+  mass: 50000
   useGravity: 1
   isKinematic: 0
 --- !u!114 &3084809842243271576
@@ -18482,12 +18859,16 @@ MonoBehaviour:
       jointData: {fileID: 0}
       jointlimitCount: 0
   jointData: {fileID: 0}
+  showAttachmentConnectionGizmos: 0
+  showAttachmentPointGizmos: 0
+  attachmentConnectionGizmoScale: 0.15
   useDirectAttach: 0
   freeAttachLayer:
     serializedVersion: 2
     m_Bits: 0
   needCheckConnected: 1
   gripPose: 2
+  allowGripStealFromNPC: 0
   buildingTag: 0
   maxDurability: 20
   durabilityDamageRelVelThreshold: 9

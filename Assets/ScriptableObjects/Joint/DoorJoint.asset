@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -2144360946, guid: b3c590d4f1db7254ea39fb77f44f6f00, type: 3}
+  m_Name: DoorJoint
+  m_EditorClassIdentifier: 
+  jointType: 2
+  axis: {x: 0, y: 1, z: 0}
+  secondaryAxis: {x: 0, y: 1, z: 0}
+  xMotion: 0
+  yMotion: 0
+  zMotion: 0
+  angularXMotion: 0
+  angularYMotion: 0
+  angularZMotion: 0
+  linearLimit_limit: 0
+  lowAngularXLimit_limit: 0
+  lowAngularXLimit_bounciness: 0
+  lowAngularXLimit_contactDistance: 0
+  highAngularXLimit_limit: 0
+  highAngularXLimit_bounciness: 0
+  highAngularXLimit_contactDistance: 0
+  angularYLimit_limit: 0
+  angularYLimit_bounciness: 0
+  angularYLimit_contactDistance: 0
+  angularZLimit_limit: 0
+  angularZLimit_bounciness: 0
+  angularZLimit_contactDistance: 0
+  angularXLimitSpring_spring: 0
+  angularXLimitSpring_damper: 0
+  angularYZLimitSpring_spring: 0
+  angularYZLimitSpring_damper: 0
+  targetPosition: {x: 0, y: 0, z: 0}
+  targetRotation: {x: 0, y: 0, z: 0, w: 1}
+  positionSpring: 10
+  positionDamper: 5
+  maximumForce: 0
+  slerpPositionSpring: 0
+  selrpPositionDamper: 0
+  selpMaximumForce: 0
+  slerpDriveUseAcceleration: 0
+  angularXDrivePositionSpring: 0
+  angularXDrivePositionDamper: 0
+  angularXDriveMaximumForce: 0
+  angularXDriveUseAcceleration: 0
+  angularYZDrivePositionSpring: 0
+  angularYZDrivePositionDamper: 0
+  angularYZDriveMaximumForce: 0
+  angularYZDriveUseAcceleration: 0
+  targetAngularVelocity: {x: 0, y: 0, z: 0}
+  breakForce: 1e+9
+  breakTorque: 1e+9
+  rotationDriveMode: 0
+  projectionMode: 0
+  projectionDistance: 0.1
+  projectionAngle: 20
+  massScale: 1
+  connectedMassScale: 1
+  enablePreprocessing: 1
+  enableCollision: 0
+  useSpring: 1
+  useLimit: 1
+  minAngle: -180
+  maxAngle: 50
+  swapBodies: 0
+  angularDriveDataMigrated: 1

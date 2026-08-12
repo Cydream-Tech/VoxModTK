@@ -16,7 +16,9 @@ public class VoxelVolumeEditor : Editor
             foreach (var target in targets)
             {
                 VoxelVolume cmbc = (VoxelVolume)target;
+                EditorVoxelPreviewMaterialUtility.DestroyPreviewMeshes(cmbc.transform);
                 SimpleMeshCreator.CreateEditorMesh(cmbc);
+                EditorVoxelPreviewMaterialUtility.Apply(cmbc.transform);
             }
         }
     }

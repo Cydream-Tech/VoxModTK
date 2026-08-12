@@ -36,7 +36,7 @@ public class ItemsPreviewWindow : EditorWindow
     private Dictionary<string, List<ItemData>> categorizedItems = new Dictionary<string, List<ItemData>>();
     private Dictionary<string, bool> categoryFoldouts = new Dictionary<string, bool>();
 
-    [MenuItem("Vox Mod Tools/Builtin Entities Preview")]
+    [MenuItem("Vox Mod Tools/Builtin Entities Preview", priority = 102)]
     public static void ShowWindow()
     {
         ItemsPreviewWindow window = GetWindow<ItemsPreviewWindow>("Builtin Entities Preview");
@@ -254,6 +254,7 @@ public class ItemsPreviewWindow : EditorWindow
         proxy.type = item.type;
 
         SimpleMeshCreator.CreateEditorMesh(proxy);
+        EditorVoxelPreviewMaterialUtility.Apply(newObject.transform);
         
         // Position it at the scene view camera position or at origin
         SceneView sceneView = SceneView.lastActiveSceneView;

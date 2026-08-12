@@ -4309,6 +4309,1033 @@
         */
         enum ConfigurableJointMotion
         { Locked = 0, Limited = 1, Free = 2 }
+        /** The animation component is used to play back animations.
+        */
+        class Animation extends UnityEngine.Behaviour implements System.Collections.IEnumerable
+        {
+            protected [__keep_incompatibility]: never;
+            /** The default animation.
+            */
+            public get clip(): UnityEngine.AnimationClip;
+            public set clip(value: UnityEngine.AnimationClip);
+            /** Should the default animation clip (the Animation.clip property) automatically start playing on startup?
+            */
+            public get playAutomatically(): boolean;
+            public set playAutomatically(value: boolean);
+            /** How should time beyond the playback range of the clip be treated?
+            */
+            public get wrapMode(): UnityEngine.WrapMode;
+            public set wrapMode(value: UnityEngine.WrapMode);
+            /** Is an animation currently being played?
+            */
+            public get isPlaying(): boolean;
+            /** When enabled, the physics system uses animated transforms from GameObjects with kinematic Rigidbody components to influence other GameObjects.
+            */
+            public get animatePhysics(): boolean;
+            public set animatePhysics(value: boolean);
+            /** Specifies the update mode of the Animation.
+            */
+            public get updateMode(): UnityEngine.AnimationUpdateMode;
+            public set updateMode(value: UnityEngine.AnimationUpdateMode);
+            /** Controls culling of this Animation component.
+            */
+            public get cullingType(): UnityEngine.AnimationCullingType;
+            public set cullingType(value: UnityEngine.AnimationCullingType);
+            /** AABB of this Animation animation component in local space.
+            */
+            public get localBounds(): UnityEngine.Bounds;
+            public set localBounds(value: UnityEngine.Bounds);
+            /** Stops all playing animations that were started with this Animation.
+            */
+            public Stop () : void
+            /** Stops an animation named name.
+            */
+            public Stop ($name: string) : void
+            /** Rewinds all animations.
+            */
+            public Rewind () : void
+            /** Rewinds the animation named name.
+            */
+            public Rewind ($name: string) : void
+            /** Samples animations at the current state.
+            */
+            public Sample () : void
+            /** Is the animation named name playing?
+            */
+            public IsPlaying ($name: string) : boolean
+            public get_Item ($name: string) : UnityEngine.AnimationState
+            public Play () : boolean
+            /** Plays an animation without blending.
+            * @returns If no name is supplied and there is no default animation, then this method returns false. Otherwise, it returns true. 
+            */
+            public Play ($mode: UnityEngine.PlayMode) : boolean
+            /** Plays an animation without blending.
+            * @returns If no name is supplied and there is no default animation, then this method returns false. Otherwise, it returns true. 
+            */
+            public Play ($animation: string) : boolean
+            /** Plays an animation without blending.
+            * @returns If no name is supplied and there is no default animation, then this method returns false. Otherwise, it returns true. 
+            */
+            public Play ($animation: string, $mode: UnityEngine.PlayMode) : boolean
+            /** Fades in the animation with the name animation over a period of time defined by fadeLength.
+            */
+            public CrossFade ($animation: string) : void
+            /** Fades in the animation with the name animation over a period of time defined by fadeLength.
+            */
+            public CrossFade ($animation: string, $fadeLength: number) : void
+            /** Fades in the animation with the name animation over a period of time defined by fadeLength.
+            */
+            public CrossFade ($animation: string, $fadeLength: number, $mode: UnityEngine.PlayMode) : void
+            /** Blends the animation named animation towards targetWeight over the next time seconds.
+            */
+            public Blend ($animation: string) : void
+            /** Blends the animation named animation towards targetWeight over the next time seconds.
+            */
+            public Blend ($animation: string, $targetWeight: number) : void
+            /** Blends the animation named animation towards targetWeight over the next time seconds.
+            */
+            public Blend ($animation: string, $targetWeight: number, $fadeLength: number) : void
+            /** Cross fades an animation after previous animations has finished playing.
+            */
+            public CrossFadeQueued ($animation: string) : UnityEngine.AnimationState
+            /** Cross fades an animation after previous animations has finished playing.
+            */
+            public CrossFadeQueued ($animation: string, $fadeLength: number) : UnityEngine.AnimationState
+            /** Cross fades an animation after previous animations has finished playing.
+            */
+            public CrossFadeQueued ($animation: string, $fadeLength: number, $queue: UnityEngine.QueueMode) : UnityEngine.AnimationState
+            /** Cross fades an animation after previous animations has finished playing.
+            */
+            public CrossFadeQueued ($animation: string, $fadeLength: number, $queue: UnityEngine.QueueMode, $mode: UnityEngine.PlayMode) : UnityEngine.AnimationState
+            /** Plays an animation after previous animations has finished playing.
+            */
+            public PlayQueued ($animation: string) : UnityEngine.AnimationState
+            /** Plays an animation after previous animations has finished playing.
+            */
+            public PlayQueued ($animation: string, $queue: UnityEngine.QueueMode) : UnityEngine.AnimationState
+            /** Plays an animation after previous animations has finished playing.
+            */
+            public PlayQueued ($animation: string, $queue: UnityEngine.QueueMode, $mode: UnityEngine.PlayMode) : UnityEngine.AnimationState
+            /** Adds a clip to the animation with name newName.
+            */
+            public AddClip ($clip: UnityEngine.AnimationClip, $newName: string) : void
+            /** Adds clip to the only play between firstFrame and lastFrame. The new clip will also be added to the animation with name newName.
+            * @param $addLoopFrame Should an extra frame be inserted at the end that matches the first frame? Turn this on if you are making a looping animation.
+            */
+            public AddClip ($clip: UnityEngine.AnimationClip, $newName: string, $firstFrame: number, $lastFrame: number) : void
+            /** Adds clip to the only play between firstFrame and lastFrame. The new clip will also be added to the animation with name newName.
+            * @param $addLoopFrame Should an extra frame be inserted at the end that matches the first frame? Turn this on if you are making a looping animation.
+            */
+            public AddClip ($clip: UnityEngine.AnimationClip, $newName: string, $firstFrame: number, $lastFrame: number, $addLoopFrame: boolean) : void
+            /** Remove clip from the animation list.
+            */
+            public RemoveClip ($clip: UnityEngine.AnimationClip) : void
+            /** Remove clip from the animation list.
+            */
+            public RemoveClip ($clipName: string) : void
+            /** Get the number of clips currently assigned to this animation.
+            */
+            public GetClipCount () : number
+            public SyncLayer ($layer: number) : void
+            public GetEnumerator () : System.Collections.IEnumerator
+            public GetClip ($name: string) : UnityEngine.AnimationClip
+            public constructor ()
+        }
+        /** Base class for AnimationClips and BlendTrees.
+        */
+        class Motion extends UnityEngine.Object
+        {
+            protected [__keep_incompatibility]: never;
+        }
+        /** Stores keyframe based animations.
+        */
+        class AnimationClip extends UnityEngine.Motion
+        {
+            protected [__keep_incompatibility]: never;
+            /** Animation length in seconds. (Read Only)
+            */
+            public get length(): number;
+            /** Frame rate at which keyframes are sampled. (Read Only)
+            */
+            public get frameRate(): number;
+            public set frameRate(value: number);
+            /** Sets the default wrap mode used in the animation state.
+            */
+            public get wrapMode(): UnityEngine.WrapMode;
+            public set wrapMode(value: UnityEngine.WrapMode);
+            /** AABB of this Animation Clip in local space of Animation component that it is attached too.
+            */
+            public get localBounds(): UnityEngine.Bounds;
+            public set localBounds(value: UnityEngine.Bounds);
+            /** Set to true if the AnimationClip will be used with the Legacy Animation component ( instead of the Animator ).
+            */
+            public get legacy(): boolean;
+            public set legacy(value: boolean);
+            /** Returns true if the animation contains curve that drives a humanoid rig.
+            */
+            public get humanMotion(): boolean;
+            /** Returns true if the animation clip has no curves and no events.
+            */
+            public get empty(): boolean;
+            /** Returns true if the Animation has animation on the root transform.
+            */
+            public get hasGenericRootTransform(): boolean;
+            /** Returns true if the AnimationClip has editor curves for its root motion.
+            */
+            public get hasMotionFloatCurves(): boolean;
+            /** Returns true if the AnimationClip has root motion curves.
+            */
+            public get hasMotionCurves(): boolean;
+            /** Returns true if the AnimationClip has root Curves.
+            */
+            public get hasRootCurves(): boolean;
+            /** Animation Events for this animation clip.
+            */
+            public get events(): System.Array$1<UnityEngine.AnimationEvent>;
+            public set events(value: System.Array$1<UnityEngine.AnimationEvent>);
+            /** Samples an animation at a given time for any animated properties.
+            * @param $go The animated game object.
+            * @param $time The time to sample an animation.
+            */
+            public SampleAnimation ($go: UnityEngine.GameObject, $time: number) : void
+            /** Assigns the curve to animate a specific property.
+            * @param $relativePath Path to the game object this curve applies to. The relativePath
+            is formatted similar to a pathname, e.g. "rootspineleftArm".  If relativePath
+            is empty it refers to the game object the animation clip is attached to.
+            * @param $type The class type of the component that is animated.
+            * @param $propertyName The name or path to the property being animated.
+            * @param $curve The animation curve.
+            */
+            public SetCurve ($relativePath: string, $type: System.Type, $propertyName: string, $curve: UnityEngine.AnimationCurve) : void
+            /** Realigns quaternion keys to ensure shortest interpolation paths.
+            */
+            public EnsureQuaternionContinuity () : void
+            /** Clears all curves from the clip.
+            */
+            public ClearCurves () : void
+            /** Adds an animation event to the clip.
+            * @param $evt AnimationEvent to add.
+            */
+            public AddEvent ($evt: UnityEngine.AnimationEvent) : void
+            public constructor ()
+        }
+        class TrackedReference extends System.Object
+        {
+            protected [__keep_incompatibility]: never;
+        }
+        /** The AnimationState gives full control over animation blending.
+        */
+        class AnimationState extends UnityEngine.TrackedReference
+        {
+            protected [__keep_incompatibility]: never;
+            /** Enables / disables the animation.
+            */
+            public get enabled(): boolean;
+            public set enabled(value: boolean);
+            /** The weight of animation.
+            */
+            public get weight(): number;
+            public set weight(value: number);
+            /** Wrapping mode of the animation.
+            */
+            public get wrapMode(): UnityEngine.WrapMode;
+            public set wrapMode(value: UnityEngine.WrapMode);
+            /** The current time of the animation.
+            */
+            public get time(): number;
+            public set time(value: number);
+            /** Normalized time of the State.
+            */
+            public get normalizedTime(): number;
+            public set normalizedTime(value: number);
+            /** The playback speed of the animation. 1 is normal playback speed.
+            */
+            public get speed(): number;
+            public set speed(value: number);
+            /** The normalized playback speed.
+            */
+            public get normalizedSpeed(): number;
+            public set normalizedSpeed(value: number);
+            /** The length of the animation clip in seconds.
+            */
+            public get length(): number;
+            public get layer(): number;
+            public set layer(value: number);
+            /** The clip that is being played by this animation state.
+            */
+            public get clip(): UnityEngine.AnimationClip;
+            /** The name of the animation.
+            */
+            public get name(): string;
+            public set name(value: string);
+            /** Which blend mode should be used?
+            */
+            public get blendMode(): UnityEngine.AnimationBlendMode;
+            public set blendMode(value: UnityEngine.AnimationBlendMode);
+            /** Adds a transform which should be animated. This allows you to reduce the number of animations you have to create.
+            * @param $mix The transform to animate.
+            * @param $recursive Whether to also animate all children of the specified transform.
+            */
+            public AddMixingTransform ($mix: UnityEngine.Transform) : void
+            /** Adds a transform which should be animated. This allows you to reduce the number of animations you have to create.
+            * @param $mix The transform to animate.
+            * @param $recursive Whether to also animate all children of the specified transform.
+            */
+            public AddMixingTransform ($mix: UnityEngine.Transform, $recursive: boolean) : void
+            /** Removes a transform which should be animated.
+            */
+            public RemoveMixingTransform ($mix: UnityEngine.Transform) : void
+            public constructor ()
+        }
+        /** Used by Animation.Play function.
+        */
+        enum PlayMode
+        { StopSameLayer = 0, StopAll = 4 }
+        /** Used by Animation.Play function.
+        */
+        enum QueueMode
+        { CompleteOthers = 0, PlayNow = 2 }
+        enum AnimationPlayMode
+        { Stop = 0, Queue = 1, Mix = 2 }
+        /** The update mode of the Animation component.
+        */
+        enum AnimationUpdateMode
+        { Normal = 0, Fixed = 1 }
+        /** This enum controlls culling of Animation component.
+        */
+        enum AnimationCullingType
+        { AlwaysAnimate = 0, BasedOnRenderers = 1, BasedOnClipBounds = 2, BasedOnUserBounds = 3 }
+        /** Used by Animation.Play function.
+        */
+        enum AnimationBlendMode
+        { Blend = 0, Additive = 1 }
+        /** AnimationEvent lets you call a script function similar to SendMessage as part of playing back an animation.
+        */
+        class AnimationEvent extends System.Object
+        {
+            protected [__keep_incompatibility]: never;
+        }
+        /** Interface to control the Mecanim animation system.
+        */
+        class Animator extends UnityEngine.Behaviour
+        {
+            protected [__keep_incompatibility]: never;
+            /** Returns true if the current rig is optimizable with AnimatorUtility.OptimizeTransformHierarchy.
+            */
+            public get isOptimizable(): boolean;
+            /** Returns true if the current rig is humanoid, false if it is generic.
+            */
+            public get isHuman(): boolean;
+            /** Returns true if the current rig has root motion.
+            */
+            public get hasRootMotion(): boolean;
+            /** Returns the scale of the current Avatar for a humanoid rig, (1 by default if the rig is generic).
+            */
+            public get humanScale(): number;
+            /** Returns whether the animator is initialized successfully.
+            */
+            public get isInitialized(): boolean;
+            /** Gets the avatar delta position for the last evaluated frame.
+            */
+            public get deltaPosition(): UnityEngine.Vector3;
+            /** Gets the avatar delta rotation for the last evaluated frame.
+            */
+            public get deltaRotation(): UnityEngine.Quaternion;
+            /** Gets the avatar velocity  for the last evaluated frame.
+            */
+            public get velocity(): UnityEngine.Vector3;
+            /** Gets the avatar angular velocity for the last evaluated frame.
+            */
+            public get angularVelocity(): UnityEngine.Vector3;
+            /** The root position, the position of the game object.
+            */
+            public get rootPosition(): UnityEngine.Vector3;
+            public set rootPosition(value: UnityEngine.Vector3);
+            /** The root rotation, the rotation of the game object.
+            */
+            public get rootRotation(): UnityEngine.Quaternion;
+            public set rootRotation(value: UnityEngine.Quaternion);
+            /** Should root motion be applied?
+            */
+            public get applyRootMotion(): boolean;
+            public set applyRootMotion(value: boolean);
+            /** When enabled, the physics system uses animated transforms from GameObjects with kinematic Rigidbody components to influence other GameObjects.
+            */
+            public get animatePhysics(): boolean;
+            public set animatePhysics(value: boolean);
+            /** Specifies the update mode of the Animator.
+            */
+            public get updateMode(): UnityEngine.AnimatorUpdateMode;
+            public set updateMode(value: UnityEngine.AnimatorUpdateMode);
+            /** Returns true if the object has a transform hierarchy.
+            */
+            public get hasTransformHierarchy(): boolean;
+            /** The current gravity weight based on current animations that are played.
+            */
+            public get gravityWeight(): number;
+            /** The position of the body center of mass.
+            */
+            public get bodyPosition(): UnityEngine.Vector3;
+            public set bodyPosition(value: UnityEngine.Vector3);
+            /** The rotation of the body center of mass.
+            */
+            public get bodyRotation(): UnityEngine.Quaternion;
+            public set bodyRotation(value: UnityEngine.Quaternion);
+            /** Automatic stabilization of feet during transition and blending.
+            */
+            public get stabilizeFeet(): boolean;
+            public set stabilizeFeet(value: boolean);
+            /** Returns the number of layers in the controller.
+            */
+            public get layerCount(): number;
+            /** The AnimatorControllerParameter list used by the animator. (Read Only)
+            */
+            public get parameters(): System.Array$1<UnityEngine.AnimatorControllerParameter>;
+            /** Returns the number of parameters in the controller.
+            */
+            public get parameterCount(): number;
+            /** Blends pivot point between body center of mass and feet pivot.
+            */
+            public get feetPivotActive(): number;
+            public set feetPivotActive(value: number);
+            /** Gets the pivot weight.
+            */
+            public get pivotWeight(): number;
+            /** Get the current position of the pivot.
+            */
+            public get pivotPosition(): UnityEngine.Vector3;
+            /** If automatic matching is active.
+            */
+            public get isMatchingTarget(): boolean;
+            /** The playback speed of the Animator. 1 is normal playback speed.
+            */
+            public get speed(): number;
+            public set speed(value: number);
+            /** Returns the position of the target specified by SetTarget.
+            */
+            public get targetPosition(): UnityEngine.Vector3;
+            /** Returns the rotation of the target specified by SetTarget.
+            */
+            public get targetRotation(): UnityEngine.Quaternion;
+            /** Returns the Avatar root Transform.
+            */
+            public get avatarRoot(): UnityEngine.Transform;
+            /** Controls culling of this Animator component.
+            */
+            public get cullingMode(): UnityEngine.AnimatorCullingMode;
+            public set cullingMode(value: UnityEngine.AnimatorCullingMode);
+            /** Sets the playback position in the recording buffer.
+            */
+            public get playbackTime(): number;
+            public set playbackTime(value: number);
+            /** Start time of the first frame of the buffer relative to the frame at which StartRecording was called.
+            */
+            public get recorderStartTime(): number;
+            public set recorderStartTime(value: number);
+            /** End time of the recorded clip relative to when StartRecording was called.
+            */
+            public get recorderStopTime(): number;
+            public set recorderStopTime(value: number);
+            /** Gets the mode of the Animator recorder.
+            */
+            public get recorderMode(): UnityEngine.AnimatorRecorderMode;
+            /** The runtime representation of AnimatorController that controls the Animator.
+            */
+            public get runtimeAnimatorController(): UnityEngine.RuntimeAnimatorController;
+            public set runtimeAnimatorController(value: UnityEngine.RuntimeAnimatorController);
+            /** Returns true if Animator has any playables assigned to it.
+            */
+            public get hasBoundPlayables(): boolean;
+            /** Gets/Sets the current Avatar.
+            */
+            public get avatar(): UnityEngine.Avatar;
+            public set avatar(value: UnityEngine.Avatar);
+            /** The PlayableGraph created by the Animator.
+            */
+            public get playableGraph(): UnityEngine.Playables.PlayableGraph;
+            /** Additional layers affects the center of mass.
+            */
+            public get layersAffectMassCenter(): boolean;
+            public set layersAffectMassCenter(value: boolean);
+            /** Get left foot bottom height.
+            */
+            public get leftFeetBottomHeight(): number;
+            /** Get right foot bottom height.
+            */
+            public get rightFeetBottomHeight(): number;
+            public get logWarnings(): boolean;
+            public set logWarnings(value: boolean);
+            /** Sets whether the Animator sends events of type AnimationEvent.
+            */
+            public get fireEvents(): boolean;
+            public set fireEvents(value: boolean);
+            /** Controls the behaviour of the Animator component when a GameObject is inactive.
+            */
+            public get keepAnimatorStateOnDisable(): boolean;
+            public set keepAnimatorStateOnDisable(value: boolean);
+            /** Specifies whether playable graph values are reset or preserved when the Animator is disabled.
+            */
+            public get writeDefaultValuesOnDisable(): boolean;
+            public set writeDefaultValuesOnDisable(value: boolean);
+            /** Returns the value of the given float parameter.
+            * @param $name The parameter name.
+            * @param $id The parameter ID.
+            * @returns The value of the parameter. 
+            */
+            public GetFloat ($name: string) : number
+            /** Returns the value of the given float parameter.
+            * @param $name The parameter name.
+            * @param $id The parameter ID.
+            * @returns The value of the parameter. 
+            */
+            public GetFloat ($id: number) : number
+            /** Send float values to the Animator to affect transitions.
+            * @param $name The parameter name.
+            * @param $id The parameter ID.
+            * @param $value The new parameter value.
+            * @param $dampTime The damper total time.
+            * @param $deltaTime The delta time to give to the damper.
+            */
+            public SetFloat ($name: string, $value: number) : void
+            /** Send float values to the Animator to affect transitions.
+            * @param $name The parameter name.
+            * @param $id The parameter ID.
+            * @param $value The new parameter value.
+            * @param $dampTime The damper total time.
+            * @param $deltaTime The delta time to give to the damper.
+            */
+            public SetFloat ($name: string, $value: number, $dampTime: number, $deltaTime: number) : void
+            /** Send float values to the Animator to affect transitions.
+            * @param $name The parameter name.
+            * @param $id The parameter ID.
+            * @param $value The new parameter value.
+            * @param $dampTime The damper total time.
+            * @param $deltaTime The delta time to give to the damper.
+            */
+            public SetFloat ($id: number, $value: number) : void
+            /** Send float values to the Animator to affect transitions.
+            * @param $name The parameter name.
+            * @param $id The parameter ID.
+            * @param $value The new parameter value.
+            * @param $dampTime The damper total time.
+            * @param $deltaTime The delta time to give to the damper.
+            */
+            public SetFloat ($id: number, $value: number, $dampTime: number, $deltaTime: number) : void
+            /** Returns the value of the given boolean parameter.
+            * @param $name The parameter name.
+            * @param $id The parameter ID.
+            * @returns The value of the parameter. 
+            */
+            public GetBool ($name: string) : boolean
+            /** Returns the value of the given boolean parameter.
+            * @param $name The parameter name.
+            * @param $id The parameter ID.
+            * @returns The value of the parameter. 
+            */
+            public GetBool ($id: number) : boolean
+            /** Sets the value of the given boolean parameter.
+            * @param $name The parameter name.
+            * @param $id The parameter ID.
+            * @param $value The new parameter value.
+            */
+            public SetBool ($name: string, $value: boolean) : void
+            /** Sets the value of the given boolean parameter.
+            * @param $name The parameter name.
+            * @param $id The parameter ID.
+            * @param $value The new parameter value.
+            */
+            public SetBool ($id: number, $value: boolean) : void
+            /** Returns the value of the given integer parameter.
+            * @param $name The parameter name.
+            * @param $id The parameter ID.
+            * @returns The value of the parameter. 
+            */
+            public GetInteger ($name: string) : number
+            /** Returns the value of the given integer parameter.
+            * @param $name The parameter name.
+            * @param $id The parameter ID.
+            * @returns The value of the parameter. 
+            */
+            public GetInteger ($id: number) : number
+            /** Sets the value of the given integer parameter.
+            * @param $name The parameter name.
+            * @param $id The parameter ID.
+            * @param $value The new parameter value.
+            */
+            public SetInteger ($name: string, $value: number) : void
+            /** Sets the value of the given integer parameter.
+            * @param $name The parameter name.
+            * @param $id The parameter ID.
+            * @param $value The new parameter value.
+            */
+            public SetInteger ($id: number, $value: number) : void
+            /** Sets the value of the given trigger parameter.
+            * @param $name The parameter name.
+            * @param $id The parameter ID.
+            */
+            public SetTrigger ($name: string) : void
+            /** Sets the value of the given trigger parameter.
+            * @param $name The parameter name.
+            * @param $id The parameter ID.
+            */
+            public SetTrigger ($id: number) : void
+            /** Resets the value of the given trigger parameter.
+            * @param $name The parameter name.
+            * @param $id The parameter ID.
+            */
+            public ResetTrigger ($name: string) : void
+            /** Resets the value of the given trigger parameter.
+            * @param $name The parameter name.
+            * @param $id The parameter ID.
+            */
+            public ResetTrigger ($id: number) : void
+            /** Returns true if the parameter is controlled by a curve, false otherwise.
+            * @param $name The parameter name.
+            * @param $id The parameter ID.
+            * @returns True if the parameter is controlled by a curve, false otherwise. 
+            */
+            public IsParameterControlledByCurve ($name: string) : boolean
+            /** Returns true if the parameter is controlled by a curve, false otherwise.
+            * @param $name The parameter name.
+            * @param $id The parameter ID.
+            * @returns True if the parameter is controlled by a curve, false otherwise. 
+            */
+            public IsParameterControlledByCurve ($id: number) : boolean
+            /** Gets the position of an IK goal.
+            * @param $goal The AvatarIKGoal that is queried.
+            * @returns Return the current position of this IK goal in world space. 
+            */
+            public GetIKPosition ($goal: UnityEngine.AvatarIKGoal) : UnityEngine.Vector3
+            /** Sets the position of an IK goal.
+            * @param $goal The AvatarIKGoal that is set.
+            * @param $goalPosition The position in world space.
+            */
+            public SetIKPosition ($goal: UnityEngine.AvatarIKGoal, $goalPosition: UnityEngine.Vector3) : void
+            /** Gets the rotation of an IK goal.
+            * @param $goal The AvatarIKGoal that is is queried.
+            */
+            public GetIKRotation ($goal: UnityEngine.AvatarIKGoal) : UnityEngine.Quaternion
+            /** Sets the rotation of an IK goal.
+            * @param $goal The AvatarIKGoal that is set.
+            * @param $goalRotation The rotation of the goal in world space which should follow Unity's world coordinates convention (see below).
+            */
+            public SetIKRotation ($goal: UnityEngine.AvatarIKGoal, $goalRotation: UnityEngine.Quaternion) : void
+            /** Gets the translative weight of an IK goal (0 = at the original animation before IK, 1 = at the goal).
+            * @param $goal The AvatarIKGoal that is queried.
+            */
+            public GetIKPositionWeight ($goal: UnityEngine.AvatarIKGoal) : number
+            /** Sets the translative weight of an IK goal (0 = at the original animation before IK, 1 = at the goal).
+            * @param $goal The AvatarIKGoal that is set.
+            * @param $value The translative weight.
+            */
+            public SetIKPositionWeight ($goal: UnityEngine.AvatarIKGoal, $value: number) : void
+            /** Gets the rotational weight of an IK goal (0 = rotation before IK, 1 = rotation at the IK goal).
+            * @param $goal The AvatarIKGoal that is queried.
+            */
+            public GetIKRotationWeight ($goal: UnityEngine.AvatarIKGoal) : number
+            /** Sets the rotational weight of an IK goal (0 = rotation before IK, 1 = rotation at the IK goal).
+            * @param $goal The AvatarIKGoal that is set.
+            * @param $value The rotational weight.
+            */
+            public SetIKRotationWeight ($goal: UnityEngine.AvatarIKGoal, $value: number) : void
+            /** Gets the position of an IK hint.
+            * @param $hint The AvatarIKHint that is queried.
+            * @returns Return the current position of this IK hint in world space. 
+            */
+            public GetIKHintPosition ($hint: UnityEngine.AvatarIKHint) : UnityEngine.Vector3
+            /** Sets the position of an IK hint.
+            * @param $hint The AvatarIKHint that is set.
+            * @param $hintPosition The position in world space.
+            */
+            public SetIKHintPosition ($hint: UnityEngine.AvatarIKHint, $hintPosition: UnityEngine.Vector3) : void
+            /** Gets the translative weight of an IK Hint (0 = at the original animation before IK, 1 = at the hint).
+            * @param $hint The AvatarIKHint that is queried.
+            * @returns Return translative weight. 
+            */
+            public GetIKHintPositionWeight ($hint: UnityEngine.AvatarIKHint) : number
+            /** Sets the translative weight of an IK hint (0 = at the original animation before IK, 1 = at the hint).
+            * @param $hint The AvatarIKHint that is set.
+            * @param $value The translative weight.
+            */
+            public SetIKHintPositionWeight ($hint: UnityEngine.AvatarIKHint, $value: number) : void
+            /** Sets the look at position.
+            * @param $lookAtPosition The position to lookAt.
+            */
+            public SetLookAtPosition ($lookAtPosition: UnityEngine.Vector3) : void
+            /** Set look at weights.
+            * @param $weight (0-1) the global weight of the LookAt, multiplier for other parameters.
+            * @param $bodyWeight (0-1) determines how much the body is involved in the LookAt.
+            * @param $headWeight (0-1) determines how much the head is involved in the LookAt.
+            * @param $eyesWeight (0-1) determines how much the eyes are involved in the LookAt.
+            * @param $clampWeight (0-1) 0.0 means the character is unrestrained in motion. 1.0 means the character is clamped (look at becomes impossible). 0.5 means the character is able to move on half of the possible range (180 degrees).
+            */
+            public SetLookAtWeight ($weight: number) : void
+            /** Set look at weights.
+            * @param $weight (0-1) the global weight of the LookAt, multiplier for other parameters.
+            * @param $bodyWeight (0-1) determines how much the body is involved in the LookAt.
+            * @param $headWeight (0-1) determines how much the head is involved in the LookAt.
+            * @param $eyesWeight (0-1) determines how much the eyes are involved in the LookAt.
+            * @param $clampWeight (0-1) 0.0 means the character is unrestrained in motion. 1.0 means the character is clamped (look at becomes impossible). 0.5 means the character is able to move on half of the possible range (180 degrees).
+            */
+            public SetLookAtWeight ($weight: number, $bodyWeight: number) : void
+            /** Set look at weights.
+            * @param $weight (0-1) the global weight of the LookAt, multiplier for other parameters.
+            * @param $bodyWeight (0-1) determines how much the body is involved in the LookAt.
+            * @param $headWeight (0-1) determines how much the head is involved in the LookAt.
+            * @param $eyesWeight (0-1) determines how much the eyes are involved in the LookAt.
+            * @param $clampWeight (0-1) 0.0 means the character is unrestrained in motion. 1.0 means the character is clamped (look at becomes impossible). 0.5 means the character is able to move on half of the possible range (180 degrees).
+            */
+            public SetLookAtWeight ($weight: number, $bodyWeight: number, $headWeight: number) : void
+            /** Set look at weights.
+            * @param $weight (0-1) the global weight of the LookAt, multiplier for other parameters.
+            * @param $bodyWeight (0-1) determines how much the body is involved in the LookAt.
+            * @param $headWeight (0-1) determines how much the head is involved in the LookAt.
+            * @param $eyesWeight (0-1) determines how much the eyes are involved in the LookAt.
+            * @param $clampWeight (0-1) 0.0 means the character is unrestrained in motion. 1.0 means the character is clamped (look at becomes impossible). 0.5 means the character is able to move on half of the possible range (180 degrees).
+            */
+            public SetLookAtWeight ($weight: number, $bodyWeight: number, $headWeight: number, $eyesWeight: number) : void
+            /** Set look at weights.
+            * @param $weight (0-1) the global weight of the LookAt, multiplier for other parameters.
+            * @param $bodyWeight (0-1) determines how much the body is involved in the LookAt.
+            * @param $headWeight (0-1) determines how much the head is involved in the LookAt.
+            * @param $eyesWeight (0-1) determines how much the eyes are involved in the LookAt.
+            * @param $clampWeight (0-1) 0.0 means the character is unrestrained in motion. 1.0 means the character is clamped (look at becomes impossible). 0.5 means the character is able to move on half of the possible range (180 degrees).
+            */
+            public SetLookAtWeight ($weight: number, $bodyWeight: number, $headWeight: number, $eyesWeight: number, $clampWeight: number) : void
+            /** Sets local rotation of a human bone during a IK pass.
+            * @param $humanBoneId The human bone Id.
+            * @param $rotation The local rotation.
+            */
+            public SetBoneLocalRotation ($humanBoneId: UnityEngine.HumanBodyBones, $rotation: UnityEngine.Quaternion) : void
+            public GetBehaviours ($fullPathHash: number, $layerIndex: number) : System.Array$1<UnityEngine.StateMachineBehaviour>
+            /** Returns the layer name.
+            * @param $layerIndex The layer index.
+            * @returns The layer name. 
+            */
+            public GetLayerName ($layerIndex: number) : string
+            /** Returns the index of the layer with the given name.
+            * @param $layerName The layer name.
+            * @returns The layer index. 
+            */
+            public GetLayerIndex ($layerName: string) : number
+            /** Returns the weight of the layer at the specified index.
+            * @param $layerIndex The layer index.
+            * @returns The layer weight. 
+            */
+            public GetLayerWeight ($layerIndex: number) : number
+            /** Sets the weight of the layer at the given index.
+            * @param $layerIndex The layer index.
+            * @param $weight The new layer weight.
+            */
+            public SetLayerWeight ($layerIndex: number, $weight: number) : void
+            /** Returns an AnimatorStateInfo with the information on the current state.
+            * @param $layerIndex The layer index.
+            * @returns An AnimatorStateInfo with the information on the current state. 
+            */
+            public GetCurrentAnimatorStateInfo ($layerIndex: number) : UnityEngine.AnimatorStateInfo
+            /** Returns an AnimatorStateInfo with the information on the next state.
+            * @param $layerIndex The layer index.
+            * @returns An AnimatorStateInfo with the information on the next state. 
+            */
+            public GetNextAnimatorStateInfo ($layerIndex: number) : UnityEngine.AnimatorStateInfo
+            /** Returns an AnimatorTransitionInfo with the informations on the current transition.
+            * @param $layerIndex The layer's index.
+            * @returns An AnimatorTransitionInfo with the informations on the current transition. 
+            */
+            public GetAnimatorTransitionInfo ($layerIndex: number) : UnityEngine.AnimatorTransitionInfo
+            /** Returns the number of AnimatorClipInfo in the current state.
+            * @param $layerIndex The layer index.
+            * @returns The number of AnimatorClipInfo in the current state. 
+            */
+            public GetCurrentAnimatorClipInfoCount ($layerIndex: number) : number
+            /** Returns the number of AnimatorClipInfo in the next state.
+            * @param $layerIndex The layer index.
+            * @returns The number of AnimatorClipInfo in the next state. 
+            */
+            public GetNextAnimatorClipInfoCount ($layerIndex: number) : number
+            /** Returns an array of all the AnimatorClipInfo in the current state of the given layer.
+            * @param $layerIndex The layer index.
+            * @returns An array of all the AnimatorClipInfo in the current state. 
+            */
+            public GetCurrentAnimatorClipInfo ($layerIndex: number) : System.Array$1<UnityEngine.AnimatorClipInfo>
+            /** Returns an array of all the AnimatorClipInfo in the next state of the given layer.
+            * @param $layerIndex The layer index.
+            * @returns An array of all the AnimatorClipInfo in the next state. 
+            */
+            public GetNextAnimatorClipInfo ($layerIndex: number) : System.Array$1<UnityEngine.AnimatorClipInfo>
+            public GetCurrentAnimatorClipInfo ($layerIndex: number, $clips: System.Collections.Generic.List$1<UnityEngine.AnimatorClipInfo>) : void
+            public GetNextAnimatorClipInfo ($layerIndex: number, $clips: System.Collections.Generic.List$1<UnityEngine.AnimatorClipInfo>) : void
+            /** Returns true if there is a transition on the given layer, false otherwise.
+            * @param $layerIndex The layer index.
+            * @returns True if there is a transition on the given layer, false otherwise. 
+            */
+            public IsInTransition ($layerIndex: number) : boolean
+            /** See AnimatorController.parameters.
+            */
+            public GetParameter ($index: number) : UnityEngine.AnimatorControllerParameter
+            public MatchTarget ($matchPosition: UnityEngine.Vector3, $matchRotation: UnityEngine.Quaternion, $targetBodyPart: UnityEngine.AvatarTarget, $weightMask: UnityEngine.MatchTargetWeightMask, $startNormalizedTime: number) : void
+            /** Automatically adjust the GameObject position and rotation.
+            * @param $matchPosition The position we want the body part to reach.
+            * @param $matchRotation The rotation in which we want the body part to be.
+            * @param $targetBodyPart The body part that is involved in the match.
+            * @param $weightMask Structure that contains weights for matching position and rotation.
+            * @param $startNormalizedTime Start time within the animation clip (0 - beginning of clip, 1 - end of clip).
+            * @param $targetNormalizedTime End time within the animation clip (0 - beginning of clip, 1 - end of clip), values greater than 1 can be set to trigger a match after a certain number of loops. Ex: 2.3 means at 30% of 2nd loop.
+            * @param $completeMatch Allows you to specify what should happen if the MatchTarget function is interrupted. A value of true causes the GameObject to immediately move to the matchPosition if interrupted. A value of false causes the GameObject to stay at its current position if interrupted.
+            */
+            public MatchTarget ($matchPosition: UnityEngine.Vector3, $matchRotation: UnityEngine.Quaternion, $targetBodyPart: UnityEngine.AvatarTarget, $weightMask: UnityEngine.MatchTargetWeightMask, $startNormalizedTime: number, $targetNormalizedTime: number) : void
+            public MatchTarget ($matchPosition: UnityEngine.Vector3, $matchRotation: UnityEngine.Quaternion, $targetBodyPart: UnityEngine.AvatarTarget, $weightMask: UnityEngine.MatchTargetWeightMask, $startNormalizedTime: number, $targetNormalizedTime: number, $completeMatch: boolean) : void
+            /** Interrupts the automatic target matching.
+            */
+            public InterruptMatchTarget () : void
+            /** Interrupts the automatic target matching.
+            */
+            public InterruptMatchTarget ($completeMatch: boolean) : void
+            public CrossFadeInFixedTime ($stateName: string, $fixedTransitionDuration: number) : void
+            public CrossFadeInFixedTime ($stateName: string, $fixedTransitionDuration: number, $layer: number) : void
+            public CrossFadeInFixedTime ($stateName: string, $fixedTransitionDuration: number, $layer: number, $fixedTimeOffset: number) : void
+            /** Creates a crossfade from the current state to any other state using times in seconds.
+            * @param $stateName The name of the state.
+            * @param $stateHashName The hash name of the state.
+            * @param $fixedTransitionDuration The duration of the transition (in seconds).
+            * @param $layer The layer where the crossfade occurs.
+            * @param $fixedTimeOffset The time of the state (in seconds).
+            * @param $normalizedTransitionTime The time of the transition (normalized).
+            */
+            public CrossFadeInFixedTime ($stateName: string, $fixedTransitionDuration: number, $layer: number, $fixedTimeOffset: number, $normalizedTransitionTime: number) : void
+            public CrossFadeInFixedTime ($stateHashName: number, $fixedTransitionDuration: number, $layer: number, $fixedTimeOffset: number) : void
+            public CrossFadeInFixedTime ($stateHashName: number, $fixedTransitionDuration: number, $layer: number) : void
+            public CrossFadeInFixedTime ($stateHashName: number, $fixedTransitionDuration: number) : void
+            /** Creates a crossfade from the current state to any other state using times in seconds.
+            * @param $stateName The name of the state.
+            * @param $stateHashName The hash name of the state.
+            * @param $fixedTransitionDuration The duration of the transition (in seconds).
+            * @param $layer The layer where the crossfade occurs.
+            * @param $fixedTimeOffset The time of the state (in seconds).
+            * @param $normalizedTransitionTime The time of the transition (normalized).
+            */
+            public CrossFadeInFixedTime ($stateHashName: number, $fixedTransitionDuration: number, $layer: number, $fixedTimeOffset: number, $normalizedTransitionTime: number) : void
+            /** Forces a write of the default values stored in the animator.
+            */
+            public WriteDefaultValues () : void
+            public CrossFade ($stateName: string, $normalizedTransitionDuration: number, $layer: number, $normalizedTimeOffset: number) : void
+            public CrossFade ($stateName: string, $normalizedTransitionDuration: number, $layer: number) : void
+            public CrossFade ($stateName: string, $normalizedTransitionDuration: number) : void
+            /** Creates a crossfade from the current state to any other state using normalized times.
+            * @param $stateName The name of the state.
+            * @param $stateHashName The hash name of the state.
+            * @param $normalizedTransitionDuration The duration of the transition (normalized).
+            * @param $layer The layer where the crossfade occurs.
+            * @param $normalizedTimeOffset The time of the state (normalized).
+            * @param $normalizedTransitionTime The time of the transition (normalized).
+            */
+            public CrossFade ($stateName: string, $normalizedTransitionDuration: number, $layer: number, $normalizedTimeOffset: number, $normalizedTransitionTime: number) : void
+            /** Creates a crossfade from the current state to any other state using normalized times.
+            * @param $stateName The name of the state.
+            * @param $stateHashName The hash name of the state.
+            * @param $normalizedTransitionDuration The duration of the transition (normalized).
+            * @param $layer The layer where the crossfade occurs.
+            * @param $normalizedTimeOffset The time of the state (normalized).
+            * @param $normalizedTransitionTime The time of the transition (normalized).
+            */
+            public CrossFade ($stateHashName: number, $normalizedTransitionDuration: number, $layer: number, $normalizedTimeOffset: number, $normalizedTransitionTime: number) : void
+            public CrossFade ($stateHashName: number, $normalizedTransitionDuration: number, $layer: number, $normalizedTimeOffset: number) : void
+            public CrossFade ($stateHashName: number, $normalizedTransitionDuration: number, $layer: number) : void
+            public CrossFade ($stateHashName: number, $normalizedTransitionDuration: number) : void
+            public PlayInFixedTime ($stateName: string, $layer: number) : void
+            public PlayInFixedTime ($stateName: string) : void
+            /** Plays a state.
+            * @param $stateName The state name.
+            * @param $stateNameHash The state hash name. If stateNameHash is 0, it changes the current state time.
+            * @param $layer The layer index. If layer is -1, it plays the first state with the given state name or hash.
+            * @param $fixedTime The time offset (in seconds).
+            */
+            public PlayInFixedTime ($stateName: string, $layer: number, $fixedTime: number) : void
+            /** Plays a state.
+            * @param $stateName The state name.
+            * @param $stateNameHash The state hash name. If stateNameHash is 0, it changes the current state time.
+            * @param $layer The layer index. If layer is -1, it plays the first state with the given state name or hash.
+            * @param $fixedTime The time offset (in seconds).
+            */
+            public PlayInFixedTime ($stateNameHash: number, $layer: number, $fixedTime: number) : void
+            public PlayInFixedTime ($stateNameHash: number, $layer: number) : void
+            public PlayInFixedTime ($stateNameHash: number) : void
+            public Play ($stateName: string, $layer: number) : void
+            public Play ($stateName: string) : void
+            /** Plays a state.
+            * @param $stateName The state name.
+            * @param $stateNameHash The state hash name. If stateNameHash is 0, it changes the current state time.
+            * @param $layer The layer index. If layer is -1, it plays the first state with the given state name or hash.
+            * @param $normalizedTime The time offset between zero and one.
+            */
+            public Play ($stateName: string, $layer: number, $normalizedTime: number) : void
+            /** Plays a state.
+            * @param $stateName The state name.
+            * @param $stateNameHash The state hash name. If stateNameHash is 0, it changes the current state time.
+            * @param $layer The layer index. If layer is -1, it plays the first state with the given state name or hash.
+            * @param $normalizedTime The time offset between zero and one.
+            */
+            public Play ($stateNameHash: number, $layer: number, $normalizedTime: number) : void
+            public Play ($stateNameHash: number, $layer: number) : void
+            public Play ($stateNameHash: number) : void
+            /** Sets an AvatarTarget and a targetNormalizedTime for the current state.
+            * @param $targetIndex The avatar body part that is queried.
+            * @param $targetNormalizedTime The current state Time that is queried.
+            */
+            public SetTarget ($targetIndex: UnityEngine.AvatarTarget, $targetNormalizedTime: number) : void
+            /** Retrieves the Transform mapped to a human bone based on its id.
+            * @param $humanBoneId The human bone to be queried. See the HumanBodyBones enum for a list of possible values.
+            * @returns Returns the Transform mapped to the human bone. Returns null if the human bone has no Transform. 
+            */
+            public GetBoneTransform ($humanBoneId: UnityEngine.HumanBodyBones) : UnityEngine.Transform
+            /** Sets the animator in playback mode.
+            */
+            public StartPlayback () : void
+            /** Stops the animator playback mode. When playback stops, the avatar resumes getting control from game logic.
+            */
+            public StopPlayback () : void
+            /** Sets the animator in recording mode, and allocates a circular buffer of size frameCount.
+            * @param $frameCount The number of frames (updates) that will be recorded. If frameCount is 0, the recording will continue until the user calls StopRecording. The maximum value for frameCount is 10000.
+            */
+            public StartRecording ($frameCount: number) : void
+            /** Stops animator record mode.
+            */
+            public StopRecording () : void
+            /** Returns true if the state exists in this layer, false otherwise.
+            * @param $layerIndex The layer index.
+            * @param $stateID The state ID.
+            * @returns True if the state exists in this layer, false otherwise. 
+            */
+            public HasState ($layerIndex: number, $stateID: number) : boolean
+            /** Generates a parameter id from a string.
+            * @param $name The string to convert to Id.
+            */
+            public static StringToHash ($name: string) : number
+            /** Evaluates the animator based on deltaTime.
+            * @param $deltaTime The time delta.
+            */
+            public Update ($deltaTime: number) : void
+            /** Rebind all the animated properties and mesh data with the Animator.
+            */
+            public Rebind () : void
+            /** Apply the default Root Motion.
+            */
+            public ApplyBuiltinRootMotion () : void
+            public constructor ()
+        }
+        /** Information about what animation clips is played and its weight.
+        */
+        class AnimationInfo extends System.ValueType
+        {
+            protected [__keep_incompatibility]: never;
+        }
+        /** The update mode of the Animator.
+        */
+        enum AnimatorUpdateMode
+        { Normal = 0, Fixed = 1, UnscaledTime = 2, AnimatePhysics = 1 }
+        /** IK Goal.
+        */
+        enum AvatarIKGoal
+        { LeftFoot = 0, RightFoot = 1, LeftHand = 2, RightHand = 3 }
+        /** IK Hint.
+        */
+        enum AvatarIKHint
+        { LeftKnee = 0, RightKnee = 1, LeftElbow = 2, RightElbow = 3 }
+        /** Human Body Bones.
+        */
+        enum HumanBodyBones
+        { Hips = 0, LeftUpperLeg = 1, RightUpperLeg = 2, LeftLowerLeg = 3, RightLowerLeg = 4, LeftFoot = 5, RightFoot = 6, Spine = 7, Chest = 8, UpperChest = 54, Neck = 9, Head = 10, LeftShoulder = 11, RightShoulder = 12, LeftUpperArm = 13, RightUpperArm = 14, LeftLowerArm = 15, RightLowerArm = 16, LeftHand = 17, RightHand = 18, LeftToes = 19, RightToes = 20, LeftEye = 21, RightEye = 22, Jaw = 23, LeftThumbProximal = 24, LeftThumbIntermediate = 25, LeftThumbDistal = 26, LeftIndexProximal = 27, LeftIndexIntermediate = 28, LeftIndexDistal = 29, LeftMiddleProximal = 30, LeftMiddleIntermediate = 31, LeftMiddleDistal = 32, LeftRingProximal = 33, LeftRingIntermediate = 34, LeftRingDistal = 35, LeftLittleProximal = 36, LeftLittleIntermediate = 37, LeftLittleDistal = 38, RightThumbProximal = 39, RightThumbIntermediate = 40, RightThumbDistal = 41, RightIndexProximal = 42, RightIndexIntermediate = 43, RightIndexDistal = 44, RightMiddleProximal = 45, RightMiddleIntermediate = 46, RightMiddleDistal = 47, RightRingProximal = 48, RightRingIntermediate = 49, RightRingDistal = 50, RightLittleProximal = 51, RightLittleIntermediate = 52, RightLittleDistal = 53, LastBone = 55 }
+        /** StateMachineBehaviour is a component that can be added to a state machine state. It's the base class any script on a state must derive from.
+        */
+        class StateMachineBehaviour extends UnityEngine.ScriptableObject
+        {
+            protected [__keep_incompatibility]: never;
+        }
+        /** Information about the current or next state.
+        */
+        class AnimatorStateInfo extends System.ValueType
+        {
+            protected [__keep_incompatibility]: never;
+        }
+        /** Information about the current transition.
+        */
+        class AnimatorTransitionInfo extends System.ValueType
+        {
+            protected [__keep_incompatibility]: never;
+        }
+        /** Information about clip being played and blended by the Animator.
+        */
+        class AnimatorClipInfo extends System.ValueType
+        {
+            protected [__keep_incompatibility]: never;
+        }
+        /** Used to communicate between scripting and the controller. Some parameters can be set in scripting and used by the controller, while other parameters are based on Custom Curves in Animation Clips and can be sampled using the scripting API.
+        */
+        class AnimatorControllerParameter extends System.Object
+        {
+            protected [__keep_incompatibility]: never;
+            /** The name of the parameter.
+            */
+            public get name(): string;
+            public set name(value: string);
+            /** Returns the hash of the parameter based on its name.
+            */
+            public get nameHash(): number;
+            /** The type of the parameter.
+            */
+            public get type(): UnityEngine.AnimatorControllerParameterType;
+            public set type(value: UnityEngine.AnimatorControllerParameterType);
+            /** The default float value for the parameter.
+            */
+            public get defaultFloat(): number;
+            public set defaultFloat(value: number);
+            /** The default int value for the parameter.
+            */
+            public get defaultInt(): number;
+            public set defaultInt(value: number);
+            /** The default bool value for the parameter.
+            */
+            public get defaultBool(): boolean;
+            public set defaultBool(value: boolean);
+            public constructor ()
+        }
+        /** Target.
+        */
+        enum AvatarTarget
+        { Root = 0, Body = 1, LeftFoot = 2, RightFoot = 3, LeftHand = 4, RightHand = 5 }
+        /** Use this struct to specify the position and rotation weight mask for Animator.MatchTarget.
+        */
+        class MatchTargetWeightMask extends System.ValueType
+        {
+            protected [__keep_incompatibility]: never;
+        }
+        /** Culling mode for the Animator.
+        */
+        enum AnimatorCullingMode
+        { AlwaysAnimate = 0, CullUpdateTransforms = 1, CullCompletely = 2, BasedOnRenderers = 1 }
+        /** The mode of the Animator's recorder.
+        */
+        enum AnimatorRecorderMode
+        { Offline = 0, Playback = 1, Record = 2 }
+        /** The runtime representation of the AnimatorController. Use this representation to change the Animator Controller during runtime.
+        */
+        class RuntimeAnimatorController extends UnityEngine.Object
+        {
+            protected [__keep_incompatibility]: never;
+            /** Retrieves all AnimationClip used by the controller.
+            */
+            public get animationClips(): System.Array$1<UnityEngine.AnimationClip>;
+        }
+        /** Avatar definition.
+        */
+        class Avatar extends UnityEngine.Object
+        {
+            protected [__keep_incompatibility]: never;
+        }
+        /** The type of the parameter.
+        */
+        enum AnimatorControllerParameterType
+        { Float = 1, Int = 3, Bool = 4, Trigger = 9 }
         /** A Camera is a device through which the player views the world.
         */
         class Camera extends UnityEngine.Behaviour
@@ -8902,6 +9929,52 @@
         interface ICanvasRaycastFilter
         {
         }
+        /** PlayerPrefs is a class that stores Player preferences between game sessions. It can store string, float and integer values into the user’s platform registry.
+        */
+        class PlayerPrefs extends System.Object
+        {
+            protected [__keep_incompatibility]: never;
+            /** Sets a single integer value for the preference identified by the given key. You can use PlayerPrefs.GetInt to retrieve this value.
+            */
+            public static SetInt ($key: string, $value: number) : void
+            /** Returns the value corresponding to key in the preference file if it exists.
+            */
+            public static GetInt ($key: string, $defaultValue: number) : number
+            /** Returns the value corresponding to key in the preference file if it exists.
+            */
+            public static GetInt ($key: string) : number
+            /** Sets the float value of the preference identified by the given key. You can use PlayerPrefs.GetFloat to retrieve this value.
+            */
+            public static SetFloat ($key: string, $value: number) : void
+            /** Returns the value corresponding to key in the preference file if it exists.
+            */
+            public static GetFloat ($key: string, $defaultValue: number) : number
+            /** Returns the value corresponding to key in the preference file if it exists.
+            */
+            public static GetFloat ($key: string) : number
+            /** Sets a single string value for the preference identified by the given key. You can use PlayerPrefs.GetString to retrieve this value. 
+            */
+            public static SetString ($key: string, $value: string) : void
+            /** Returns the value corresponding to key in the preference file if it exists.
+            */
+            public static GetString ($key: string, $defaultValue: string) : string
+            /** Returns the value corresponding to key in the preference file if it exists.
+            */
+            public static GetString ($key: string) : string
+            /** Returns true if the given key exists in PlayerPrefs, otherwise returns false.
+            */
+            public static HasKey ($key: string) : boolean
+            /** Removes the given key from the PlayerPrefs. If the key does not exist, DeleteKey has no impact.
+            */
+            public static DeleteKey ($key: string) : void
+            /** Removes all keys and values from the preferences. Use with caution.
+            */
+            public static DeleteAll () : void
+            /** Saves all modified preferences.
+            */
+            public static Save () : void
+            public constructor ()
+        }
         /** Spectrum analysis windowing types.
         */
         enum FFTWindow
@@ -9003,6 +10076,7 @@
             public GetNumber ($property: VoxelPlayground.Engine.PointDataV2.Property) : number
             public GetPropertyValueNormalized ($property: VoxelPlayground.Engine.PointDataV2.Property) : number
             public StoreOriginalColor () : void
+            public HasStoredOriginalColor () : boolean
             public ProgressivelyRestoreOriginalColor () : void
             public RestoreOriginalColor () : void
             public IsUnyielding () : boolean
@@ -9013,8 +10087,8 @@
             public CloneFrom ($other: VoxelPlayground.Engine.PointDataV2) : void
             public static SetHardnessTable ($hardness: System.Array$1<number>) : void
             public static SetToughnessTable ($toughness: System.Array$1<number>) : void
-            public GetHardnessById ($id: number) : number
-            public GetToughnessById ($id: number) : number
+            public static GetHardnessById ($id: number) : number
+            public static GetToughnessById ($id: number) : number
             public GetHardness () : number
             public GetToughness () : number
             public GetHardnessNormalize () : number
@@ -9051,6 +10125,7 @@
             public static layerMask_ControllerLine : UnityEngine.LayerMask
             public static layerMask_LCKTablet : UnityEngine.LayerMask
             public static layerMask_RaycastOnly : UnityEngine.LayerMask
+            public static layerMask_CharacterOverlapExclusion : UnityEngine.LayerMask
             public static layer_Character_Controlled : number
             public static layer_Character : number
             public static tag_Floor : string
@@ -9070,6 +10145,7 @@
             public static pinchMask : UnityEngine.LayerMask
             public static splatMask : UnityEngine.LayerMask
             public static splatMaskExcludeItem : UnityEngine.LayerMask
+            public static characterOverlapExclusionMask : UnityEngine.LayerMask
             public static blastMarkMask : UnityEngine.LayerMask
             public static cameraCollisionMask : UnityEngine.LayerMask
             public static shadowMask : UnityEngine.LayerMask
@@ -9088,7 +10164,7 @@
         {
             protected [__keep_incompatibility]: never;
         }
-        class EntityCharacter extends VoxelPlayground.Entity.Entity implements VoxelPlayground.Gaming.IPinchable, VoxelPlayground.Entity.ICombustible, System.IEquatable$1<VoxelPlayground.Entity.Entity>
+        class EntityCharacter extends VoxelPlayground.Entity.Entity implements VoxelPlayground.Gaming.IPinchable, System.IEquatable$1<VoxelPlayground.Entity.Entity>, VoxelPlayground.Entity.ICombustible
         {
             protected [__keep_incompatibility]: never;
         }
@@ -9247,6 +10323,479 @@
         {
         }
     }
+    namespace Px5.UnityExtensions {
+        class Collision extends System.ValueType
+        {
+            protected [__keep_incompatibility]: never;
+            public contactCount : number
+            public rigidbody : Px5.Unity.PxRigidBody
+            public relativeVelocity : UnityEngine.Vector3
+            public impulse : UnityEngine.Vector3
+            public gameObject : UnityEngine.GameObject
+            public transform : UnityEngine.Transform
+            public contacts : System.Array$1<Px5.UnityExtensions.ContactPoint>
+            public collider : Px5.Unity.PxCollider
+            public ContactPose : UnityEngine.Matrix4x4
+            public collisionType : Px5.UnityExtensions.CollisionType
+            public isOverload : boolean
+            public GetContact ($index: number) : Px5.UnityExtensions.ContactPoint
+            public GetContacts ($contacts: System.Array$1<Px5.UnityExtensions.ContactPoint>) : number
+            public GetContacts ($contacts: System.Collections.Generic.List$1<Px5.UnityExtensions.ContactPoint>) : number
+        }
+        class RaycastHit extends System.ValueType
+        {
+            protected [__keep_incompatibility]: never;
+            public collider : Px5.Unity.PxCollider
+            public normal : UnityEngine.Vector3
+            public distance : number
+            public point : UnityEngine.Vector3
+            public transform : UnityEngine.Transform
+            public rigidbody : Px5.Unity.PxRigidBody
+            public materialId : number
+            public packedFaceIndex : number
+            public static get Empty(): Px5.UnityExtensions.RaycastHit;
+            public TryGetMaterialId ($materialId: $Ref<number>) : boolean
+        }
+        class ContactPoint extends System.ValueType
+        {
+            protected [__keep_incompatibility]: never;
+            public static NoMaterialId : number
+            public thisCollider : Px5.Unity.PxCollider
+            public otherCollider : Px5.Unity.PxCollider
+            public point : UnityEngine.Vector3
+            public normal : UnityEngine.Vector3
+            public impulse : UnityEngine.Vector3
+            public seperation : number
+            public thisMaterialId : number
+            public otherMaterialId : number
+            public TryGetThisMaterialId ($materialId: $Ref<number>) : boolean
+            public TryGetOtherMaterialId ($materialId: $Ref<number>) : boolean
+        }
+        enum CollisionType
+        { SurfaceHit = 0, PenetrateSelf = 1, PenetrateOthers = 2 }
+    }
+    namespace Px5.Unity {
+        class PxComponent extends UnityEngine.MonoBehaviour implements Px5.Unity.IPxDependency
+        {
+            protected [__keep_incompatibility]: never;
+        }
+        interface IPxDependency
+        {
+        }
+        class PxCollider extends Px5.Unity.PxComponent implements Px5.Unity.IPxDependency
+        {
+            protected [__keep_incompatibility]: never;
+            public apiShape : Px5.PxShape
+            public get attachedRigidbody(): Px5.Unity.PxRigidBody;
+            public get bounds(): UnityEngine.Bounds;
+            public get isTrigger(): boolean;
+            public set isTrigger(value: boolean);
+            public get material(): Px5.Unity.PxMaterial;
+            public set material(value: Px5.Unity.PxMaterial);
+            public get includeLayers(): UnityEngine.LayerMask;
+            public set includeLayers(value: UnityEngine.LayerMask);
+            public get excludeLayers(): UnityEngine.LayerMask;
+            public set excludeLayers(value: UnityEngine.LayerMask);
+            public get layerOverridePriority(): number;
+            public set layerOverridePriority(value: number);
+            public get hasModifiableContacts(): boolean;
+            public set hasModifiableContacts(value: boolean);
+            public get hardness(): number;
+            public set hardness(value: number);
+            public ClosestPoint ($point: UnityEngine.Vector3) : UnityEngine.Vector3
+            public UpdateLayer ($targetLayer?: number) : void
+            public Raycast ($ray: UnityEngine.Ray, $hitInfo: $Ref<Px5.UnityExtensions.RaycastHit>, $maxDistance?: number) : boolean
+            public UpdatePose () : void
+            public GetLocalBounds () : UnityEngine.Bounds
+            public DebugParam () : void
+            public constructor ()
+        }
+        class PxActor extends Px5.Unity.PxComponent implements Px5.Unity.IPxDependency
+        {
+            protected [__keep_incompatibility]: never;
+            public OnCollisionEnter : System.Action$1<Px5.UnityExtensions.Collision>
+            public OnCollisionStay : System.Action$1<Px5.UnityExtensions.Collision>
+            public OnCollisionExit : System.Action$1<Px5.UnityExtensions.Collision>
+            public OnTriggerEnter : System.Action$1<Px5.Unity.PxCollider>
+            public OnTriggerStay : System.Action$1<Px5.Unity.PxCollider>
+            public OnTriggerExit : System.Action$1<Px5.Unity.PxCollider>
+            public get currentScene(): Px5.Unity.PxScene;
+            public get valid(): boolean;
+            public get detectCollisions(): boolean;
+            public set detectCollisions(value: boolean);
+            public get indestructible(): boolean;
+            public set indestructible(value: boolean);
+            public get includeLayers(): UnityEngine.LayerMask;
+            public set includeLayers(value: UnityEngine.LayerMask);
+            public get excludeLayers(): UnityEngine.LayerMask;
+            public set excludeLayers(value: UnityEngine.LayerMask);
+            public get enableCollisionEvent(): boolean;
+            public set enableCollisionEvent(value: boolean);
+            public get hasCollisionCallback(): boolean;
+            public get hasOnCollisionEnter(): boolean;
+            public get hasOnCollisionStay(): boolean;
+            public get hasOnCollisionExit(): boolean;
+            public get hasOnTriggerEnter(): boolean;
+            public get hasOnTriggerStay(): boolean;
+            public get hasOnTriggerExit(): boolean;
+            public get hasContactModify(): boolean;
+            public set hasContactModify(value: boolean);
+            public RegisterOnCollisionEnter ($enter: System.Action$1<Px5.UnityExtensions.Collision>) : void
+            public UnregisterOnCollisionEnter ($enter: System.Action$1<Px5.UnityExtensions.Collision>) : void
+            public RegisterOnCollisionStay ($stay: System.Action$1<Px5.UnityExtensions.Collision>) : void
+            public UnregisterOnCollisionStay ($stay: System.Action$1<Px5.UnityExtensions.Collision>) : void
+            public RegisterOnCollisionExit ($exit: System.Action$1<Px5.UnityExtensions.Collision>) : void
+            public UnregisterOnCollisionExit ($exit: System.Action$1<Px5.UnityExtensions.Collision>) : void
+            public RegisterOnTriggerEnter ($enter: System.Action$1<Px5.Unity.PxCollider>) : void
+            public UnregisterOnTriggerEnter ($enter: System.Action$1<Px5.Unity.PxCollider>) : void
+            public RegisterOnTriggerStay ($stay: System.Action$1<Px5.Unity.PxCollider>) : void
+            public UnregisterOnTriggerStay ($stay: System.Action$1<Px5.Unity.PxCollider>) : void
+            public RegisterOnTriggerExit ($exit: System.Action$1<Px5.Unity.PxCollider>) : void
+            public UnregisterOnTriggerExit ($exit: System.Action$1<Px5.Unity.PxCollider>) : void
+            public AttachShape ($collider: Px5.Unity.PxCollider, $updateMass?: boolean) : void
+            public DetachShape ($collider: Px5.Unity.PxCollider) : void
+            public ReplaceShape ($shapeBefore: Px5.PxShape, $shapeAfter: Px5.PxShape) : void
+            public constructor ()
+        }
+        class PxRigidBody extends Px5.Unity.PxActor implements Px5.Unity.IPxDependency
+        {
+            protected [__keep_incompatibility]: never;
+            public get valid(): boolean;
+            public get useGravity(): boolean;
+            public set useGravity(value: boolean);
+            public get mass(): number;
+            public set mass(value: number);
+            public get isKinematic(): boolean;
+            public set isKinematic(value: boolean);
+            public get velocity(): UnityEngine.Vector3;
+            public set velocity(value: UnityEngine.Vector3);
+            public get linearVelocity(): UnityEngine.Vector3;
+            public set linearVelocity(value: UnityEngine.Vector3);
+            public get angularVelocity(): UnityEngine.Vector3;
+            public set angularVelocity(value: UnityEngine.Vector3);
+            public get maxLinearVelocity(): number;
+            public set maxLinearVelocity(value: number);
+            public get maxAngularVelocity(): number;
+            public set maxAngularVelocity(value: number);
+            public get solverIterations(): number;
+            public set solverIterations(value: number);
+            public get solverVelocityIterations(): number;
+            public set solverVelocityIterations(value: number);
+            public get drag(): number;
+            public set drag(value: number);
+            public get angularDrag(): number;
+            public set angularDrag(value: number);
+            public get centerOfMass(): UnityEngine.Vector3;
+            public set centerOfMass(value: UnityEngine.Vector3);
+            public get worldCenterOfMass(): UnityEngine.Vector3;
+            public get inertiaTensor(): UnityEngine.Vector3;
+            public set inertiaTensor(value: UnityEngine.Vector3);
+            public get inertiaTensorRotation(): UnityEngine.Quaternion;
+            public set inertiaTensorRotation(value: UnityEngine.Quaternion);
+            public get position(): UnityEngine.Vector3;
+            public set position(value: UnityEngine.Vector3);
+            public get rotation(): UnityEngine.Quaternion;
+            public set rotation(value: UnityEngine.Quaternion);
+            public get automaticCenterOfMass(): boolean;
+            public set automaticCenterOfMass(value: boolean);
+            public get automaticInertiaTensor(): boolean;
+            public set automaticInertiaTensor(value: boolean);
+            public get sleepThreshold(): number;
+            public set sleepThreshold(value: number);
+            public get constraints(): UnityEngine.RigidbodyConstraints;
+            public set constraints(value: UnityEngine.RigidbodyConstraints);
+            public get interpolation(): UnityEngine.RigidbodyInterpolation;
+            public set interpolation(value: UnityEngine.RigidbodyInterpolation);
+            public get maxContactImpulse(): number;
+            public set maxContactImpulse(value: number);
+            public get maxDepenetrationVelocity(): number;
+            public set maxDepenetrationVelocity(value: number);
+            public get collisionDetectionMode(): UnityEngine.CollisionDetectionMode;
+            public set collisionDetectionMode(value: UnityEngine.CollisionDetectionMode);
+            public get detectCollisions(): boolean;
+            public set detectCollisions(value: boolean);
+            public get indestructible(): boolean;
+            public set indestructible(value: boolean);
+            public get materialSupportGraph(): boolean;
+            public set materialSupportGraph(value: boolean);
+            public AddForce ($force: UnityEngine.Vector3, $mode?: UnityEngine.ForceMode) : void
+            public AddForceAtPosition ($force: UnityEngine.Vector3, $position: UnityEngine.Vector3, $mode?: UnityEngine.ForceMode) : void
+            public AddTorque ($torque: UnityEngine.Vector3, $mode?: UnityEngine.ForceMode) : void
+            public MovePosition ($position: UnityEngine.Vector3) : void
+            public MoveRotation ($rotation: UnityEngine.Quaternion) : void
+            public MovePose ($position: UnityEngine.Vector3, $rotation: UnityEngine.Quaternion) : void
+            public IsSleeping () : boolean
+            public ForceSleep () : void
+            public WakeUp () : void
+            public WorldBound () : UnityEngine.Bounds
+            public UpdateMassAndInertia () : void
+            public ClosestPoint ($query: UnityEngine.Vector3) : UnityEngine.Vector3
+            public ClosestCollider ($query: UnityEngine.Vector3) : Px5.Unity.PxCollider
+            public setMassAndUpdateInertia () : void
+            public Colliders () : System.Collections.Generic.IEnumerable$1<Px5.Unity.PxCollider>
+            public DebugParam () : void
+            public debugAddVelocity ($force: UnityEngine.Vector3, $mode: UnityEngine.ForceMode) : void
+            public constructor ()
+        }
+        interface PxRigidBody {
+            AddExplosionForce ($explosionForce: number, $explosionPosition: UnityEngine.Vector3, $explosionRadius: number, $upliftModifier: number, $forceMode?: UnityEngine.ForceMode) : void;
+        }
+        class PxJoint extends Px5.Unity.PxComponent implements Px5.Unity.IPxDependency
+        {
+            protected [__keep_incompatibility]: never;
+            public onJointBreak : Px5.Unity.OnJointBreak
+            public get apiJoint(): Px5.PxJoint;
+            public get actor0(): Px5.Unity.PxActor;
+            public set actor0(value: Px5.Unity.PxActor);
+            public get actor1(): Px5.Unity.PxActor;
+            public set actor1(value: Px5.Unity.PxActor);
+            public get valid(): boolean;
+            public get breakForce(): number;
+            public set breakForce(value: number);
+            public get breakTorque(): number;
+            public set breakTorque(value: number);
+            public get enableCollision(): boolean;
+            public set enableCollision(value: boolean);
+            public get connectedBody(): Px5.Unity.PxRigidBody;
+            public set connectedBody(value: Px5.Unity.PxRigidBody);
+            public get connectedMassScale(): number;
+            public set connectedMassScale(value: number);
+            public get autoConfigureConnectedAnchor(): boolean;
+            public set autoConfigureConnectedAnchor(value: boolean);
+            public get swapBodies(): boolean;
+            public set swapBodies(value: boolean);
+            public get currentForce(): UnityEngine.Vector3;
+            public get currentTorque(): UnityEngine.Vector3;
+            public get connectedAnchor(): UnityEngine.Vector3;
+            public set connectedAnchor(value: UnityEngine.Vector3);
+            public get anchor(): UnityEngine.Vector3;
+            public set anchor(value: UnityEngine.Vector3);
+            public get axis(): UnityEngine.Vector3;
+            public set axis(value: UnityEngine.Vector3);
+            public get secondaryAxis(): UnityEngine.Vector3;
+            public set secondaryAxis(value: UnityEngine.Vector3);
+            public get massScale(): number;
+            public set massScale(value: number);
+            public get enablePreprocessing(): boolean;
+            public set enablePreprocessing(value: boolean);
+            public SetJointAnchors ($position0: UnityEngine.Vector3, $computeAnchor1: boolean) : void
+            public DebugParam () : void
+            public constructor ()
+        }
+        class PxD6Joint extends Px5.Unity.PxJoint implements Px5.Unity.IPxDependency
+        {
+            protected [__keep_incompatibility]: never;
+            public get valid(): boolean;
+            public get apiJoint(): Px5.PxJoint;
+            public get apiD6Joint(): Px5.PxD6Joint;
+            public get xMotion(): UnityEngine.ConfigurableJointMotion;
+            public set xMotion(value: UnityEngine.ConfigurableJointMotion);
+            public get yMotion(): UnityEngine.ConfigurableJointMotion;
+            public set yMotion(value: UnityEngine.ConfigurableJointMotion);
+            public get zMotion(): UnityEngine.ConfigurableJointMotion;
+            public set zMotion(value: UnityEngine.ConfigurableJointMotion);
+            public get angularXMotion(): UnityEngine.ConfigurableJointMotion;
+            public set angularXMotion(value: UnityEngine.ConfigurableJointMotion);
+            public get angularYMotion(): UnityEngine.ConfigurableJointMotion;
+            public set angularYMotion(value: UnityEngine.ConfigurableJointMotion);
+            public get angularZMotion(): UnityEngine.ConfigurableJointMotion;
+            public set angularZMotion(value: UnityEngine.ConfigurableJointMotion);
+            public get linearLimit(): UnityEngine.SoftJointLimit;
+            public set linearLimit(value: UnityEngine.SoftJointLimit);
+            public get xDrive(): UnityEngine.JointDrive;
+            public set xDrive(value: UnityEngine.JointDrive);
+            public get yDrive(): UnityEngine.JointDrive;
+            public set yDrive(value: UnityEngine.JointDrive);
+            public get zDrive(): UnityEngine.JointDrive;
+            public set zDrive(value: UnityEngine.JointDrive);
+            public get targetPosition(): UnityEngine.Vector3;
+            public set targetPosition(value: UnityEngine.Vector3);
+            public get targetRotation(): UnityEngine.Quaternion;
+            public set targetRotation(value: UnityEngine.Quaternion);
+            public get targetVelocity(): UnityEngine.Vector3;
+            public set targetVelocity(value: UnityEngine.Vector3);
+            public get targetAngularVelocity(): UnityEngine.Vector3;
+            public set targetAngularVelocity(value: UnityEngine.Vector3);
+            public get slerpDrive(): UnityEngine.JointDrive;
+            public set slerpDrive(value: UnityEngine.JointDrive);
+            public get angularXDrive(): UnityEngine.JointDrive;
+            public set angularXDrive(value: UnityEngine.JointDrive);
+            public get angularYZDrive(): UnityEngine.JointDrive;
+            public set angularYZDrive(value: UnityEngine.JointDrive);
+            public get angularYLimit(): UnityEngine.SoftJointLimit;
+            public set angularYLimit(value: UnityEngine.SoftJointLimit);
+            public get angularZLimit(): UnityEngine.SoftJointLimit;
+            public set angularZLimit(value: UnityEngine.SoftJointLimit);
+            public get angularYZLimitSpring(): UnityEngine.SoftJointLimitSpring;
+            public set angularYZLimitSpring(value: UnityEngine.SoftJointLimitSpring);
+            public get configuredInWorldSpace(): boolean;
+            public set configuredInWorldSpace(value: boolean);
+            public get rotationDriveMode(): UnityEngine.RotationDriveMode;
+            public set rotationDriveMode(value: UnityEngine.RotationDriveMode);
+            public get projectionMode(): UnityEngine.JointProjectionMode;
+            public set projectionMode(value: UnityEngine.JointProjectionMode);
+            public get projectionAngle(): number;
+            public set projectionAngle(value: number);
+            public get projectionDistance(): number;
+            public set projectionDistance(value: number);
+            public get linearLimitSpring(): UnityEngine.SoftJointLimitSpring;
+            public set linearLimitSpring(value: UnityEngine.SoftJointLimitSpring);
+            public get highAngularXLimit(): UnityEngine.SoftJointLimit;
+            public set highAngularXLimit(value: UnityEngine.SoftJointLimit);
+            public get lowAngularXLimit(): UnityEngine.SoftJointLimit;
+            public set lowAngularXLimit(value: UnityEngine.SoftJointLimit);
+            public get angularXLimitSpring(): UnityEngine.SoftJointLimitSpring;
+            public set angularXLimitSpring(value: UnityEngine.SoftJointLimitSpring);
+            public UpdateAxis ($axis: UnityEngine.Vector3, $secondaryAxis: UnityEngine.Vector3) : void
+            public CaptureReferencePose () : void
+            public static GetGizmoSize ($position: UnityEngine.Vector3) : number
+            public DebugLog () : void
+            public constructor ()
+        }
+        class PxPhysics extends System.Object
+        {
+            protected [__keep_incompatibility]: never;
+            public static apiScene : Px5.PxScene
+            public static get apiFoundation(): Px5.PxFoundation;
+            public static get valid(): boolean;
+            public static get apiPhysics(): Px5.PxPhysics;
+            public static get cpuDispatcher(): Px5.PxCpuDispatcher;
+            public static get noMaterial(): Px5.PxMaterial;
+            public static get settings(): Px5.Unity.PxSettings;
+            public static get gravity(): UnityEngine.Vector3;
+            public static set gravity(value: UnityEngine.Vector3);
+            public static get Scene(): Px5.Unity.PxScene;
+            public static Raycast ($ray: UnityEngine.Ray, $hitInfo: $Ref<Px5.UnityExtensions.RaycastHit>, $maxDistance?: number, $layerMask?: number, $trigger?: UnityEngine.QueryTriggerInteraction) : boolean
+            public static Raycast ($origin: UnityEngine.Vector3, $direction: UnityEngine.Vector3, $maxDistance?: number, $layerMask?: number, $trigger?: UnityEngine.QueryTriggerInteraction) : boolean
+            public static Raycast ($origin: UnityEngine.Vector3, $direction: UnityEngine.Vector3, $hitInfo: $Ref<Px5.UnityExtensions.RaycastHit>, $maxDistance?: number, $layerMask?: number, $trigger?: UnityEngine.QueryTriggerInteraction) : boolean
+            public static RaycastAll ($ray: UnityEngine.Ray, $maxDistance?: number, $layerMask?: number, $queryTriggerInteraction?: UnityEngine.QueryTriggerInteraction) : System.Array$1<Px5.UnityExtensions.RaycastHit>
+            public static RaycastAll ($origin: UnityEngine.Vector3, $direction: UnityEngine.Vector3, $maxDistance?: number, $layerMask?: number, $queryTriggerInteraction?: UnityEngine.QueryTriggerInteraction) : System.Array$1<Px5.UnityExtensions.RaycastHit>
+            public static RaycastNonAlloc ($origin: UnityEngine.Vector3, $direction: UnityEngine.Vector3, $hitResult: System.Array$1<Px5.UnityExtensions.RaycastHit>, $maxDistance?: number, $layerMask?: number, $queryTriggerInteraction?: UnityEngine.QueryTriggerInteraction) : number
+            public static Linecast ($start: UnityEngine.Vector3, $end: UnityEngine.Vector3, $layerMask?: number, $queryTriggerInteraction?: UnityEngine.QueryTriggerInteraction) : boolean
+            public static Linecast ($start: UnityEngine.Vector3, $end: UnityEngine.Vector3, $hitInfo: $Ref<Px5.UnityExtensions.RaycastHit>, $layerMask?: number, $queryTriggerInteraction?: UnityEngine.QueryTriggerInteraction) : boolean
+            public static SphereCast ($origin: UnityEngine.Vector3, $radius: number, $direction: UnityEngine.Vector3, $hitInfo: $Ref<Px5.UnityExtensions.RaycastHit>, $maxDistance: number, $layerMask?: number, $trigger?: UnityEngine.QueryTriggerInteraction) : boolean
+            public static SphereCastAll ($ray: UnityEngine.Ray, $radius: number, $maxDistance: number, $layerMask?: number, $trigger?: UnityEngine.QueryTriggerInteraction) : System.Array$1<Px5.UnityExtensions.RaycastHit>
+            public static SphereCastAll ($origin: UnityEngine.Vector3, $radius: number, $direction: UnityEngine.Vector3, $maxDistance: number, $layerMask?: number, $queryTriggerInteraction?: UnityEngine.QueryTriggerInteraction) : System.Array$1<Px5.UnityExtensions.RaycastHit>
+            public static SphereCastNonAlloc ($origin: UnityEngine.Vector3, $radius: number, $direction: UnityEngine.Vector3, $hitResult: System.Array$1<Px5.UnityExtensions.RaycastHit>, $maxDistance?: number, $layerMask?: number, $queryTriggerInteraction?: UnityEngine.QueryTriggerInteraction) : number
+            public static OverlapBoxNonAlloc ($center: UnityEngine.Vector3, $halfExtent: UnityEngine.Vector3, $colliders: System.Array$1<Px5.Unity.PxCollider>, $rotation: UnityEngine.Quaternion, $layerMask?: number, $queryTriggerInteraction?: UnityEngine.QueryTriggerInteraction) : number
+            public static OverlapSphereNonAlloc ($position: UnityEngine.Vector3, $radius: number, $colliders: System.Array$1<Px5.Unity.PxCollider>, $layerMask?: number, $queryTriggerInteraction?: UnityEngine.QueryTriggerInteraction) : number
+            public static OverlapSphere ($position: UnityEngine.Vector3, $radius: number, $layerMask?: number, $queryTriggerInteraction?: UnityEngine.QueryTriggerInteraction) : System.Array$1<Px5.Unity.PxCollider>
+            public static OverlapBox ($position: UnityEngine.Vector3, $halfExtent: UnityEngine.Vector3, $orientation: UnityEngine.Quaternion, $layerMask?: number, $queryTriggerInteraction?: UnityEngine.QueryTriggerInteraction) : System.Array$1<Px5.Unity.PxCollider>
+            public static CapsuleCast ($point1: UnityEngine.Vector3, $point2: UnityEngine.Vector3, $radius: number, $direction: UnityEngine.Vector3, $maxDistance: number, $layerMask?: number, $trigger?: UnityEngine.QueryTriggerInteraction) : boolean
+            public static CapsuleCastAll ($point1: UnityEngine.Vector3, $point2: UnityEngine.Vector3, $radius: number, $direction: UnityEngine.Vector3, $maxDistance: number, $layerMask?: number, $queryTriggerInteraction?: UnityEngine.QueryTriggerInteraction) : System.Array$1<Px5.UnityExtensions.RaycastHit>
+            public static CapsuleCastNonAlloc ($point1: UnityEngine.Vector3, $point2: UnityEngine.Vector3, $radius: number, $direction: UnityEngine.Vector3, $hitResult: System.Array$1<Px5.UnityExtensions.RaycastHit>, $maxDistance: number, $layerMask?: number, $queryTriggerInteraction?: UnityEngine.QueryTriggerInteraction) : number
+            public static IgnoreCollision ($col1: Px5.Unity.PxCollider, $col2: Px5.Unity.PxCollider, $ignore?: boolean) : void
+            public static isCollisionIgnored ($col1: Px5.Unity.PxCollider, $col2: Px5.Unity.PxCollider) : boolean
+            public static ClosestPoint ($point: UnityEngine.Vector3, $collider: Px5.Unity.PxCollider, $position: UnityEngine.Vector3, $rotation: UnityEngine.Quaternion) : UnityEngine.Vector3
+            public static AddExplosionForce ($body: Px5.Unity.PxRigidBody, $explosionForce: number, $explosionPosition: UnityEngine.Vector3, $explosionRadius: number, $upliftModifier: number, $forceMode?: UnityEngine.ForceMode) : void
+            public static GetShapeQueryFilterData ($layerMask: number, $isTrigger: boolean) : Px5.PxFilterData
+            public static GetQueryFilterData ($layerMask: number, $includeTrigger: boolean) : Px5.PxFilterData
+            public static GetSimulationFilterData ($layer: number, $overridePriority: number, $includeLayers: UnityEngine.LayerMask, $excludeLayers: UnityEngine.LayerMask) : Px5.PxFilterData
+        }
+        class PxAsset extends UnityEngine.ScriptableObject implements Px5.Unity.IPxDependency
+        {
+            protected [__keep_incompatibility]: never;
+        }
+        class PxSettings extends Px5.Unity.PxAsset implements Px5.Unity.IPxDependency
+        {
+            protected [__keep_incompatibility]: never;
+        }
+        class PxScene extends Px5.Unity.PxComponent implements Px5.Unity.IPxDependency
+        {
+            protected [__keep_incompatibility]: never;
+        }
+        class PxMaterial extends Px5.Unity.PxAsset implements Px5.Unity.IPxDependency
+        {
+            protected [__keep_incompatibility]: never;
+        }
+        class PxBoxCollider extends Px5.Unity.PxCollider implements Px5.Unity.IPxDependency
+        {
+            protected [__keep_incompatibility]: never;
+            public get size(): UnityEngine.Vector3;
+            public set size(value: UnityEngine.Vector3);
+            public get center(): UnityEngine.Vector3;
+            public set center(value: UnityEngine.Vector3);
+            public OnDrawGizmosSelected () : void
+            public constructor ()
+        }
+        class PxSphereCollider extends Px5.Unity.PxCollider implements Px5.Unity.IPxDependency
+        {
+            protected [__keep_incompatibility]: never;
+            public get radius(): number;
+            public set radius(value: number);
+            public get center(): UnityEngine.Vector3;
+            public set center(value: UnityEngine.Vector3);
+            public OnDrawGizmosSelected () : void
+            public constructor ()
+        }
+        class PxCapsuleCollider extends Px5.Unity.PxCollider implements Px5.Unity.IPxDependency
+        {
+            protected [__keep_incompatibility]: never;
+            public get height(): number;
+            public set height(value: number);
+            public get radius(): number;
+            public set radius(value: number);
+            public get center(): UnityEngine.Vector3;
+            public set center(value: UnityEngine.Vector3);
+            public get direction(): number;
+            public set direction(value: number);
+            public OnDrawGizmosSelected () : void
+            public constructor ()
+        }
+        class PxMeshCollider extends Px5.Unity.PxCollider implements Px5.Unity.IPxDependency
+        {
+            protected [__keep_incompatibility]: never;
+            public get mesh(): UnityEngine.Mesh;
+            public set mesh(value: UnityEngine.Mesh);
+            public get convex(): boolean;
+            public set convex(value: boolean);
+            public get cookingOptions(): UnityEngine.MeshColliderCookingOptions;
+            public set cookingOptions(value: UnityEngine.MeshColliderCookingOptions);
+            public OnDrawGizmosSelected () : void
+            public constructor ()
+        }
+        interface OnJointBreak
+        { 
+        (force: number) : void; 
+        Invoke?: (force: number) => void;
+        }
+        var OnJointBreak: { new (func: (force: number) => void): OnJointBreak; }
+        class PxFixedJoint extends Px5.Unity.PxJoint implements Px5.Unity.IPxDependency
+        {
+            protected [__keep_incompatibility]: never;
+            public get valid(): boolean;
+            public get apiJoint(): Px5.PxJoint;
+            public constructor ()
+        }
+        class PxHingeJoint extends Px5.Unity.PxJoint implements Px5.Unity.IPxDependency
+        {
+            protected [__keep_incompatibility]: never;
+            public get apiJoint(): Px5.PxJoint;
+            public get useSpring(): boolean;
+            public set useSpring(value: boolean);
+            public get useLimits(): boolean;
+            public set useLimits(value: boolean);
+            public get useMotor(): boolean;
+            public set useMotor(value: boolean);
+            public get spring(): UnityEngine.JointSpring;
+            public set spring(value: UnityEngine.JointSpring);
+            public get limits(): UnityEngine.JointLimits;
+            public set limits(value: UnityEngine.JointLimits);
+            public get motor(): UnityEngine.JointMotor;
+            public set motor(value: UnityEngine.JointMotor);
+            public get extendedLimits(): boolean;
+            public set extendedLimits(value: boolean);
+            public get useAcceleration(): boolean;
+            public set useAcceleration(value: boolean);
+            public get projectionMode(): UnityEngine.JointProjectionMode;
+            public set projectionMode(value: UnityEngine.JointProjectionMode);
+            public get projectionAngle(): number;
+            public set projectionAngle(value: number);
+            public get projectionDistance(): number;
+            public set projectionDistance(value: number);
+            public constructor ()
+        }
+    }
     namespace System.Collections.Generic.Dictionary$2 {
         class KeyCollection<TKey, TValue> extends System.Object implements System.Collections.ICollection, System.Collections.Generic.IEnumerable$1<TKey>, System.Collections.IEnumerable, System.Collections.Generic.IReadOnlyCollection$1<TKey>, System.Collections.Generic.ICollection$1<TKey>
         {
@@ -9327,7 +10876,7 @@
             public GetCurrentState () : VoxelPlayground.Utility.State
             public InitState ($state: VoxelPlayground.Utility.State) : void
             public ChangeState ($newState: VoxelPlayground.Utility.State) : void
-            public Update () : void
+            public Tick ($deltaTime: number) : void
             public FixedUpdate () : void
             public constructor ()
         }
@@ -9342,10 +10891,14 @@
             public static showAttach : boolean
             public static showInput : boolean
             public static showRayHit : boolean
+            public static showPhys : boolean
+            public static showAchievements : boolean
+            public static showMaterialSoundRadius : number
             public static verbose : boolean
             public static PushDuration ($duration: number) : void
             public static PopDuration () : void
             public static DrawBasis ($rot: UnityEngine.Quaternion, $pos: UnityEngine.Vector3, $len?: number, $brightness?: number, $lenMul?: number) : void
+            public static DrawBasis ($tr: UnityEngine.Transform, $len?: number, $brightness?: number) : void
             public static DrawRay ($pos: UnityEngine.Vector3, $dir: UnityEngine.Vector3, $color?: UnityEngine.Color) : void
             public static DrawRayArrow ($pos: UnityEngine.Vector3, $dir: UnityEngine.Vector3, $color?: UnityEngine.Color) : void
             public static DrawCrosshair ($pos: UnityEngine.Vector3, $rot: UnityEngine.Quaternion, $size?: number, $color?: UnityEngine.Color) : void
@@ -9353,7 +10906,9 @@
             public static DrawArrow ($start: UnityEngine.Vector3, $end: UnityEngine.Vector3, $color?: UnityEngine.Color) : void
             public static DrawDashedLine ($start: UnityEngine.Vector3, $end: UnityEngine.Vector3, $dash: number, $gap: number, $color?: UnityEngine.Color) : void
             public static DrawLabel ($pos: UnityEngine.Vector3, $text: string, $color?: UnityEngine.Color, $sizeInPixels?: number) : void
+            public static DrawLabel3D ($pos: UnityEngine.Vector3, $rotation: UnityEngine.Quaternion, $text: string, $worldSize?: number, $color?: UnityEngine.Color) : void
             public static DrawWireSphere ($pos: UnityEngine.Vector3, $radius: number, $color?: UnityEngine.Color) : void
+            public static DrawSphereOutline ($pos: UnityEngine.Vector3, $radius: number, $color?: UnityEngine.Color) : void
             public static DrawWireCapsule ($start: UnityEngine.Vector3, $end: UnityEngine.Vector3, $radius: number, $color?: UnityEngine.Color) : void
             public static DrawWireBox ($center: UnityEngine.Vector3, $rotation: UnityEngine.Quaternion, $size: UnityEngine.Vector3, $color?: UnityEngine.Color) : void
             public static DrawWireBox ($bounds: UnityEngine.Bounds, $rotation: UnityEngine.Quaternion, $color?: UnityEngine.Color) : void
@@ -9438,6 +10993,14 @@
     }
     namespace UnityEngine.Random {
         class State extends System.ValueType
+        {
+            protected [__keep_incompatibility]: never;
+        }
+    }
+    namespace UnityEngine.Playables {
+        /** Use the PlayableGraph to manage Playable creations and destructions.
+        */
+        class PlayableGraph extends System.ValueType
         {
             protected [__keep_incompatibility]: never;
         }
@@ -11197,6 +12760,7 @@
             public static GetAllCharacters () : System.Array$1<VoxelPlayground.Entity.EntityCharacter>
             public static GetCharactersInRange ($center: UnityEngine.Vector3, $radius: number) : System.Array$1<VoxelPlayground.Entity.EntityCharacter>
             public static GetCharacterModel ($ch: VoxelPlayground.Entity.EntityCharacter) : UnityEngine.GameObject
+            public static GetCharacterAnimator ($ch: VoxelPlayground.Entity.EntityCharacter) : UnityEngine.Animator
             public static GetCharacterBody ($ch: VoxelPlayground.Entity.EntityCharacter, $bodyName: string) : Px5.Unity.PxRigidBody
             public static AttachJointToCharacter ($ch: VoxelPlayground.Entity.EntityCharacter, $connectedBody: Px5.Unity.PxRigidBody, $bodyName?: string) : Px5.Unity.PxD6Joint
             public static CharacterContainsRigidbody ($ch: VoxelPlayground.Entity.EntityCharacter, $rb: Px5.Unity.PxRigidBody) : boolean
@@ -11205,9 +12769,16 @@
             public static IsCharacterGrounded ($ch: VoxelPlayground.Entity.EntityCharacter) : boolean
             public static SetCharacterHanging ($ch: VoxelPlayground.Entity.EntityCharacter, $hanging: boolean) : void
             public static GetCharacterVelocity ($ch: VoxelPlayground.Entity.EntityCharacter) : UnityEngine.Vector3
+            public static GetCharacterMovementSpeedMultiplier ($ch: VoxelPlayground.Entity.EntityCharacter) : number
+            public static SetCharacterMovementSpeedMultiplier ($ch: VoxelPlayground.Entity.EntityCharacter, $multiplier: number) : void
+            public static ScaleCharacterMovementSpeedMultiplier ($ch: VoxelPlayground.Entity.EntityCharacter, $scale: number) : void
+            public static UnscaleCharacterMovementSpeedMultiplier ($ch: VoxelPlayground.Entity.EntityCharacter, $scale: number) : void
             public static SetCharacterVelocity ($ch: VoxelPlayground.Entity.EntityCharacter, $v: UnityEngine.Vector3) : void
             public static AddCharacterVelocity ($ch: VoxelPlayground.Entity.EntityCharacter, $v: UnityEngine.Vector3, $mode?: UnityEngine.ForceMode) : void
             public static AddCharacterMotion ($ch: VoxelPlayground.Entity.EntityCharacter, $v: UnityEngine.Vector3, $mode?: UnityEngine.ForceMode) : void
+            public static GetCharacterTeamFlag ($ch: VoxelPlayground.Entity.EntityCharacter) : number
+            public static TurnCharacterTowardsDirection ($ch: VoxelPlayground.Entity.EntityCharacter, $direction: UnityEngine.Vector3, $speed?: number) : void
+            public static TurnCharacterTowardsPosition ($ch: VoxelPlayground.Entity.EntityCharacter, $targetPos: UnityEngine.Vector3, $speed?: number) : void
             public static TeleportCharacter ($ch: VoxelPlayground.Entity.EntityCharacter, $pos: UnityEngine.Vector3, $rot: UnityEngine.Quaternion) : void
             public static GetCharacterCurrentState ($ch: VoxelPlayground.Entity.EntityCharacter) : VoxelPlayground.Utility.State
             public static SetCharacterCurrentState ($ch: VoxelPlayground.Entity.EntityCharacter, $stateName: string) : void
@@ -11275,7 +12846,7 @@
             public static DemolishVoxelSphere ($voxel: VoxelPlayground.Destruction.VoxelDestructor, $center: UnityEngine.Vector3, $radius: number, $force?: number, $explodeDirection?: UnityEngine.Vector3, $spreadAngle?: number, $maxFragments?: number, $hardnessCap?: number) : void
             public static ClearVoxelScreenLine ($voxel: VoxelPlayground.Destruction.VoxelDestructor, $screenA: UnityEngine.Vector2, $screenB: UnityEngine.Vector2, $worldToScreen: UnityEngine.Matrix4x4, $chunk: VoxelPlayground.Engine.VoxelChunk) : void
             public static ExplodeVoxelObject ($voxel: VoxelPlayground.Destruction.VoxelDestructor, $specialEffect?: boolean, $randomRemoval?: boolean) : void
-            public static ModifyVoxelProperty ($voxel: VoxelPlayground.Destruction.VoxelDestructor, $center: UnityEngine.Vector3, $radius: number, $property?: VoxelPlayground.Engine.PointDataV2.Property) : void
+            public static ModifyVoxelProperty ($voxel: VoxelPlayground.Destruction.VoxelDestructor, $center: UnityEngine.Vector3, $radius: number, $property?: VoxelPlayground.Engine.PointDataV2.Property, $propertyValue?: number, $surfaceOnly?: boolean) : void
             public static ProjectVoxelDecal ($voxel: VoxelPlayground.Destruction.VoxelDestructor, $center: UnityEngine.Vector3, $radius: number, $decalTexture: UnityEngine.Texture2D, $projectDirection: UnityEngine.Vector3, $projectDepth: number, $splatType?: VoxelPlayground.Engine.Destruction.SplatType, $opacity?: number) : void
             public static GetVoxelSolidCount ($voxel: VoxelPlayground.Engine.VoxelVolume) : number
             public static GetVoxelOriginalSolidCount ($voxel: VoxelPlayground.Engine.VoxelVolume) : number
@@ -11292,6 +12863,22 @@
             public static ClearVoxelCylinder ($voxel: VoxelPlayground.Destruction.VoxelDestructor, $end1: UnityEngine.Vector3, $end2: UnityEngine.Vector3, $radius: number) : void
             public static ClearVoxelBoxSweep ($voxel: VoxelPlayground.Destruction.VoxelDestructor, $end1: UnityEngine.Vector3, $end2: UnityEngine.Vector3, $halfBox: UnityEngine.Vector3, $boxLocalToWorld: UnityEngine.Matrix4x4, $chunk: VoxelPlayground.Engine.VoxelChunk, $hardnessCap?: number) : void
             public static RestoreVoxelColor ($voxel: VoxelPlayground.Destruction.VoxelDestructor) : void
+            public static SetVoxelColorSphere ($voxel: VoxelPlayground.Destruction.VoxelDestructor, $center: UnityEngine.Vector3, $radius: number, $color: UnityEngine.Color, $storeOriginalColor?: boolean, $hardnessCap?: number) : void
+            public static BlendVoxelColorSphere ($voxel: VoxelPlayground.Destruction.VoxelDestructor, $center: UnityEngine.Vector3, $radius: number, $color: UnityEngine.Color, $opacity: number, $storeOriginalColor?: boolean, $hardnessCap?: number) : void
+            public static StoreVoxelOriginalColorSphere ($voxel: VoxelPlayground.Destruction.VoxelDestructor, $center: UnityEngine.Vector3, $radius: number) : void
+            public static RestoreVoxelColorSphere ($voxel: VoxelPlayground.Destruction.VoxelDestructor, $center: UnityEngine.Vector3, $radius: number) : void
+            public static ApplyVoxelHeatColorSphere ($voxel: VoxelPlayground.Destruction.VoxelDestructor, $center: UnityEngine.Vector3, $radius: number, $baseColor: UnityEngine.Color, $heatColor: UnityEngine.Color, $heatAmount: number, $falloffPower: number) : void
+            public static ReplaceVoxelMaterial ($voxel: VoxelPlayground.Destruction.VoxelDestructor, $fromMaterialId: number, $toMaterialId: number, $hardnessCap?: number) : void
+            public static SetAllSolidVoxelMaterial ($voxel: VoxelPlayground.Destruction.VoxelDestructor, $materialId: number) : void
+            public static ReplaceVoxelColorByMaterial ($voxel: VoxelPlayground.Destruction.VoxelDestructor, $materialId: number, $color: UnityEngine.Color, $storeOriginalColor?: boolean, $hardnessCap?: number) : void
+            public static ReplaceVoxelColor ($voxel: VoxelPlayground.Destruction.VoxelDestructor, $fromColor: UnityEngine.Color, $toColor: UnityEngine.Color, $storeOriginalColor?: boolean, $hardnessCap?: number) : void
+            public static RestoreAllVoxelColorsStep ($voxel: VoxelPlayground.Destruction.VoxelDestructor) : void
+            public static RestoreAllVoxelColorsImmediate ($voxel: VoxelPlayground.Destruction.VoxelDestructor) : void
+            public static SetVoxelPropertySphere ($voxel: VoxelPlayground.Destruction.VoxelDestructor, $center: UnityEngine.Vector3, $radius: number, $property: VoxelPlayground.Engine.PointDataV2.Property, $propertyValue: number, $hardnessCap?: number) : void
+            public static SetVoxelPropertyByIndices ($voxel: VoxelPlayground.Destruction.VoxelDestructor, $indices: System.Array$1<number>, $property: VoxelPlayground.Engine.PointDataV2.Property, $propertyValue: number) : void
+            public static ClearVoxelIndices ($voxel: VoxelPlayground.Destruction.VoxelDestructor, $indices: System.Array$1<number>, $hardnessCap?: number) : void
+            public static SetVoxelMaterialByIndices ($voxel: VoxelPlayground.Destruction.VoxelDestructor, $indices: System.Array$1<number>, $materialId: number, $hardnessCap?: number) : void
+            public static SetVoxelColorByIndices ($voxel: VoxelPlayground.Destruction.VoxelDestructor, $indices: System.Array$1<number>, $color: UnityEngine.Color, $storeOriginalColor?: boolean, $hardnessCap?: number) : void
             public static GetVoxelAtWorld ($voxel: VoxelPlayground.Engine.VoxelVolume, $worldPos: UnityEngine.Vector3) : VoxelPlayground.Engine.PointDataV2
             public static GetVoxelAtLocal ($voxel: VoxelPlayground.Engine.VoxelVolume, $localPos: UnityEngine.Vector3Int) : VoxelPlayground.Engine.PointDataV2
             public static GetVoxelAtHit ($hit: Px5.UnityExtensions.RaycastHit) : VoxelPlayground.Engine.PointDataV2
@@ -11356,383 +12943,6 @@
             public constructor ()
         }
     }
-    namespace Px5.Unity {
-        class PxComponent extends UnityEngine.MonoBehaviour implements Px5.Unity.IPxDependency
-        {
-            protected [__keep_incompatibility]: never;
-        }
-        interface IPxDependency
-        {
-        }
-        class PxActor extends Px5.Unity.PxComponent implements Px5.Unity.IPxDependency
-        {
-            protected [__keep_incompatibility]: never;
-        }
-        class PxRigidBody extends Px5.Unity.PxActor implements Px5.Unity.IPxDependency
-        {
-            protected [__keep_incompatibility]: never;
-            public get valid(): boolean;
-            public get useGravity(): boolean;
-            public set useGravity(value: boolean);
-            public get mass(): number;
-            public set mass(value: number);
-            public get isKinematic(): boolean;
-            public set isKinematic(value: boolean);
-            public get velocity(): UnityEngine.Vector3;
-            public set velocity(value: UnityEngine.Vector3);
-            public get linearVelocity(): UnityEngine.Vector3;
-            public set linearVelocity(value: UnityEngine.Vector3);
-            public get angularVelocity(): UnityEngine.Vector3;
-            public set angularVelocity(value: UnityEngine.Vector3);
-            public get maxLinearVelocity(): number;
-            public set maxLinearVelocity(value: number);
-            public get maxAngularVelocity(): number;
-            public set maxAngularVelocity(value: number);
-            public get solverIterations(): number;
-            public set solverIterations(value: number);
-            public get solverVelocityIterations(): number;
-            public set solverVelocityIterations(value: number);
-            public get drag(): number;
-            public set drag(value: number);
-            public get angularDrag(): number;
-            public set angularDrag(value: number);
-            public get centerOfMass(): UnityEngine.Vector3;
-            public set centerOfMass(value: UnityEngine.Vector3);
-            public get worldCenterOfMass(): UnityEngine.Vector3;
-            public get inertiaTensor(): UnityEngine.Vector3;
-            public set inertiaTensor(value: UnityEngine.Vector3);
-            public get inertiaTensorRotation(): UnityEngine.Quaternion;
-            public set inertiaTensorRotation(value: UnityEngine.Quaternion);
-            public get position(): UnityEngine.Vector3;
-            public set position(value: UnityEngine.Vector3);
-            public get rotation(): UnityEngine.Quaternion;
-            public set rotation(value: UnityEngine.Quaternion);
-            public get automaticCenterOfMass(): boolean;
-            public set automaticCenterOfMass(value: boolean);
-            public get automaticInertiaTensor(): boolean;
-            public set automaticInertiaTensor(value: boolean);
-            public get sleepThreshold(): number;
-            public set sleepThreshold(value: number);
-            public get constraints(): UnityEngine.RigidbodyConstraints;
-            public set constraints(value: UnityEngine.RigidbodyConstraints);
-            public get interpolation(): UnityEngine.RigidbodyInterpolation;
-            public set interpolation(value: UnityEngine.RigidbodyInterpolation);
-            public get maxContactImpulse(): number;
-            public set maxContactImpulse(value: number);
-            public get maxDepenetrationVelocity(): number;
-            public set maxDepenetrationVelocity(value: number);
-            public get collisionDetectionMode(): UnityEngine.CollisionDetectionMode;
-            public set collisionDetectionMode(value: UnityEngine.CollisionDetectionMode);
-            public get detectCollisions(): boolean;
-            public set detectCollisions(value: boolean);
-            public get indestructible(): boolean;
-            public set indestructible(value: boolean);
-            public get materialSupportGraph(): boolean;
-            public set materialSupportGraph(value: boolean);
-            public AddForce ($force: UnityEngine.Vector3, $mode?: UnityEngine.ForceMode) : void
-            public AddForceAtPosition ($force: UnityEngine.Vector3, $position: UnityEngine.Vector3, $mode?: UnityEngine.ForceMode) : void
-            public AddTorque ($torque: UnityEngine.Vector3, $mode?: UnityEngine.ForceMode) : void
-            public MovePosition ($position: UnityEngine.Vector3) : void
-            public MoveRotation ($rotation: UnityEngine.Quaternion) : void
-            public MovePose ($position: UnityEngine.Vector3, $rotation: UnityEngine.Quaternion) : void
-            public IsSleeping () : boolean
-            public WakeUp () : void
-            public WorldBound () : UnityEngine.Bounds
-            public UpdateMassAndInertia () : void
-            public ClosestPoint ($query: UnityEngine.Vector3) : UnityEngine.Vector3
-            public ClosestCollider ($query: UnityEngine.Vector3) : Px5.Unity.PxCollider
-            public setMassAndUpdateInertia () : void
-            public Colliders () : System.Collections.Generic.IEnumerable$1<Px5.Unity.PxCollider>
-            public DebugParam () : void
-            public debugAddVelocity ($force: UnityEngine.Vector3, $mode: UnityEngine.ForceMode) : void
-            public constructor ()
-        }
-        interface PxRigidBody {
-            AddExplosionForce ($explosionForce: number, $explosionPosition: UnityEngine.Vector3, $explosionRadius: number, $upliftModifier: number, $forceMode?: UnityEngine.ForceMode) : void;
-        }
-        class PxJoint extends Px5.Unity.PxComponent implements Px5.Unity.IPxDependency
-        {
-            protected [__keep_incompatibility]: never;
-            public onJointBreak : Px5.Unity.OnJointBreak
-            public get apiJoint(): Px5.PxJoint;
-            public get actor0(): Px5.Unity.PxActor;
-            public set actor0(value: Px5.Unity.PxActor);
-            public get actor1(): Px5.Unity.PxActor;
-            public set actor1(value: Px5.Unity.PxActor);
-            public get valid(): boolean;
-            public get breakForce(): number;
-            public set breakForce(value: number);
-            public get breakTorque(): number;
-            public set breakTorque(value: number);
-            public get enableCollision(): boolean;
-            public set enableCollision(value: boolean);
-            public get connectedBody(): Px5.Unity.PxRigidBody;
-            public set connectedBody(value: Px5.Unity.PxRigidBody);
-            public get connectedMassScale(): number;
-            public set connectedMassScale(value: number);
-            public get autoConfigureConnectedAnchor(): boolean;
-            public set autoConfigureConnectedAnchor(value: boolean);
-            public get swapBodies(): boolean;
-            public set swapBodies(value: boolean);
-            public get currentForce(): UnityEngine.Vector3;
-            public get currentTorque(): UnityEngine.Vector3;
-            public get connectedAnchor(): UnityEngine.Vector3;
-            public set connectedAnchor(value: UnityEngine.Vector3);
-            public get anchor(): UnityEngine.Vector3;
-            public set anchor(value: UnityEngine.Vector3);
-            public get axis(): UnityEngine.Vector3;
-            public set axis(value: UnityEngine.Vector3);
-            public get secondaryAxis(): UnityEngine.Vector3;
-            public set secondaryAxis(value: UnityEngine.Vector3);
-            public get massScale(): number;
-            public set massScale(value: number);
-            public get enablePreprocessing(): boolean;
-            public set enablePreprocessing(value: boolean);
-            public SetJointAnchors ($position0: UnityEngine.Vector3, $computeAnchor1: boolean) : void
-            public DebugParam () : void
-            public constructor ()
-        }
-        class PxD6Joint extends Px5.Unity.PxJoint implements Px5.Unity.IPxDependency
-        {
-            protected [__keep_incompatibility]: never;
-            public get valid(): boolean;
-            public get apiJoint(): Px5.PxJoint;
-            public get apiD6Joint(): Px5.PxD6Joint;
-            public get xMotion(): UnityEngine.ConfigurableJointMotion;
-            public set xMotion(value: UnityEngine.ConfigurableJointMotion);
-            public get yMotion(): UnityEngine.ConfigurableJointMotion;
-            public set yMotion(value: UnityEngine.ConfigurableJointMotion);
-            public get zMotion(): UnityEngine.ConfigurableJointMotion;
-            public set zMotion(value: UnityEngine.ConfigurableJointMotion);
-            public get angularXMotion(): UnityEngine.ConfigurableJointMotion;
-            public set angularXMotion(value: UnityEngine.ConfigurableJointMotion);
-            public get angularYMotion(): UnityEngine.ConfigurableJointMotion;
-            public set angularYMotion(value: UnityEngine.ConfigurableJointMotion);
-            public get angularZMotion(): UnityEngine.ConfigurableJointMotion;
-            public set angularZMotion(value: UnityEngine.ConfigurableJointMotion);
-            public get linearLimit(): UnityEngine.SoftJointLimit;
-            public set linearLimit(value: UnityEngine.SoftJointLimit);
-            public get xDrive(): UnityEngine.JointDrive;
-            public set xDrive(value: UnityEngine.JointDrive);
-            public get yDrive(): UnityEngine.JointDrive;
-            public set yDrive(value: UnityEngine.JointDrive);
-            public get zDrive(): UnityEngine.JointDrive;
-            public set zDrive(value: UnityEngine.JointDrive);
-            public get targetPosition(): UnityEngine.Vector3;
-            public set targetPosition(value: UnityEngine.Vector3);
-            public get targetRotation(): UnityEngine.Quaternion;
-            public set targetRotation(value: UnityEngine.Quaternion);
-            public get targetVelocity(): UnityEngine.Vector3;
-            public set targetVelocity(value: UnityEngine.Vector3);
-            public get targetAngularVelocity(): UnityEngine.Vector3;
-            public set targetAngularVelocity(value: UnityEngine.Vector3);
-            public get slerpDrive(): UnityEngine.JointDrive;
-            public set slerpDrive(value: UnityEngine.JointDrive);
-            public get angularXDrive(): UnityEngine.JointDrive;
-            public set angularXDrive(value: UnityEngine.JointDrive);
-            public get angularYZDrive(): UnityEngine.JointDrive;
-            public set angularYZDrive(value: UnityEngine.JointDrive);
-            public get angularYLimit(): UnityEngine.SoftJointLimit;
-            public set angularYLimit(value: UnityEngine.SoftJointLimit);
-            public get angularZLimit(): UnityEngine.SoftJointLimit;
-            public set angularZLimit(value: UnityEngine.SoftJointLimit);
-            public get angularYZLimitSpring(): UnityEngine.SoftJointLimitSpring;
-            public set angularYZLimitSpring(value: UnityEngine.SoftJointLimitSpring);
-            public get configuredInWorldSpace(): boolean;
-            public set configuredInWorldSpace(value: boolean);
-            public get rotationDriveMode(): UnityEngine.RotationDriveMode;
-            public set rotationDriveMode(value: UnityEngine.RotationDriveMode);
-            public get projectionMode(): UnityEngine.JointProjectionMode;
-            public set projectionMode(value: UnityEngine.JointProjectionMode);
-            public get projectionAngle(): number;
-            public set projectionAngle(value: number);
-            public get projectionDistance(): number;
-            public set projectionDistance(value: number);
-            public get linearLimitSpring(): UnityEngine.SoftJointLimitSpring;
-            public set linearLimitSpring(value: UnityEngine.SoftJointLimitSpring);
-            public get highAngularXLimit(): UnityEngine.SoftJointLimit;
-            public set highAngularXLimit(value: UnityEngine.SoftJointLimit);
-            public get lowAngularXLimit(): UnityEngine.SoftJointLimit;
-            public set lowAngularXLimit(value: UnityEngine.SoftJointLimit);
-            public get angularXLimitSpring(): UnityEngine.SoftJointLimitSpring;
-            public set angularXLimitSpring(value: UnityEngine.SoftJointLimitSpring);
-            public UpdateAxis ($axis: UnityEngine.Vector3, $secondaryAxis: UnityEngine.Vector3) : void
-            public static GetGizmoSize ($position: UnityEngine.Vector3) : number
-            public DebugLog () : void
-            public constructor ()
-        }
-        class PxCollider extends Px5.Unity.PxComponent implements Px5.Unity.IPxDependency
-        {
-            protected [__keep_incompatibility]: never;
-            public apiShape : Px5.PxShape
-            public get attachedRigidbody(): Px5.Unity.PxRigidBody;
-            public get bounds(): UnityEngine.Bounds;
-            public get isTrigger(): boolean;
-            public set isTrigger(value: boolean);
-            public get material(): Px5.Unity.PxMaterial;
-            public set material(value: Px5.Unity.PxMaterial);
-            public get includeLayers(): UnityEngine.LayerMask;
-            public set includeLayers(value: UnityEngine.LayerMask);
-            public get excludeLayers(): UnityEngine.LayerMask;
-            public set excludeLayers(value: UnityEngine.LayerMask);
-            public get layerOverridePriority(): number;
-            public set layerOverridePriority(value: number);
-            public get hasModifiableContacts(): boolean;
-            public set hasModifiableContacts(value: boolean);
-            public get hardness(): number;
-            public set hardness(value: number);
-            public ClosestPoint ($point: UnityEngine.Vector3) : UnityEngine.Vector3
-            public UpdateLayer ($targetLayer?: number) : void
-            public Raycast ($ray: UnityEngine.Ray, $hitInfo: $Ref<Px5.UnityExtensions.RaycastHit>, $maxDistance?: number) : boolean
-            public UpdatePose () : void
-            public GetLocalBounds () : UnityEngine.Bounds
-            public DebugParam () : void
-            public constructor ()
-        }
-        class PxPhysics extends System.Object
-        {
-            protected [__keep_incompatibility]: never;
-            public static apiScene : Px5.PxScene
-            public static get apiFoundation(): Px5.PxFoundation;
-            public static get valid(): boolean;
-            public static get apiPhysics(): Px5.PxPhysics;
-            public static get cpuDispatcher(): Px5.PxCpuDispatcher;
-            public static get noMaterial(): Px5.PxMaterial;
-            public static get settings(): Px5.Unity.PxSettings;
-            public static get gravity(): UnityEngine.Vector3;
-            public static set gravity(value: UnityEngine.Vector3);
-            public static get Scene(): Px5.Unity.PxScene;
-            public static Raycast ($ray: UnityEngine.Ray, $hitInfo: $Ref<Px5.UnityExtensions.RaycastHit>, $maxDistance?: number, $layerMask?: number, $trigger?: UnityEngine.QueryTriggerInteraction) : boolean
-            public static Raycast ($origin: UnityEngine.Vector3, $direction: UnityEngine.Vector3, $maxDistance?: number, $layerMask?: number, $trigger?: UnityEngine.QueryTriggerInteraction) : boolean
-            public static Raycast ($origin: UnityEngine.Vector3, $direction: UnityEngine.Vector3, $hitInfo: $Ref<Px5.UnityExtensions.RaycastHit>, $maxDistance?: number, $layerMask?: number, $trigger?: UnityEngine.QueryTriggerInteraction) : boolean
-            public static RaycastAll ($ray: UnityEngine.Ray, $maxDistance?: number, $layerMask?: number, $queryTriggerInteraction?: UnityEngine.QueryTriggerInteraction) : System.Array$1<Px5.UnityExtensions.RaycastHit>
-            public static RaycastAll ($origin: UnityEngine.Vector3, $direction: UnityEngine.Vector3, $maxDistance?: number, $layerMask?: number, $queryTriggerInteraction?: UnityEngine.QueryTriggerInteraction) : System.Array$1<Px5.UnityExtensions.RaycastHit>
-            public static RaycastNonAlloc ($origin: UnityEngine.Vector3, $direction: UnityEngine.Vector3, $hitResult: System.Array$1<Px5.UnityExtensions.RaycastHit>, $maxDistance?: number, $layerMask?: number, $queryTriggerInteraction?: UnityEngine.QueryTriggerInteraction) : number
-            public static Linecast ($start: UnityEngine.Vector3, $end: UnityEngine.Vector3, $layerMask?: number, $queryTriggerInteraction?: UnityEngine.QueryTriggerInteraction) : boolean
-            public static Linecast ($start: UnityEngine.Vector3, $end: UnityEngine.Vector3, $hitInfo: $Ref<Px5.UnityExtensions.RaycastHit>, $layerMask?: number, $queryTriggerInteraction?: UnityEngine.QueryTriggerInteraction) : boolean
-            public static SphereCast ($origin: UnityEngine.Vector3, $radius: number, $direction: UnityEngine.Vector3, $hitInfo: $Ref<Px5.UnityExtensions.RaycastHit>, $maxDistance: number, $layerMask?: number, $trigger?: UnityEngine.QueryTriggerInteraction) : boolean
-            public static SphereCastAll ($ray: UnityEngine.Ray, $radius: number, $maxDistance: number, $layerMask?: number, $trigger?: UnityEngine.QueryTriggerInteraction) : System.Array$1<Px5.UnityExtensions.RaycastHit>
-            public static SphereCastAll ($origin: UnityEngine.Vector3, $radius: number, $direction: UnityEngine.Vector3, $maxDistance: number, $layerMask?: number, $queryTriggerInteraction?: UnityEngine.QueryTriggerInteraction) : System.Array$1<Px5.UnityExtensions.RaycastHit>
-            public static SphereCastNonAlloc ($origin: UnityEngine.Vector3, $radius: number, $direction: UnityEngine.Vector3, $hitResult: System.Array$1<Px5.UnityExtensions.RaycastHit>, $maxDistance?: number, $layerMask?: number, $queryTriggerInteraction?: UnityEngine.QueryTriggerInteraction) : number
-            public static OverlapBoxNonAlloc ($center: UnityEngine.Vector3, $halfExtent: UnityEngine.Vector3, $colliders: System.Array$1<Px5.Unity.PxCollider>, $rotation: UnityEngine.Quaternion, $layerMask?: number, $queryTriggerInteraction?: UnityEngine.QueryTriggerInteraction) : number
-            public static OverlapSphereNonAlloc ($position: UnityEngine.Vector3, $radius: number, $colliders: System.Array$1<Px5.Unity.PxCollider>, $layerMask?: number, $queryTriggerInteraction?: UnityEngine.QueryTriggerInteraction) : number
-            public static OverlapSphere ($position: UnityEngine.Vector3, $radius: number, $layerMask?: number, $queryTriggerInteraction?: UnityEngine.QueryTriggerInteraction) : System.Array$1<Px5.Unity.PxCollider>
-            public static OverlapBox ($position: UnityEngine.Vector3, $halfExtent: UnityEngine.Vector3, $orientation: UnityEngine.Quaternion, $layerMask?: number, $queryTriggerInteraction?: UnityEngine.QueryTriggerInteraction) : System.Array$1<Px5.Unity.PxCollider>
-            public static CapsuleCast ($point1: UnityEngine.Vector3, $point2: UnityEngine.Vector3, $radius: number, $direction: UnityEngine.Vector3, $maxDistance: number, $layerMask?: number, $trigger?: UnityEngine.QueryTriggerInteraction) : boolean
-            public static CapsuleCastAll ($point1: UnityEngine.Vector3, $point2: UnityEngine.Vector3, $radius: number, $direction: UnityEngine.Vector3, $maxDistance: number, $layerMask?: number, $queryTriggerInteraction?: UnityEngine.QueryTriggerInteraction) : System.Array$1<Px5.UnityExtensions.RaycastHit>
-            public static CapsuleCastNonAlloc ($point1: UnityEngine.Vector3, $point2: UnityEngine.Vector3, $radius: number, $direction: UnityEngine.Vector3, $hitResult: System.Array$1<Px5.UnityExtensions.RaycastHit>, $maxDistance: number, $layerMask?: number, $queryTriggerInteraction?: UnityEngine.QueryTriggerInteraction) : number
-            public static IgnoreCollision ($col1: Px5.Unity.PxCollider, $col2: Px5.Unity.PxCollider, $ignore?: boolean) : void
-            public static isCollisionIgnored ($col1: Px5.Unity.PxCollider, $col2: Px5.Unity.PxCollider) : boolean
-            public static ClosestPoint ($point: UnityEngine.Vector3, $collider: Px5.Unity.PxCollider, $position: UnityEngine.Vector3, $rotation: UnityEngine.Quaternion) : UnityEngine.Vector3
-            public static AddExplosionForce ($body: Px5.Unity.PxRigidBody, $explosionForce: number, $explosionPosition: UnityEngine.Vector3, $explosionRadius: number, $upliftModifier: number, $forceMode?: UnityEngine.ForceMode) : void
-            public static GetShapeQueryFilterData ($layerMask: number, $isTrigger: boolean) : Px5.PxFilterData
-            public static GetQueryFilterData ($layerMask: number, $includeTrigger: boolean) : Px5.PxFilterData
-            public static GetSimulationFilterData ($layer: number, $overridePriority: number, $includeLayers: UnityEngine.LayerMask, $excludeLayers: UnityEngine.LayerMask) : Px5.PxFilterData
-        }
-        class PxAsset extends UnityEngine.ScriptableObject implements Px5.Unity.IPxDependency
-        {
-            protected [__keep_incompatibility]: never;
-        }
-        class PxSettings extends Px5.Unity.PxAsset implements Px5.Unity.IPxDependency
-        {
-            protected [__keep_incompatibility]: never;
-        }
-        class PxScene extends Px5.Unity.PxComponent implements Px5.Unity.IPxDependency
-        {
-            protected [__keep_incompatibility]: never;
-        }
-        class PxMaterial extends Px5.Unity.PxAsset implements Px5.Unity.IPxDependency
-        {
-            protected [__keep_incompatibility]: never;
-        }
-        class PxBoxCollider extends Px5.Unity.PxCollider implements Px5.Unity.IPxDependency
-        {
-            protected [__keep_incompatibility]: never;
-            public get size(): UnityEngine.Vector3;
-            public set size(value: UnityEngine.Vector3);
-            public get center(): UnityEngine.Vector3;
-            public set center(value: UnityEngine.Vector3);
-            public OnDrawGizmosSelected () : void
-            public constructor ()
-        }
-        class PxSphereCollider extends Px5.Unity.PxCollider implements Px5.Unity.IPxDependency
-        {
-            protected [__keep_incompatibility]: never;
-            public get radius(): number;
-            public set radius(value: number);
-            public get center(): UnityEngine.Vector3;
-            public set center(value: UnityEngine.Vector3);
-            public OnDrawGizmosSelected () : void
-            public constructor ()
-        }
-        class PxCapsuleCollider extends Px5.Unity.PxCollider implements Px5.Unity.IPxDependency
-        {
-            protected [__keep_incompatibility]: never;
-            public get height(): number;
-            public set height(value: number);
-            public get radius(): number;
-            public set radius(value: number);
-            public get center(): UnityEngine.Vector3;
-            public set center(value: UnityEngine.Vector3);
-            public get direction(): number;
-            public set direction(value: number);
-            public OnDrawGizmosSelected () : void
-            public constructor ()
-        }
-        class PxMeshCollider extends Px5.Unity.PxCollider implements Px5.Unity.IPxDependency
-        {
-            protected [__keep_incompatibility]: never;
-            public get mesh(): UnityEngine.Mesh;
-            public set mesh(value: UnityEngine.Mesh);
-            public get convex(): boolean;
-            public set convex(value: boolean);
-            public get cookingOptions(): UnityEngine.MeshColliderCookingOptions;
-            public set cookingOptions(value: UnityEngine.MeshColliderCookingOptions);
-            public OnDrawGizmosSelected () : void
-            public constructor ()
-        }
-        interface OnJointBreak
-        { 
-        (force: number) : void; 
-        Invoke?: (force: number) => void;
-        }
-        var OnJointBreak: { new (func: (force: number) => void): OnJointBreak; }
-        class PxFixedJoint extends Px5.Unity.PxJoint implements Px5.Unity.IPxDependency
-        {
-            protected [__keep_incompatibility]: never;
-            public get valid(): boolean;
-            public get apiJoint(): Px5.PxJoint;
-            public constructor ()
-        }
-        class PxHingeJoint extends Px5.Unity.PxJoint implements Px5.Unity.IPxDependency
-        {
-            protected [__keep_incompatibility]: never;
-            public get apiJoint(): Px5.PxJoint;
-            public get useSpring(): boolean;
-            public set useSpring(value: boolean);
-            public get useLimits(): boolean;
-            public set useLimits(value: boolean);
-            public get useMotor(): boolean;
-            public set useMotor(value: boolean);
-            public get spring(): UnityEngine.JointSpring;
-            public set spring(value: UnityEngine.JointSpring);
-            public get limits(): UnityEngine.JointLimits;
-            public set limits(value: UnityEngine.JointLimits);
-            public get motor(): UnityEngine.JointMotor;
-            public set motor(value: UnityEngine.JointMotor);
-            public get extendedLimits(): boolean;
-            public set extendedLimits(value: boolean);
-            public get useAcceleration(): boolean;
-            public set useAcceleration(value: boolean);
-            public get projectionMode(): UnityEngine.JointProjectionMode;
-            public set projectionMode(value: UnityEngine.JointProjectionMode);
-            public get projectionAngle(): number;
-            public set projectionAngle(value: number);
-            public get projectionDistance(): number;
-            public set projectionDistance(value: number);
-            public constructor ()
-        }
-    }
     namespace VoxelPlayground.Sound.SoundManager {
         enum SoundMixerType
         { Master = 0, SFX = 1, UI = 2, Music = 3 }
@@ -11754,52 +12964,6 @@
     namespace VoxelPlayground.Engine.Destruction {
         enum SplatType
         { Blood = 0, Acid = 1, Fire = 2, ColorOnly = 3 }
-    }
-    namespace Px5.UnityExtensions {
-        class RaycastHit extends System.ValueType
-        {
-            protected [__keep_incompatibility]: never;
-            public collider : Px5.Unity.PxCollider
-            public normal : UnityEngine.Vector3
-            public distance : number
-            public point : UnityEngine.Vector3
-            public transform : UnityEngine.Transform
-            public rigidbody : Px5.Unity.PxRigidBody
-        }
-        class Collision extends System.ValueType
-        {
-            protected [__keep_incompatibility]: never;
-            public contactCount : number
-            public rigidbody : Px5.Unity.PxRigidBody
-            public relativeVelocity : UnityEngine.Vector3
-            public impulse : UnityEngine.Vector3
-            public gameObject : UnityEngine.GameObject
-            public transform : UnityEngine.Transform
-            public contacts : System.Array$1<Px5.UnityExtensions.ContactPoint>
-            public collider : Px5.Unity.PxCollider
-            public ContactPose : UnityEngine.Matrix4x4
-            public collisionType : Px5.UnityExtensions.CollisionType
-            public GetContact ($index: number) : Px5.UnityExtensions.ContactPoint
-            public GetContacts ($contacts: System.Array$1<Px5.UnityExtensions.ContactPoint>) : number
-            public GetContacts ($contacts: System.Collections.Generic.List$1<Px5.UnityExtensions.ContactPoint>) : number
-        }
-        class ContactPoint extends System.ValueType
-        {
-            protected [__keep_incompatibility]: never;
-            public static NoMaterialId : number
-            public thisCollider : Px5.Unity.PxCollider
-            public otherCollider : Px5.Unity.PxCollider
-            public point : UnityEngine.Vector3
-            public normal : UnityEngine.Vector3
-            public impulse : UnityEngine.Vector3
-            public seperation : number
-            public thisMaterialId : number
-            public otherMaterialId : number
-            public TryGetThisMaterialId ($materialId: $Ref<number>) : boolean
-            public TryGetOtherMaterialId ($materialId: $Ref<number>) : boolean
-        }
-        enum CollisionType
-        { SurfaceHit = 0, PenetrateSelf = 1, PenetrateOthers = 2 }
     }
     namespace VoxelPlayground.Mod.ModAPI {
         class Input extends System.Object implements System.IDisposable

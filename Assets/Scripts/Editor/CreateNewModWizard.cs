@@ -141,7 +141,7 @@ public class CreateNewModWizard : EditorWindow
         manifest.modName = modName;
         manifest.id = modId;
         manifest.modVersion = new SemanticVersion{major = 1, minor = 0, patch = 0};
-        manifest.minimalMainGameVersion = new SemanticVersion{major = 0, minor = 5, patch = 0};
+        manifest.minimalMainGameVersion = new SemanticVersion{major = 0, minor = 6, patch = 0};
 
         // Create the asset file
         AssetDatabase.CreateAsset(manifest, manifestPath);
